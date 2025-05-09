@@ -1,0 +1,1090 @@
+Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
+My college in Japan offers a six-month study (a)________________ program in California.:-abroad;-0.5
+We had ten classes, but he only came to four.  He had six (a)________________.:-absences;-0.5
+Did Bob come to school yesterday?  No, he was (a)________________.:-absent;-0.5
+If a stranger gives you some money, would you (a)________________ it?:-accept;-0.5
+He is an (a)________________ boy.  He has so much energy and is always running around, playing and laughing.:-active;-0.5
+In first grade, we learned (a)________________, but not multiplication.:-addition;-0.5
+If you will not come to class, then you should let me know in (a)________________.:-advance;-0.5
+Reading the newspaper every day is a good way to know about current world (a)________________.:-affairs;-0.5
+Every student needs to have an English dictionary.  It's a useful study (a)________________.:-aid;-0.5
+I (a)________________ my water gun at my brother and fired!:-aimed;-0.5
+Which (a)________________ would be more fun to ride in: a jet, or a helicopter?:-aircraft;-0.5
+An (a)________________ is a company that flies passengers in airplanes.:-airline;-0.5
+Do you need an (a)________________ clock to help you wake up in the morning?:-alarm;-0.5
+Before smartphones and the Internet, people mostly kept their (printed) photos in an (a)________________.:-album;-0.5
+My sister looks like my mother.  But my father and I do not look (a)________________.:-alike;-0.5
+The man is (a)______________ (not dead).:-alive;-0.5
+My favorite Haagen-Dazs ice cream is chocolate (a)________________ flavor.  (Hint: It's a nut):-almond;-0.5
+Please read it (a)________________, so I can hear.:-aloud;-0.5
+There are twenty-six letters in the (a)________________.:-alphabet;-0.5
+(a)________________ he has lots of money, he has few true friends.:-although;-0.5
+Four children have six apples each, so they have twenty-four apples (a)________________.:-altogether;-0.5
+The (a)________________ of poison in a snake bite can kill an adult.:-amount;-0.5
+(a)________________ history includes the old history of the Greeks, Romans, and Chinese.:-ancient;-0.5
+While playing basketball, I fell and twisted my (a)________________.:-ankle;-0.5
+Does (a)________________ know who did this?:-anybody;-0.5
+It's OK if we don't go to the movie. I didn't want to see it (a)________________.:-anyhow/anyway;-0.5
+You can come see me (a)________________.  You don't have to call in advance.:-anytime;-0.5
+The thieves left the house five hours ago.  They could be (a)________________ by now.:-anywhere/anyplace;-0.5
+Before moving to this big house, my family lived in a smaller (a)________________.:-apartment;-0.5
+Although the fruit has an ugly (a)________________, don't be fooled by its looks! It is really quite delicious.:-appearance;-0.5
+After eating five candy bars, I had no more (a)________________ for dinner.:-appetite;-0.5
+Math is a useful subject.  It can be (a)______________ to many other fields (subjects), like science and engineering.:-applied;-0.5
+I bought my mother a new (a)________________ to keep her dress clean when she cooks.:-apron;-0.5
+My brother and I always (a)________________ about who gets to play the game.:-argue;-0.5
+My friend and I had a big (a)________________, and we haven't spoken in days.:-argument;-0.5
+Some (a)________________ have a foot extension and reclining back.  You could easily fall asleep sitting in one.:-armchairs;-0.5
+I (a)________________ my things by putting books on the left and pencils on the right.:-arranged;-0.5
+I'm learning flower (a)________________, which is the study of how to make flowers look nice.:-arrangment;-0.5
+The police (a)________________ the burglar for stealing the jewelry.:-arrested;-0.5
+Please (a)________________ at the classroom by 4:50, so that we can begin at 5:00.:-arrive;-0.5
+The map had an (a)________________ pointing to where the treasure was hidden.:-arrow;-0.5
+I read in a newspaper (a)________________ that my classmate won a prize.:-article;-0.5
+I want to become an (a)________________, because I love to draw.:-artist;-0.5
+I fell (a)________________ while reading the dictionary.:-asleep;-0.5
+At first, the teacher taught the class by himself.  Later, he had an (a)________________.:-assistant;-0.5
+If the enemy (a)________________, would you run or stand and fight?:-attacks;-0.5
+The boy (a)________________ Jefferson High School by day, but is a superhero by night.:-attends;-0.5
+Please pay (a)________________ to the road when you are riding your bike!:-attention;-0.5
+It makes her uncomfortable, and she (a)______________ talking about it.:-avoids;-0.5
+While my mother was away, I had to (b)________________ my younger sister.:-babysit;-0.5
+Mom and Dad found a (b)________________ to take care of the kids for the evening.:-babysitter;-0.5
+It's dangerous to walk (b)________________, because we can't see behind us.:-backwards;-0.5
+My mom spent all afternoon (b)________________ cookies for us - they were delicious!:-baking;-0.5
+That shop is my favorite (b)________________. I always buy bread from there on my way home.:-bakery;-0.5
+We live on the 20th floor, and have to be very careful when standing on the (b)____________.:-balcony;-0.5
+Pandas eat (b)________________.:-bamboo;-0.5
+A (b)________________ is someone who works at a bank.:-banker;-0.5
+This Saturday it should be sunny, so we are having a (b)________________ and pool party at my house.:-barbecue;-0.5
+I carved my name into the (b)________________ of the tree.:-bark;-0.5
+The dog (b)________________ all night, and I could not sleep!:-barked;-0.5
+The rain flooded (filled) the (b)________________ of our house with water, but the ground floor stayed dry.:-basement;-0.5
+Before you take a car on the road, you must learn some (b)________________  safety rules like obeying traffic signs and how to signal.:-basic;-0.5
+Is there a factual (based on facts) (b)________________ (evidence, proof) behind the claim (saying) that tall people are better at sports?:-basis;-0.5
+There was a great (b)________________ between the monsters and angels.  The angels won.:-battle;-0.5
+The necklace was made from (b)________________ of many different colors.:-beads;-0.5
+Soy milk is made from soy (b)________________.:-beans;-0.5
+If you see a big black (b)________________, you should avoid looking at its eyes, and walk away slowly...:-bear;-0.5
+I can't (b)_______________ the noise.  I want to change an apartment.:-bear;-0.5
+A (b)________________ is hair growing on a man's face, around and below the mouth.:-beard;-0.5
+This house has five (b)________________ and four bathrooms.:-bedrooms;-0.5
+Many people in India don't eat (b)________________, or cow meat.:-beef;-0.5
+Trucks sometimes (b)________________ when they are backing up, to let people know.:-beep;-0.5
+At bars, adults sometimes like to drink a glass or pint of cold (b)________________.:-beer;-0.5
+A (b)________________ is usually a bit bigger than a cockroach.  It has a black or multicolor shell and can crawl and fly.:-beetle;-0.5
+Our dog always (b)________________ for food at the dinner table.:-begs;-0.5
+I've only learned piano for two months, so I am a (b)________________.  But my brother has played for ten years.:-beginner;-0.5
+After finally visiting, I learned that many of my (b)________________ about the country had been wrong.:-beliefs;-0.5
+His story is (b)________________, but I'm still not sure if I can trust him.  He has lied to me many times before.:-believable;-0.5
+If I don't wear a (b)________________ with these large pants, they will fall off.:-belt;-0.5
+We sat on a (b)________________ while waiting for the bus.:-bench;-0.5
+Don't (b)________________ your arm; please keep it straight.:-bend;-0.5
+(b)________________ the piano, I'm also very good at violin.:-besides;-0.5
+I (b)________________ you $1000 the coin will come up heads.:-bet;-0.5
+If you travel (b)________________ the moon, you might reach the stars.:-beyond;-0.5
+The machine doesn't take coins, only paper (b)________________.:-bills;-0.5
+A three-ring (b)________________ is a folder that keeps your papers together using metal rings.:-binder;-0.5
+The taste of some Chinese medicine can be rather (b)________________, so I try to avoid it if I can.:-bitter;-0.5
+The teacher wrote his name on the (b)________________, but it was hard for me to see.:-blackboard;-0.5
+Please fill in the (b)________________ with the best word.:-blank;-0.5
+If someone is (b)________________, it means they cannot see.:-blind;-0.5
+She had a (b)________________ nose at school, and went to the nurse's office.:-bloody;-0.5
+For my Tae Kwon Do test, I broke five wooden (b)________________ with my flying kick.:-boards;-0.5
+Room and (b)________________ means giving you a place to stay (live) and food to eat.:-board;-0.5
+Water (b)________________ at 100 degrees Celsius.:-boils;-0.5
+During the battle, the airplane dropped a (b)________________ on the enemy.:-bomb;-0.5
+The old lady showed me her (b)________________ finger.  I was surprised how thin it was.:-bony;-0.5
+The (b)_______________ in my bedroom has four shelves, and each shelf can hold ten books.:-bookcase;-0.5
+I went to the library and (b)________________ some books.  I will return them next week.:-borrowed;-0.5
+Her (b)______________ at work told her to stay overtime.:-boss;-0.5
+Rather than (b)________________ the teacher with every little question, let's do as much as we can first, by ourselves.:-bothering;-0.5
+Please hold my water (b)________________ while I go use the restroom.:-bottle;-0.5
+In Japan, it's common for businesspeople to (b)________________ to each other when they first meet.:-bow;-0.5
+A long time ago, people hunted animals using (b)________________ and arrow.:-bow;-0.5
+In the game of (b)________________, a large black ball is rolled down a lane to knock over ten pins.:-bowling;-0.5
+The (b)_______________ is inside the head.:-brain;-0.5
+Many leaves may grow on the (b)________________ of a tree.:-branch;-0.5
+iPhone is a (b)________________ of smartphones made by the company Apple.:-brand;-0.5
+In the story of The Three Little Pigs, the wolf could not blow down the house made of (b)________________.:-bricks;-0.5
+The President paid a (b)_______________ visit to our school.  He only stayed ten minutes.:-brief;-0.5
+The professor had (b)________________ knowledge of many different areas of science.:-broad;-0.5
+The TV station (b)________________ its signal to the whole city.:-broadcasts;-0.5
+On the weekends, we usually skip breakfast and have (b)________________ at 11am.:-brunch;-0.5
+We use a toilet (b)________________ to clean the toilet.:-brush;-0.5
+You should (b)________________ your teeth after every meal.:-brush;-0.5
+The bread used for holding a hot dog is called a (b)________________.:-bun/roll;-0.5
+I tied up the newspapers into a (b)________________ using some string, and took them outside to recycle.:-bundle;-0.5
+Don't touch the fire, or you will (b)________________ your finger!:-burn;-0.5
+If you fill the balloon with too much air, it might (b)________________.:-burst;-0.5
+The boss owns his own (b)_________________ and makes a lot of money.:-business;-0.5
+I lost a (b)________________ from my shirt - could you help me find it?:-button;-0.5
+Push this (b)________________ to turn on the TV.:-button;-0.5
+Korean kimchee is made from sour (c)________________.:-cabbage;-0.5
+A (c)_____________ connects the phone to its (battery) charger.:-cable;-0.5
+We met at a (c)________________, so I had coffee.:-cafe;-0.5
+At school, we eat our lunch in a (c)________________.:-cafeteria;-0.5
+What day is July 23rd? Let me check the (c)________________.:-calendar;-0.5
+I thought he would be very upset. But he remained quite (c)________________.:-calm;-0.5
+We can't make it (go) tomorrow, so we need to (c)________________ our reservation.:-cancel;-0.5
+They say that smoking can cause lung (c)________________.:-cancer;-0.5
+There's a power outage, and it's dark. I have a match - let's light a (c)________________.:-candle;-0.5
+The (c)________________ decided to turn her ship around due to bad weather.:-captain;-0.5
+The (c)________________ (covering the floor) is dirty. We need to vacuum it.:-carpet;-0.5
+Rabbits like to eat (c)________________ (color orange).:-carrots;-0.5
+My little brother likes to ride in the shopping (c)________________ at the supermarket.:-cart;-0.5
+Mickey Mouse, Bugs Bunny, and Homer Simpson are all (c)________________ characters.:-cartoon;-0.5
+I tried to pay by credit card, but the store would only take (c)________________.:-cash;-0.5
+My mother wanted to play the music on her (c)________________ tape, but they don't make those machines anymore.:-cassette;-0.5
+The king and queen live in a (c)________________.:-castle;-0.5
+100,000 years ago, people lived in (c)________________ and hunted animals for food.:-caves;-0.5
+I don't think I can reach the (c)________________ to change the light bulb. I will need a ladder.:-ceiling;-0.5
+Your body is made up of many (c)________________. Most are too small to see.:-cells;-0.5
+The word "(c)________________" means located close to the center (middle).:-central;-0.5
+A (c)________________ is 100 years.:-century;-0.5
+In the morning, I like to have milk and (c)________________ for breakfast.:-cereal;-0.5
+The teacher wrote on the blackboard using (c)________________.:-chalk;-0.5
+Can you help me (c)________________ the battery in my smoke detector?:-change;-0.5
+If I give you $100 for a $35 candy bar, you owe me $65 in (c)________________.:-change;-0.5
+My favorite Star Wars (c)________________ is Yoda.:-character;-0.5
+My phone has run out of battery. I need to (c)________________ it.:-charge;-0.5
+Buying two candy bars for $10 is (c)________________ (less expensive) than paying $6 for each separately.:-cheaper;-0.5
+The movie was about a student who (c)_______________ on her test by hiding secret notes in a pencil eraser.:-cheated;-0.5
+The (c)________________ formula for water is H20.:-chemical;-0.5
+(c)________________ is a game played using pieces on a board with 64 squares.:-chess;-0.5
+Stop acting like a child!  Don't be so (c)________________.:-childish;-0.5
+She speaks with a (c)________________ (like a child) innocence.:-childlike;-0.5
+The (c)________________ is a part of your face below your mouth.  For men, it's where a beard might grow.:-chin;-0.5
+I like (c)________________ ice cream. She likes vanilla.:-chocolate;-0.5
+I chose the brown one, but my brother's (c)________________ was different.:-choice;-0.5
+Of all the great schools you could have studied at, what made you (c)________________ this one?:-choose;-0.5
+Chinese people usually eat rice using (c)________________ or a spoon.:-chopsticks;-0.5
+It's hard to draw a perfect, round (c)________________ using only your hands (without a compass).:-circle;-0.5
+I was born in New York. I am a (c)________________ of the United States.:-citizen;-0.5
+The woman (c)________________ I took her bag, but I didn't do it!:-claims;-0.5
+The young man gave a great speech, and everybody (c)________________ their hands.:-clapped;-0.5
+War and Peace is a (c)________________ novel written by Tolstoy in 1869. It is a central work of Russian literature that has stood the test of time.:-classic;-0.5
+People have toes. Eagles have (c)________________.:-claws;-0.5
+Play-doh is like (c)________________. You can mold (make) it into any shape you like.:-clay;-0.5
+We will have a professional (c)________________ come and clean the house for us.:-cleaner;-0.5
+I asked a store (c)_______________ if they sold toothpaste.:-clerk;-0.5
+The dog is very (c)________________, and can do many tricks.:-clever;-0.5
+(c)________________ change is long-term change in the earth's weather.:-climate;-0.5
+I hang my shirts and pants in my (c)________________.:-closet;-0.5
+I used a (c)________________ rag (small towel) to wipe the kitchen sink.  The material is soft and soaks up water.:-cloth;-0.5
+The rich man is (c)________________ by the finest tailors (people who make clothes) in the world.:-clothed;-0.5
+He buys many (c)_________________ and wears something different every day.:-clothes;-0.5
+We donated (gave) food and (c)________________ to the poor.:-clothing;-0.5
+It's a (c)________________ day - I can't see the sun.:-cloudy;-0.5
+A (c)________________ performs at the circus and makes everyone laugh.:-clown;-0.5
+I play with a soccer (c)________________ on the weekends, as my school doesn't have a team.:-club;-0.5
+Our basketball (c)________________ told us if we worked hard, we could win the championship.:-coach;-0.5
+(c)________________ is a black rock we can burn for fuel (energy).:-coal;-0.5
+A (c)________________ is a male chicken, or rooster.:-cock;-0.5
+Are you scared of the big (c)________________ (a kind of bug) crawling around the trash can at night?:-cockroaches;-0.5
+The slot machine doesn't take paper bills, only (c)________________.:-coins;-0.5
+My hobby is (c)________________ stamps.:-collecting;-0.5
+The painting is very (c)_________________, and uses orange, blue, green, yellow, and red.:-colorful;-0.5
+She didn't (c)________________ her hair this morning. It looks like she just woke up.:-comb;-0.5
+This chair is too small for me, and not very (c)________________.:-comfortable;-0.5
+She works for a big (c)________________ and makes lots of money.:-company;-0.5
+I don't think he should (c)________________ us to each other. We are all special in our own ways.:-compare;-0.5
+He always (c)________________ that the weather is too hot, or his soup is too cold, etc.:-complains;-0.5
+We can't play chess if we don't have a (c)________________ set of pieces!  This one is missing a rook.:-complete;-0.5
+I like to watch videos on my (c)________________ screen, because it's bigger than my phone.:-computer;-0.5
+The doctor thought the man might have Covid, and the tests (c)________________ it.:-confirmed;-0.5
+Let's make sure competition doesn't turn into (c)________________.  = a contest doesn't turn into a fight:-conflict;-0.5
+孔夫子, or the Great Sage, is referred to in the West as (c)________________.:-Confucius;-0.5
+(c)________________! You have won a prize.:-congratulations;-0.5
+I (c)________________ my brother to also be my best friend.:-consider;-0.5
+If you have any questions, you can (c)________________ me by LINE or email.:-contact;-0.5
+What do you think this box (c)________________? Toys or candy?:-contains;-0.5
+I can't find the remote (c)________________ for the TV.:-control;-0.5
+You use this (c)________________ to move the toy car around.:-controller;-0.5
+That school is very far away, and not (c)________________ for me to get to at all.:-convenient;-0.5
+We had a good (co)________________, and talked about many things.:-conversation;-0.5
+We cook rice using a rice (c)________________.:-cooker;-0.5
+To make a (c)________________ of this paper, could we just take a picture using our smartphone then print it out on a printer?:-copy;-0.5
+My house lies at the southwest (c)________________ of that intersection.:-corner;-0.5
+The builder made a (c)________________ mistake that was very expensive to repair.:-costly;-0.5
+My shirt is made of (c)________________. It's soft.:-cotton;-0.5
+When we catch a cold, we might sneeze and (c)________________.:-cough;-0.5
+I live in the city, but  grew up in the (c)________________, on a farm.:-countryside;-0.5
+A (c)________________ is usually larger than a city, and may include many cities.  In America, it is smaller than a state.:-county;-0.5
+After the wedding, the (c)________________ went to Hawaii for their honeymoon.:-couple;-0.5
+He showed a lot of (c)________________ by standing up to (not backing down from) the bully.:-courage;-0.5
+During a basketball game, there are ten players on the (c)________________, i.e., five from each team.:-court;-0.5
+Your (c)________________ is the son or daughter of your parent's brother or sister.:-cousin;-0.5
+A (c)________________ can live in the ocean or fresh water.  It has a hard shell with a front pair of pincers (like sharp claws).:-crab;-0.5
+A construction (c)________________ is used to lift heavy objects to tall places.:-crane;-0.5
+I colored my drawing with (c)________________.:-crayons;-0.5
+Many people thought she was (c)________________ to quit her job without any back-up plan.  But she knew what she was doing.:-crazy;-0.5
+My favorite ice (c)________________ flavor? Strawberry!:-cream;-0.5
+Please don't copy my drawing. I want you to (c)________________ something new.:-create;-0.5
+This neighborhood is not safe at night. There is lots of (c)________________, like theft and robbery.:-crime;-0.5
+A (c)________________ is an emergency.  For example, the country has a food (c)____________.:-crisis;-0.5
+This year, the farmers had a good (c)________________, and everyone will be well fed.:-crop;-0.5
+Jesus died on a (c)________________.  To some, it symbolizes the Church.:-cross;-0.5
+A (c)________________ is a black bird.:-crow;-0.5
+The rooster (c)________________ as the sun began to rise.:-crowed;-0.5
+A (c)________________ gathered (got together) to watch the street performer.:-crowd;-0.5
+Don't be (c)________________ to animals. They have feelings too.:-cruel;-0.5
+To know a people, you should learn not only their language but also about their (c)________________: their food, music, pastimes (hobbies), etc.:-culture;-0.5
+I hope to become a doctor and find a (c)________________ for cancer.:-cure;-0.5
+I'm not sure who that girl likes, but I'm very (c)________________ to know.:-curious;-0.5
+It was very sunny outside, so we drew (pulled) the (c)________________ closed to make the room darker.:-curtains;-0.5
+It is a (c)________________ in the US to shake hands when first meeting someone.:-custom;-0.5
+This restaurant serves over a hundred happy (c)________________ every day.:-customers;-0.5
+My (d)________________ (something you do every day) exercise includes both running and swimming.:-daily;-0.5
+I hit his car with my shopping cart and caused some (d)________________.:-damage;-0.5
+It's very (d)________________ to try and drive a car with your eyes closed!:-dangerous;-0.5
+My phone broke down, and all my (d)________________ is lost!:-data;-0.5
+The break of (d)________________ is the time of day when the sun first comes out.:-dawn;-0.5
+(d)________________ people have trouble hearing things.:-deaf;-0.5
+In class, they had a (d)________________ (discussion, argument) about whether the government should set tighter limits on gun ownership.:-debate;-0.5
+I owe him $1000.  It's my (d)_______________ to him.:-debt;-0.5
+The CEO made a difficult (d)________________ to lay off some employees (workers).:-decision;-0.5
+Every year, we (d)________________ our Christmas tree with ornaments (small toys).:-decorate;-0.5
+It's 35 (d)________________ outside today!:-degrees;-0.5
+He graduated from the university with a (d)________________ in mathematics.:-degree;-0.5
+There was a slight (d)________________, and my mother didn't come until 5:05pm.:-delay;-0.5
+Cheeseburgers are my favorite! They're (d)________________.:-delicious;-0.5
+The mailman (d)________________ a package, but I wasn't home.:-delivered;-0.5
+I have a toothache (tooth pain). I need to see a (d)________________.:-dentist;-0.5
+I think she ate my cookie, but she (d)________________ it.:-denies;-0.5
+Macy's is a (d)________________ store in America, similar to Sogo in Asia.:-department;-0.5
+How long does it take to get to work? It (d)________________ on whether I walk, bike, or drive.:-depends;-0.5
+The (average) (d)________________ of the ocean is about 3.7 km.:-depth;-0.5
+"Please (d)________________ this picture."  "It looks like a photo of a family having a nice picnic at the park on a sunny day.":-describe;-0.5
+A (d)________________ is a very hot and dry place with lots of sand.:-desert;-0.5
+It's a crime for a soldier to (d)________________ the army. He must stay with his unit (team)!:-desert;-0.5
+The iPhone's (d)________________ was different from other cell phones when it first came out. Rather than having plastic buttons, the keyboard could be selected from a touchscreen.:-design;-0.5
+The genie will grant you three wishes: anything your heart (d)________________.:-desires;-0.5
+After dinner, I like to have ice cream for (d)________________.:-dessert;-0.5
+You should replace the batteries in the smoke (d)________________ often.  It could save your life.:-detector;-0.5
+A large city is usually more (d)________________ than the countryside. It may have subways, highways, Internet, etc.:-developed;-0.5
+When you step outside in the early morning, you can sometimes see (d)________________ (water) on the grass.:-dew;-0.5
+In case of an emergency, please (d)________________ 119 on your phone.:-dial;-0.5
+(d)________________ is an expensive, transparent (see-through), and very hard rock made of carbon. It's used to make jewelry or tools.:-diamond;-0.5
+My sister keeps (writes down) all her secrets in a (d)________________.:-diary;-0.5
+I don't know what this word means. I need to look it up in a (d)________________.:-dictionary;-0.5
+At 10 years old, you're old enough to tell the (d)________________ between right and wrong.:-difference;-0.5
+Some of my friends are worried about doing well in this class.  But math has always been easy for me, so I should have no (d)________________.:-difficulties;-0.5
+(d)________________ were animals that lived about 100 million years ago, that looked like big lizards (or dragons).:-dinosaurs;-0.5
+When you're driving, it's important to know in which (d)________________ (e.g., north or south) you are headed (going).:-direction;-0.5
+A movie (d)________________ is the person who tells the actors how to act in the movie.:-director;-0.5
+Many people say he's mean, but I (d)________________. I think he's nice.:-disagree;-0.5
+About 66 million years ago, dinosaurs (d)________________ from the face of the earth. Nobody knows what happened to them.:-disappeared;-0.5
+Her parents met with the teacher to (d)________________ her grades.:-discuss;-0.5
+We had a long (d)________________ about where we wanted to go on vacation.:-discussion;-0.5
+A (d)________________ person is not honest.:-dishonest;-0.5
+Many toys were (d)________________ in the store window, for everyone to see.:-displayed;-0.5
+The (d)________________ between the two cities is about 360 km.:-distance;-0.5
+A (d)________________ relative (family member) came to visit us. He is the grandson of my grandmother's cousin.:-distant;-0.5
+20 (d)________________ by 4 is 5.:-divided;-0.5
+The young girl knows addition, subtraction, and multiplication, but hasn't yet learned  (d)________________.:-division;-0.5
+If you quickly spin around ten times, you might get (d)________________ and fall down.:-dizzy;-0.5
+Like whales, (d)________________ swim in the water, but are not fish (they breathe using lungs).:-dolphins;-0.5
+A (d)________________ is like a horse, but smaller.  People sometimes use them as working animals to help carry things (on their back).:-donkey;-0.5
+A period (.) looks just like a small (d)________________.:-dot;-0.5
+(d)________________ power means twice (two times) the power.:-double;-0.5
+He said he's finished his homework, but I have my (d)________________. He's lied to me before.:-doubts;-0.5
+(d)________________ are a kind of sweet circular bread with a hole in the middle.:-donuts;-0.5
+(d)________________ is the (usually busy) area near the center of a city.:-downtown;-0.5
+Whenever I get sick, I pay a visit to our family (d)________________.:-doctor;-0.5
+To (d)________________ something means to pull it along the floor, e.g., a bag.:-drag;-0.5
+A (d)________________ breathes fire, and looks like a dinosaur with wings.:-dragon;-0.5
+A (d)________________ is a small insect that has a long body and transparent (see-through) wings.:-dragonfly;-0.5
+If you join the (d)________________ club in high school, you might act in a play on stage.:-drama;-0.5
+The desk has four slidable (can slide on wheels) (d)________________ for you to store your things.:-drawers;-0.5
+She really likes (d)________________ with a pencil, and all of her pictures look really good!:-drawing;-0.5
+The girl wore a pretty red (d)________________ the party.:-dress;-0.5
+I (d)________________ my book, and she helped me pick it up.:-dropped;-0.5
+Don't take (d)________________ - they can harm your body and ruin your life.:-drugs;-0.5
+We can buy medicine for your cough at the (d)________________.:-drugstore;-0.5
+I beat on the (d)________________ with these sticks to make music.:-drum;-0.5
+After washing your clothes, do you use a (d)________________, or hang them outside in the sun?:-dryer;-0.5
+Because he doesn't say much, some people find him a bit (d)________________ and boring.  But he is actually a fantastic artist.:-dull;-0.5
+It's not nice to call someone (d)________________, even if they're not smart.:-dumb;-0.5
+Potstickers are a kind of Chinese (d)________________, which all have a cooked dough wrapped around a sweet or salty filling.:-dumpling;-0.5
+As a teacher, it's his (d)________________ to make sure the students are learning.:-duty;-0.5
+How much money can one (e)________________ as a cab driver in the city?:-earn;-0.5
+There was a big (e)________________ yesterday. The ground shook very violently (with lots of force).:-earthquake;-0.5
+(e)________________ is the opposite of western.:-eastern;-0.5
+My mother told me it's important to go to school and get a good (e)________________.:-education;-0.5
+If you hurt me, I will bleed. This is an example of cause and (e)________________.:-effect;-0.5
+The teacher was very funny, but not (e)________________. The students didn't learn much.:-effective;-0.5
+He put lots of time and (e)________________ into improving his basketball skills.:-effort;-0.5
+An (e)________________ is any person who is older than you.:-elder;-0.5
+The people (e)________________ her as their new President.:-elected;-0.5
+Oxygen, carbon, and nitrogen are all (e)________________.:-elements;-0.5
+I took the (e)________________ to get to the fiftieth floor.:-elevator;-0.5
+It's important to be aware of your (e)________________, e.g., happiness, anger, sadness.:-emotions;-0.5
+At first I was afraid, but my father (e)________________ me to just go for it.:-encouraged;-0.5
+Please don't tell me the (e)________________ to that movie, as I haven't seen it yet!:-ending;-0.5
+They say you should keep your friends close, and your (e)________________ even closer.:-enemies;-0.5
+If I don't get enough sleep, I have no (e)________________ to do anything the next day.:-energy;-0.5
+I really (e)________________ the class. It's fun and I learn many new things.:-enjoy;-0.5
+I finished the (e)________________ book in just two days.:-entire;-0.5
+I will wait for you by the (e)________________ to the movie theater, and we can go in together.:-entrance;-0.5
+When you mail a letter, you should put a stamp on the (e)________________.:-envelope;-0.5
+She really cares about the (e)________________. She always recycles, and turns off the lights when not using them.:-environment;-0.5
+I brought my pencil but forgot my (e)________________.:-eraser;-0.5
+I made a small (e)________________ on the math test, so my score was 98 instead of 100.:-error;-0.5
+Of all his good qualities,  I (e)________________ admire his honesty.:-especially;-0.5
+There was a special (e)________________ being held at the library today, so it was closed to students.:-event;-0.5
+When did he arrive? About 3pm. Could you tell me the (e)________________ time? OK, he arrived at 3:05:29.:-exact;-0.5
+I'm very happy - you did an (e)________________ job!:-excellent;-0.5
+The little boy was so (e)________________ to see the robot dance. He laughed and jumped up and down.:-excited;-0.5
+(e)________________ me, but could you tell me what time it is?:-excuse;-0.5
+To stay healthy, it's important to get lots of (e)________________, e.g., run, swim, or bike.:-exercise;-0.5
+Does God really (e)________________? Many people believe so.:-exist;-0.5
+I didn't (e)________________ this to take so long... now I will be late for class!:-expect;-0.5
+This watch is really (e)________________. It costs a lot of money.:-expensive;-0.5
+Going to California last summer was really a great (e)________________ for me.  I learned a lot and met many new friends.:-experience;-0.5
+She is an (e)________________ in physics. She can definitely answer any questions you might have.:-expert;-0.5
+I still didn't understand, so the teacher took some extra time to (e)________________ it to me.:-explain;-0.5
+He chose his words carefully to (e)________________ his meaning clearly.:-express;-0.5
+Be sure to do the first five problems.  The sixth is just for (e)________________ credit.:-extra;-0.5
+The (e)________________ are the hair on your face, right above your eyes.:-eyebrows;-0.5
+Some people (f)________________ 99 times before they succeed once.:-fail;-0.5
+The young man was not afraid of (f)________________, and learned by making many mistakes.:-failure;-0.5
+My family and I went to the county (f)________________ over the weekend. I had cotton candy and played games.:-fair;-0.5
+You gave me one candy, but my brother got two. That's not (f)________________!:-fair;-0.5
+The movie star is very (f)________________. Everybody knows him.:-famous;-0.5
+She was in an accident, and it was the other driver's (f)________________.:-fault;-0.5
+I need to ask you for a (f)________________: could you help babysit my brother next week?:-favor;-0.5
+My (f)________________ movie is Avengers: Endgame. It's the best!:-favorite;-0.5
+(f)________________ means full of fear.  For example, she's (f)_____________ of spiders.:-fearful;-0.5
+The bank charges a (f)________________ if your account balance drops below $1000.:-fee;-0.5
+The neighbors knew him as a jolly  (f)________________ - always chatting and bringing candy to the children.:-fellow;-0.5
+Men are male, and women are (f)________________.:-female;-0.5
+Good (f)________________ make good neighbors, because everybody knows what's theirs and what's not.:-fences;-0.5
+During the Mid-Autumn (f)________________ (traditional celebration), the Chinese eat mooncakes.:-festival;-0.5
+My sister was sick, and ran a high (f)________________ of 39 degrees.:-fever;-0.5
+A soccer pitch is also known as a soccer (f)________________. It's where they play soccer.:-field;-0.5
+A (f)________________ is a person who fights.:-fighter;-0.5
+Our science book has many (f)________________, i.e., pictures that explain the words.:-figures;-0.5
+Avengers: Endgame is my favorite (f)________________ of all time.:-film;-0.5
+A (f)________________ fights fires.:-fireman/firewoman;-0.5
+My mother works at a law (f)________________, i.e., a company of lawyers.:-firm;-0.5
+(f)________________ have to wake up early every morning to go catch fish.:-fishermen;-0.5
+The boy has grown a lot. His clothes no longer (f)________________.:-fit;-0.5
+The TV is broken - can you help me (f)________________ it?:-fix;-0.5
+What are the colors of the American (f)________________? Red, white, and blue.:-flag;-0.5
+There was a (f)________________ of lightning, followed by loud thunder.:-flash;-0.5
+If you go outside in the dark, you should bring a (f)________________ to help you see.:-flashlight/flash;-0.5
+My bike tire is (f)________________ - it has no air!:-flat;-0.5
+My father must catch a (f)________________ (on an airplane) to Beijing tomorrow morning.:-flight;-0.5
+In 2001, a typhoon brought heavy rains that caused the subway stations to (f)________________.:-flood;-0.5
+To make bread, you need (f)________________.  It's white and looks like powder (dust).:-flour;-0.5
+The river (f)________________ from the mountains to the sea.:-flows;-0.5
+A kid in our school caught the (f)________________, so classes are cancelled this week.:-flu;-0.5
+The (f)________________ is a long musical instrument.  To play, you hold it sideways and blow air into it.:-flute;-0.5
+In that English class, the (f)________________ is on speaking, and not so much on reading and writing.:-focus;-0.5
+On a (f)________________ day, it's hard to see things even ten feet (three meters) ahead of you.:-foggy;-0.5
+He waited until the evening, but she didn't come. The (fo)________________ day, he came back again...:-following;-0.5
+I can't believe I was such a (f)________________, and fell for his tricks (believed his lies) again!:-fool;-0.5
+(f)________________ me once, shame on you.  (f)________________ me twice, shame on me!:-fool;-0.5
+A wise man can turn enemies into friends.   A (f)________________ man will make friends into enemies!:-foolish;-0.5
+(f)________________ is a game played with a ball using your feet, and is also known as soccer in the United States.:-football;-0.5
+A (f)________________ is someone who comes from a different country.:-foreigner;-0.5
+I'm so sorry. Could you ever (f)________________ me?:-forgive;-0.5
+To see the doctor, you first have to fill out (write) many (f)________________.:-forms;-0.5
+Suits and tuxedoes are examples of (f)_______wear. T-shirts and jeans are not.:-formal;-0.5
+He was a (f)________________ navy pilot. Now, he flies for American Airlines.:-former;-0.5
+Don't look back. We must keep moving (f)________________.:-forward;-0.5
+Do you know the fable (story) of the (f)________________ and the grapes? He couldn't have the grapes, so he called them sour.:-fox;-0.5
+Can I be (f)________________ with you?  I'm not sure this T-shirt matches your outfit...:-frank;-0.5
+A prisoner loses the (f)________________ to go wherever he or she chooses.:-freedom;-0.5
+You must put ice cream in the (f)________________, or it will melt.:-freezer;-0.5
+The dog wags his tail and licks my hand. He's very (f)________________ to me.:-friendly;-0.5
+The toy snake on her chair gave the teacher quite a (f)________________ this morning!:-fright;-0.5
+The dog was very (f)________________ by the thunderstorm, and ran into the house to hide.:-frightened;-0.5
+His pen also (f)________________ as a powerful flashlight - cool!:-functions;-0.5
+The results look promising.  But to be 100% sure, we will need to run (f)_________________ tests.:-further;-0.5
+What do you plan to do in the (f)________________? E.g., ten years later.:-future;-0.5
+By working tirelessly (non-stop) to help others, the mayor has (g)________________ the trust of the townspeople.:-gained;-0.5
+Our house doesn't have a (g)________________, so we park our car on the street.:-garage;-0.5
+What days of the week does the (g)________________ truck come to pick up the trash?:-garbage;-0.5
+Our (g)________________ comes to cut the grass for us once a week.:-gardener;-0.5
+Please close the (g)________________ so the dog doesn't run outside.:-gate;-0.5
+We are (g)________________ here today to remember the life of our dear friend, who was also a great man.:-gathered;-0.5
+I can answer any (g)________________ questions you have. For specifics, please ask my assistant.:-general;-0.5
+A (g)________________ is a top leader of an army.:-general;-0.5
+The woman was very (g)________________, and gave everyone a $500 tip.:-generous;-0.5
+Please be (g)________________ with the baby. Otherwise, you could hurt him.:-gentle;-0.5
+Ladies and (g)________________, welcome to our school!:-gentlemen;-0.5
+I studied a whole year of (g)________________, but I still don't know where the Middle East is on the map.:-geography;-0.5
+The man was a (g)________________, standing at over 230cm (7 ft 6 in) tall.:-giant;-0.5
+A (g)________________ is an animal with a long neck.:-giraffe;-0.5
+You can wear (g)________________ to keep your hands clean.:-gloves;-0.5
+I used (g)________________ to stick the two papers together.:-glue;-0.5
+My (g)________________ for the summer is to finish this 500-page book.:-goal;-0.5
+We usually drink milk from a cow, but you can also buy (g)________________ milk.:-goat;-0.5
+If something is (g)________________, it's as good as gold.:-golden;-0.5
+Tiger Woods is a (g)________________ player.:-golf;-0.5
+They believe the job of government is to (g)_____________ a country, not control it.:-govern;-0.5
+We must pay taxes to the (g)____________________.:-government;-0.5
+Do your parents think an A- is a good (g)________________?:-grade;-0.5
+The fox decided that those (g)________________ were sour anyway.:-grapes;-0.5
+A (g)________________ hill is covered with grass.:-grassy;-0.5
+The (g)________________ man took all the money for himself.:-greedy;-0.5
+She (g)________________ me with a simple "Hello!":-greeted;-0.5
+In high school, he experienced a sudden (g)________________ spurt (fast increase) that took him from 5'8" (173cm) to 6'3" (190cm).:-growth;-0.5
+There's a security (g)________________ who watches over the building at all times.:-guard;-0.5
+(g)________________ is a tropical fruit with green skin and white (or sometimes red) flesh and pulpy seeds.  We often eat them in slices, like an apple.:-guava;-0.5
+She can play the (g)________________ and sing at the same time.:-guitar;-0.5
+Who's that (g)________________? I don't know, but he was also here yesterday.:-guy;-0.5
+I have a bad (h)________________ of biting my fingernails when I feel nervous.:-habit;-0.5
+The students eat together in a big dining (h)________________.:-hall;-0.5
+McDonald's sells (h)________________.:-hamburgers;-0.5
+I used a (h)________________ to hit the nail on its head.:-hammer;-0.5
+The gentleman wiped his nose using his (h)________________.:-handkerchief;-0.5
+To open the car door, pull the (h)________________.:-handle;-0.5
+It's a big job. Are you sure you can (h)________________ it by yourself?:-handle;-0.5
+The (h)________________ man married the beautiful woman.:-handsome;-0.5
+After washing them, my mother (h)________________ up the clothes to dry.:-hung;-0.5
+A (h)________________ is used to hang clothes.:-hanger;-0.5
+After he moved far away, I (h)________________ ever see him anymore.:-hardly;-0.5
+She gave him a (h)________________ (full of hate) look. She was ready to wring (twist) his neck.:-hateful;-0.5
+To stay (h)________________, we should eat good foods and exercise.:-healthy;-0.5
+An electric (h)________________ keeps you warm during the winter.:-heater;-0.5
+His (h)________________ is 155 cm.:-height;-0.5
+Thank you for everything, you've been very (h)________________!:-helpful;-0.5
+A (h)________________ is a mother chicken.:-hen;-0.5
+The (h)________________ of the story beat the bad guys and saved his family.:-hero;-0.5
+We played (h)________________-and-go-seek.:-hide;-0.5
+You can usually drive faster on the (h)________________.:-highway;-0.5
+The (h)________________ is where your leg joins the rest of your body.:-hip;-0.5
+A (h)________________ is a big four-legged  animal that likes to spend time in the water.  Its name means "river horse.":-hippopotamus;-0.5
+The boss (h)________________ two new workers.:-hired;-0.5
+My (h)________________ is collecting stamps.:-hobby;-0.5
+You can put your toothbrush in this toothbrush (h)________________.:-holder;-0.5
+Whenever I spend too much time abroad, I start to feel (h)________________ (miss home).:-homesick;-0.5
+Please be (h)________________. Don't lie.:-honest;-0.5
+Bees make (h)________________.:-honey;-0.5
+A rabbit can move by (h)________________ (like jumping).:-hopping;-0.5
+When sick, we go to the (h)________________.:-hospital;-0.5
+The guests thanked their (h)________________ for the nice dinner.:-hosts;-0.5
+When traveling, we stay at (h)________________.:-hotels;-0.5
+I would tell you not to go. (h)________________, since I know you won't listen, I can only wish you good luck.:-however;-0.5
+He really likes music, and is always (h)________________ some tune (song) I've never heard of.:-humming;-0.5
+A (h)________________ person doesn't think he or she is better than other people.:-humble;-0.5
+Tropical summers (like in Taiwan) are hot and (h)________________.:-humid;-0.5
+The teacher has a sense of (h)________________ that makes children laugh.:-humor;-0.5
+(h)___________ is the feeling you get when you haven't eaten.:-hunger;-0.5
+A long time ago, people (h)________________ animals for food.:-hunted;-0.5
+A (h)________________ is a person who hunts.:-hunter;-0.5
+I was in a (h)________________, because I was already running late!:-hurry;-0.5
+She always (i)________________ me when she passes by, pretending not to see me.:-ignores;-0.5
+The man is (i)________________, and must stay in the hospital.:-ill;-0.5
+Can you (i)________________ a world without hunger?:-imagine;-0.5
+My father always taught me the (i)________________ of hard work and patience (waiting).:-importance;-0.5
+If you practice every day, you will (i)________________ quickly.:-improve;-0.5
+The $80 lunch special (i)________________ rice, a pork chop, and a drink.:-includes;-0.5
+For many people, their job is their main source of (i)________________.  Some also invest in things like real estate (land, buildings) or stocks (companies).:-income;-0.5
+After a price cut, sales of the new electric car model have (i)________________ by 50%.:-increased;-0.5
+In 1776, the Americans gained (i)________________ from the British, after fighting the Revolutionary War.:-independence;-0.5
+An (i)________________ person doesn't need anyone else to be happy.:-independent;-0.5
+These signs (i)________________ that you may have superpowers.:-indicate;-0.5
+People who work in the film (i)________________ include actors/actresses, directors, producers, set designers, etc.:-industry;-0.5
+The father tried to (i)________________ her daughter's decision. But she was independent now, and didn't listen.:-influence;-0.5
+A pen uses (i)________________ to write.:-ink;-0.5
+Ants and mosquitoes are both (i)________________ (or bugs).:-insects;-0.5
+I said no, but she (i)________________. So finally, I said yes.:-insisted;-0.5
+I always dream of happy things.  For (i)________________, I once dreamed of having a chocolate sundae on a beautiful island.:-instance;-0.5
+I sometimes eat (i)________________ noodles from a package. They are so easy and quick to make.:-instant;-0.5
+Do you play any musical (i)________________? Yes, both piano and violin.:-instruments;-0.5
+She went to an (i)________________ school, with students from many countries.:-international;-0.5
+To get the job, you must go to an (i)________________ and answer their questions.:-interview;-0.5
+I (i)________________ my friend to my parents. It was the first time they'd met.:-introduced;-0.5
+Thomas Edison (i)________________ the light bulb.:-invented;-0.5
+Did you receive the (i)________________ to their wedding?:-invitation;-0.5
+I (i)________________ her to my party, but she couldn't make it.:-invited;-0.5
+Taiwan is an (i)________________, and is surrounded by the sea.:-island;-0.5
+I bought five (i)_______________ from the market, costing $1,200 altogether.:-items;-0.5
+It's cold outside. Better zip up your (j)________________.:-jacket;-0.5
+I always put strawberry (j)________________ on my sandwich.:-jam;-0.5
+I (j)________________ my finger in the door.  It hurts so bad…:-jammed;-0.5
+(j)________________ music came from America, and can be played on trumpets and saxophones.:-jazz;-0.5
+She wore a T-shirt and (j)________________.:-jeans;-0.5
+We drove a (j)________________ through the wild animal park.:-jeep;-0.5
+To (j)________________ is to run slowly.:-jog;-0.5
+A (j)________________ is where two things meet. For example, your elbow is a (j)________________.:-joint;-0.5
+In court, the (j)________________ sentenced the criminal to five years in prison.:-judge;-0.5
+Don't (j)________________ a book by its cover (appearance) .:-judge;-0.5
+The delicious apple was so (j)________________, I had to wipe my mouth with a napkin.:-juicy;-0.5
+(k)________________ is made from tomatoes, and we put it on french fries.:-ketchup/catsup;-0.5
+(k)________________ is before first grade.:-kindergarten;-0.5
+The king ruled over his (k)________________.:-kingdom;-0.5
+Before you enter, please (k)________________ on the door.:-knock;-0.5
+To gain more (k)________________, you can read more books.:-knowledge;-0.5
+A (k)________________ bear lives in Australia, and has no tail.:-koala;-0.5
+A (l)________________ is a small red insect with black dots. It crawls and can fly.:-ladybug/ladybird;-0.5
+This wide road has four (l)________________, including one just for bikes.:-lanes;-0.5
+Is English a difficult (l)________________ to learn?:-language;-0.5
+A (l)________________ is a lamp that you can carry.:-lantern;-0.5
+On the train, the boy sat on his mother's (l)________________.:-lap;-0.5
+Read this to find out the (l)________________ news about your favorite stars.:-latest;-0.5
+Her mother is a (l)________________. She goes to court and prepares contracts.:-lawyer;-0.5
+As class president, the boy showed great (l)________________ by taking action only after listening carefully to all his classmates.:-leadership;-0.5
+A judge decides (l)________________ questions, e.g., what is the law?:-legal;-0.5
+A (l)________________ is a small yellow sour fruit.:-lemon;-0.5
+(l)________________ is juice from a lemon.:-lemonade;-0.5
+Can you (l)________________ me some money? I will pay you right back.:-lend;-0.5
+The (l)________________ of the rectangle is 10 cm, and its width is 5 cm.:-length;-0.5
+A (l)________________ is a large cat. It lives in trees and can have spots.:-leopard;-0.5
+A BLT sandwich includes bacon, (l)__________, and tomatoes.:-lettuce;-0.5
+Many books are found in a (l)________________.:-library;-0.5
+The dog (l)________________ its own paws (feet) with its tongue.:-licked;-0.5
+Please close the (l)________________ on this box.:-lid;-0.5
+When it rains, there may be (l)________________ and thunder.:-lightning;-0.5
+There is a (l)________________ to how much you can spend with this credit card.:-limit;-0.5
+Scientists have shown that lung cancer is (l)________________ to smoking.:-linked;-0.5
+Water is a (l)________________. Ice is a solid.:-liquid;-0.5
+When you talk, please make sure your (l)________________ understand you.:-listeners;-0.5
+I bought a (l)________________ of bread.:-loaf;-0.5
+She is a (l)________________, but we are from out of town.:-local;-0.5
+Can you (l)________________ your city on this map?:-locate;-0.5
+I (l)________________ the door but forgot the key!:-locked;-0.5
+Abraham Lincoln lived in a (l)________________ cabin.:-log;-0.5
+A (l)________________ wolf is someone who likes to do things alone.:-lone;-0.5
+If you lived by yourself, would you feel (l)________________?:-lonely;-0.5
+I hate to (l)________________. I love to win.:-lose;-0.5
+The winner gets the money. The (l)________________ goes home.:-loser;-0.5
+The player was sad at the (l)________________. He just hated to lose.:-loss;-0.5
+Those flowers are so (l)________________ (beautiful) - thank you!:-lovely;-0.5
+The (l)________________ kissed, and didn't want to say goodbye.:-lovers;-0.5
+We have two lips: upper and (l)________________.:-lower;-0.5
+She wished me good (l)________________ on my tests.:-luck;-0.5
+My sister likes to read fashion (m)________________ to catch up on the latest styles.:-magazines;-0.5
+He pulled a rabbit out of a hat! It must be (m)________________.:-magic;-0.5
+The (m)________________ made a coin appear out of thin air.:-magician;-0.5
+The article is so long. Can you just tell me the (m)________________ idea?:-main;-0.5
+Don't slow down. Please (m)________________ this speed.:-maintain;-0.5
+(m)________________ and female.:-male;-0.5
+In Beijing, people speak (m)________________ Chinese (a dialect).:-Mandarin;-0.5
+A (m)________________ is a delicious sweet fruit with orange skin (when ripe), yellow flesh, and a large, hard pit (seed).:-mango;-0.5
+She has very good (m)________________. She always smiles and says, "Thank you.":-manners;-0.5
+This tree (m)________________ the place where the treasure is buried (under the ground).:-marks;-0.5
+After dating for five years, the man finally proposed (m)________________ to his girlfriend.:-marriage;-0.5
+Batman wears a (m)________________, so you can't see his face.:-mask;-0.5
+The (m)________________ of this apple is the same on the earth and on the moon. But its weight would be different.:-mass;-0.5
+I wiped my shoes on the welcome (m)________________ before entering the house.:-mat;-0.5
+To make a fire, light a (m)________________.:-match;-0.5
+The opponents fought each other in an epic (great) (m)________________.  And the winner was...:-match;-0.5
+The male (m)________________ with the female to produce offspring (make babies).:-mates;-0.5
+The Black Panther's suit is made of a very special (m)________________ called Vibranium.:-material;-0.5
+We usually have three (m)________________ a day: breakfast, lunch, and dinner.:-meals;-0.5
+I found the (m)________________ of this word in the dictionary.:-meaning;-0.5
+Without any money, it's hard to have the (m)________________ to take care of yourself.:-means;-0.5
+There has been a (m)________________ improvement in the company's performance. = We can measure the improvement.:-measurable;-0.5
+I need a ruler to (m)________________ how long this is.:-measure;-0.5
+When you're sick, take some (m)________________.:-medicine;-0.5
+The first (m)________________ ever between the two world leaders was held in Singapore.:-meeting;-0.5
+The (m)________________ is the main line of music. The accompaniment helps that line.:-melody;-0.5
+On a hot summer day, we might eat (w)________________ to cool down.  The fruit is green on the outside and red on the inside.:-watermelon;-0.5
+To become a (m)________________ of this club, you have to have a lot of money.:-member;-0.5
+I have a good (m)________________ and can remember many things.:-memory;-0.5
+Take a look at the (m)________________ and let me know what you would like to order.:-menu;-0.5
+When you arrive, just send me a text (m)________________.:-message;-0.5
+Gold and iron are both (m)________________.:-metals;-0.5
+200 cm equals 2 (m)________________.:-meters;-0.5
+Every teacher has his or her own (m)________________ (way) for teaching students.:-method;-0.5
+I have several family members who served in the (m)________________: my father was in the Army, and my cousin is in the Marines.:-military;-0.5
+1,000,000 is one (m)________________.:-million;-0.5
+This book is (m)________________. That book is yours.:-mine;-0.5
+The man works in an underground (m)________________ looking for gold.:-mine;-0.5
+Seven (m)________________ five equals two.:-minus;-0.5
+I look in a (m)________________ to see my face.:-mirror;-0.5
+If you (m)________________ the colors red and white, you get pink.:-mix;-0.5
+At the fashion show, we saw many attractive (good-looking) fashion (m)________________ on the runway wearing stylish clothes.:-models;-0.5
+The style of this house is very old, not (m)________________.:-modern;-0.5
+The two (m)________________ Sully and Mike Wazowski try to scare children.:-monsters;-0.5
+I can't sleep at night, because the (m)________________ keep buzzing around me.:-mosquitoes;-0.5
+A (m)________________ moves like a butterfly, and likes to fly towards bright things.:-moth;-0.5
+When something is in (m)________________, it's moving. For example, the wheels are in (m)________________.:-motion;-0.5
+To ride a (m)________________ on the road, you need to wear a helmet (on your head).:-motorcycle;-0.5
+Something (m)________________ can be moved. For example, some cooking stoves are (m)________________, but some are built into the wall of a house.:-movable;-0.5
+The (s)_______________ is a train that runs underground.:-subway;-0.5
+The (m)________________ can refer to a city's bus or subway system.:-metro;-0.5
+A (m)________________ is a mix between a horse and a donkey.:-mule;-0.5
+If you (m)________________ 3 by 5, you get 15.:-multiply;-0.5
+We went to the metropolitan (city) art (m)________________ to look at paintings.:-museum;-0.5
+A (m)________________ is someone who plays music.:-musician;-0.5
+Please be careful when cutting your finger(n)________________ with the clipper.:-nails;-0.5
+I use a hammer to hit a (n)________________ on its head.:-nail;-0.5
+To be (n)________________ means wearing no clothes.:-naked;-0.5
+Please use the paper (n)________________ to wipe your mouth.:-napkin;-0.5
+This road is wide, but that road is (n)________________.:-narrow;-0.5
+He went to the Olympics as a member of our (n)________________ (country's) basketball team.:-national;-0.5
+He has a (n)________________ ability - he was born with it.:-natural;-0.5
+Santa knows if you've been (n)________________ or nice.:-naughty;-0.5
+Is there a 7-Eleven (n)________________? I need to pick up some cash.:-nearby;-0.5
+(n)________________ half (49%) the students fell sick.:-nearly;-0.5
+My sister cleaned her room.  Now it's (n)________________ and tidy.:-neat;-0.5
+Is it really (n)________________ to bring a calculator to the math test?  No, but it would definitely help.:-necessary;-0.5
+She wore a beautiful gold (n)________________ around her neck.:-necklace;-0.5
+A doctor can use a (n)________________ to give you a shot of medicine.:-needle;-0.5
+Positive (+) and (n)________________ (-).:-negative;-0.5
+The man who lives next door is your (n)________________.:-neighbor;-0.5
+(n)________________ he nor I had any idea what to do.:-neither;-0.5
+A (n)________________ is your brother or sister's son.:-nephew;-0.5
+The bird laid eggs in its (n)________________.:-nest;-0.5
+We caught many fish using a fishing (n)________________.:-net;-0.5
+Your (n)________________ is the daughter of your brother or sister.:-niece;-0.5
+(n)________________ knows what happened to him. He just disappeared.:-nobody;-0.5
+If you (n)________________ your head, it means yes. If you shake it, it means no.:-nod;-0.5
+There were seven in our group, but (n)________________ of us had any money.:-none;-0.5
+Spaghetti is an Italian dish that looks a bit like Chinese (n)________________.:-noodles;-0.5
+San Francisco is in (n)________________ California. San Diego is in the south.:-northern;-0.5
+I usually take notes in my (n)________________, but today I left it at home.:-notebook;-0.5
+War and Peace is a famous (n)________________ (written story) by Leo Tolstoy.:-novel;-0.5
+A (n)________________ idea is a new idea.:-novel;-0.5
+Is it safe to snack on (n)________________ and berries you find in the forest?:-nuts;-0.5
+I will (o)________________ your command (what you tell me to do).:-obey;-0.5
+There's a hairy round (o)________________ on the table the size of a basketball...  what could it be?:-object;-0.5
+It is the (o)________________ of my desire. = It is what I want.:-object;-0.5
+If a lawyer thinks something should not have been said in court, he or she might say, "I (o)________________.":-object;-0.5
+The accident (o)________________ at 5 p.m. yesterday.:-occurred;-0.5
+She (o)________________ me her help, and I accepted.:-offered;-0.5
+The (o)________________ name of the U.S. is the "United States of America."  It was first used by Thomas Jefferson in 1776.:-official;-0.5
+The teacher told us to (o)________________ (leave out) Question Number 5 from the test, as there was a typo (a mistake).:-omit;-0.5
+Some people will cry when cutting (o)________________ (a vegetable).:-onions;-0.5
+I don't know how to (o)________________ this machine.:-operate;-0.5
+In your (o)________________, who is stronger: the Hulk or Superman?:-opinion;-0.5
+He was no (o)________________ (common) hero. He was a superhero!:-ordinary;-0.5
+The heart, lungs, liver, and brain are all body (o)________________.:-organs;-0.5
+The WHO, or World Health (o)________________, is a group that tries to improve public health around the world.:-organization;-0.5
+I like to keep my desk (o)________________ so that I can find things easily.:-organized;-0.5
+My mother baked bread in the (o)________________.:-oven;-0.5
+An (o)________________ is a road or walkway that passes over your head, above the ground.:-overpass;-0.5
+I was born in this country, but lived (o)________________ for many years.  I just came back last year.:-overseas;-0.5
+An (o)________________ is a bird that wakes up at night, and makes a "Hoot, Hoot" sound.:-owl;-0.5
+The (o)________________ of this business doesn't just care about making money, but also making customers happy.:-owner;-0.5
+An (o)________________ is a strong cow or bull. They can work on farms.:-ox;-0.5
+I'm leaving tomorrow for Canada. I must (p)________________ my things tonight.:-pack;-0.5
+I received a big (p)________________ in the mail yesterday. I wonder what's inside.:-package;-0.5
+If you hurt me, I will feel (p)________________.:-pain;-0.5
+It's very (p)________________ (hurts a lot) to have your tooth pulled out.:-painful;-0.5
+Monet and van Gogh are famous (p)________________.:-painters;-0.5
+The Mona Lisa is a famous (p)________________ by Leonardo da Vinci.:-painting;-0.5
+When I sleep, I wear (p)________________.:-pajamas;-0.5
+She looked at the (p)________________ of my hand and told me I would be rich someday.:-palm;-0.5
+I cooked an egg in the frying (p)________________.:-pan;-0.5
+A (p)________________ is a black and white bear from China.:-panda;-0.5
+The (p)________________ is a tropical fruit with green/yellow skin and an orange-colored interior.  It has many black beady seeds in the middle, and can be blended with milk as a beverage.:-papaya;-0.5
+I beg your (p)________________?  (Excuse me.)  I didn't hear what you said.:-pardon;-0.5
+A (p)________________ is a bird that repeats what you say.:-parrot;-0.5
+I want to buy a car. Is there any (p)________________ model you are thinking about?:-particular;-0.5
+Did you have a (p)________________ when you started the company?  No, I worked by myself (solo).:-partner;-0.5
+This car seats five (p)________________.:-passengers;-0.5
+It takes too long to type it again, so I just copy-and-(p)________________.:-pasted;-0.5
+The dog likes it when I (p)________________ him on the head and scratch him behind the ears.:-pat;-0.5
+If you choose to go down this (p)________________, I'm afraid I cannot come with you.:-path;-0.5
+How many (p)________________ does this doctor see every day? Sometimes up to 100!:-patients;-0.5
+Please be (p)________________, and await your turn.:-patient;-0.5
+Can you see a (p)________________ in the numbers 3, 6, 9, 12...? Yes, they are multiples of 3.:-pattern;-0.5
+War and (p)________________ is a famous novel by Leo Tolstoy.:-peace;-0.5
+Their first three years were (p)________________.  They seldom argued.:-peaceful;-0.5
+A (p)________________ is a juicy fruit the size of an apple with fuzzy hairs on its skin.:-peach;-0.5
+Reese's candy is made of chocolate and (p)________________ butter.:-peanut;-0.5
+On the first day of Christmas, my true love sent to me... a partridge in a (p)________ tree.  (A popular American Christmas carol / song, referring to a fruit):-pear;-0.5
+A (p)________________ is a bird that cannot fly, and lives near the South Pole.:-penguin;-0.5
+Salt and (p)________________ are often used in cooking.:-pepper;-0.5
+We have six people. At $5 (p)________________ person, that comes out to $30.:-per;-0.5
+She got a (p)________________ score on her test: 100%.:-perfect;-0.5
+(p)________________ (.) and comma (,):-period;-0.5
+My (p)________________ best for the 100m is 12.4 seconds. The world record is 9.58.:-personal;-0.5
+A (p)________________ is someone who takes pictures with a camera.:-photographer;-0.5
+A (p)________________ is someone who takes photographs.:-photographer;-0.5
+We learned some simple words and (p)________________ like "How are you" in Spanish.:-phrases;-0.5
+Zion Williamson was the number one (p)________________ in the NBA draft in 2019.:-pick;-0.5
+It's such a lovely day! Let's go to the park and have a (p)________________.:-picnic;-0.5
+A (p)________________ is a bird that can fly home.:-pigeon;-0.5
+There was a huge (p)________________ of books on the teacher's desk.:-pile;-0.5
+I rest my head on a (p)________________ when I sleep.:-pillow;-0.5
+I popped the balloon with a (p)________________.:-pin;-0.5
+(p)________________ are a tropical fruit with spiky skin and yellow flesh.  They are very popular in Thailand and Taiwan.:-pineapples;-0.5
+My favorite sport is (p)________________ pong, or table tennis. We hit a small ball back and forth on a table using rackets.:-ping;-0.5
+If you mix red and white, you get (p)________________.:-pink;-0.5
+Plumbing includes the (p)________________ that carry water to your house.:-pipes;-0.5
+(p)________________ is how high a musical note sounds. Volume is how loud.:-pitch;-0.5
+I can eat a whole pepperoni (p)________________ by myself!:-pizza;-0.5
+(p)________________ (nothing special) vanilla is an ordinary flavor of ice cream.:-plain;-0.5
+A (p)________________ is a large area of flat land with few trees.:-plain;-0.5
+Earth is the third (p)________________ from the Sun.:-planet;-0.5
+She finished the whole (p)________________ of spaghetti by herself.:-plate;-0.5
+At the station,  we waited for the train on the (p)________________.:-platform;-0.5
+The dog is very (p)________________. He loves to play.:-playful;-0.5
+We spent a (p)________________ afternoon together, talking and walking along the beach.:-pleasant;-0.5
+"Thank you very much!"  "It's my (p)________________.":-pleasure;-0.5
+One (p)________________ one equals two.:-plus;-0.5
+"The Road Not Taken" is a famous English (p)________________ by Robert Frost.:-poem;-0.5
+Shakespeare is a famous English (p)________________.:-poet;-0.5
+Snow White took a bite from the (p)________________ apple and fell asleep for 100 years.:-poison;-0.5
+According to the company (p)________________, workers must provide a doctor's note if they are out sick.:-policy;-0.5
+It's not (p)________________ to put your feet on the table.:-polite;-0.5
+She is a very (p)________________ girl at school  and has many friends.:-popular;-0.5
+The (p)________________ of Taiwan is about 23 million.:-population;-0.5
+(p)________________ is pig's meat.:-pork;-0.5
+San Diego and Hong Kong are (p)________________ cities. Ships can stop there.:-port;-0.5
+The criminal (p)________________ as a reporter to get close to the President.:-posed;-0.5
+(p)________________ (+) and negative (-):-positive;-0.5
+Is it possible that he was poisoned? Yes, there is a (p)________________.:-possibility;-0.5
+I stopped off by the (p)________________ office to mail some letters.:-post;-0.5
+You can (p)________________ a comment for everyone to see on our Facebook page.:-post;-0.5
+In football (or soccer), the goal is marked by a net on two vertical (up-down) goal (p)________________ connected by a horizontal (left-right) bar.:-posts;-0.5
+On vacation, she sent me a (p)________________ from Rome.:-postcard;-0.5
+My mother cooked soup in a big (p)________________.:-pot;-0.5
+French fries are made from (p)________________.:-potatoes;-0.5
+One kilogram is about 2.2 (p)________________ (lbs).:-pounds;-0.5
+Americans use dollars, and the British use (p)________________.:-pounds;-0.5
+The country has a (p)________________ army that can defeat (beat) anyone.:-powerful;-0.5
+The school principal (p)________________ the boy for his bravery.:-praised;-0.5
+In church, we (p)________________ to God.:-pray;-0.5
+Do you (p)________________ the blue or black one?:-prefer;-0.5
+The bomb-sniffing dog, with his keen (good) sense of smell, helped the police detect the (p)________________ of explosives in the suitcase.:-presence;-0.5
+Is she still absent from class today? No, she's (p)________________.:-present;-0.5
+My brother gave me a nice birthday (p)________________.:-present;-0.5
+I get nervous when asked to (p)___________ my work in front of a large audience (many people).:-present;-0.5
+Washington was the first (p)________________ of the United States.:-president;-0.5
+To get to the eighth floor, just  (p)________________ the button marked "8" in the elevator.:-press;-0.5
+The Associated (p)________________ is a news organization with many reporters.:-press;-0.5
+When the flag was raised, the sportsman felt great (p)________________ for his country.:-pride;-0.5
+The son of a king is a (p)________________.:-prince;-0.5
+The daughter of a king is a (p)________________.:-princess;-0.5
+The (p)________________ is head of the school.:-principal;-0.5
+The (p)________________ is the head of our school.:-principal;-0.5
+The Republic of China was founded (started) on three (p)________________: nationalism (民族), democracy (民權), and prosperity (民生).:-principles;-0.5
+My (p)________________ is broken, and I can't print my homework.:-printer;-0.5
+The man broke the law, and spent ten years in (p)________________.:-prison;-0.5
+A (p)________________ is someone who has lost his freedom.:-prisoner;-0.5
+Every public figure (famous person) has a (p)________________ life that nobody knows.:-private;-0.5
+I won first (pr)________________ in the English writing competition!:-prize;-0.5
+This factory can (p)________________ five thousand computers a day.:-produce;-0.5
+A movie (p)________________ is someone who hires (pays people) people to make a movie.:-producer;-0.5
+He has made a lot of (p)________________ (improvement) in his English study.:-progress;-0.5
+For her science (p)________________, she built a talking robot.:-project;-0.5
+A projector is a machine that (p)________________ pictures or video onto a wall.:-projects;-0.5
+If I tell you a secret, will you (p)________________ not to tell anyone else?:-promise;-0.5
+When (p)________________ the word "hour," the "h" is silent (no sound).:-pronouncing;-0.5
+The man (p)________________ marriage, but she refused (said no). She said she wasn't ready.:-proposed;-0.5
+The police (p)________________ the people from bad guys.:-protects;-0.5
+The mother was very (p)________________ of her son's excellent grades.:-proud;-0.5
+This school (p)________________ a safe and fun place for children to learn and grow.:-provides;-0.5
+I love eating chocolate (p)________________ after school (with my spoon).:-pudding;-0.5
+Your tires look flat. We need to (p)________________ some air into them.:-pump;-0.5
+For Halloween, we carved (p)________________ into Jack-O-Lanterns.:-pumpkins;-0.5
+He spent 16 years in jail just for stealing some milk. The (p)________________ was too much for the crime!:-punishment;-0.5
+She is the teacher's star (p)________________ (student).:-pupil;-0.5
+A (p)________________ is a doll that you can move with your hands or fingers.:-puppet;-0.5
+A (p)________________ is a small dog.:-puppy;-0.5
+She carried a mirror, lipstick, and some money in her (p)________________.:-purse;-0.5
+This book has many games and (p)________________ for you to solve.:-puzzles;-0.5
+The company makes cars not only in great quantity (many cars) but also with very high (q)________________ (made very well).:-quality;-0.5
+This bottle can hold a large (q)________________ (amount) of liquid.:-quantity;-0.5
+A (q)________________ of a million dollars is $250,000.:-quarter;-0.5
+The man no longer liked his job.  So he (q)________ and looked for a new one.:-quit;-0.5
+There will be a (q)________________ (small test) tomorrow.:-quiz;-0.5
+A (r)________________ is an animal with long ears that jumps high.:-rabbit;-0.5
+It's a (r)________________ day. Don't forget your umbrella.:-rainy;-0.5
+The store carries a wide (r)________________ of books for you to choose from.:-range;-0.5
+A (r)________________ fire gun, also known as a machine gun, can fire bullets very quickly.:-rapid;-0.5
+A red diamond is (r)________________. It's very hard to find.:-rare;-0.5
+(r)________________ than get up early this morning, I decided to sleep in.:-rather;-0.5
+We sometimes wish that we could live like someone else, but the (r)________________ of their life could be very different from what we imagine.:-realities;-0.5
+She didn't (r)________________ she loved him, until she saw him one day with somebody else.:-realize;-0.5
+Have you downloaded the most (r)________________ update of the game?  It has a lot of cool new features!:-recent;-0.5
+My cell phone can (r)________________ my voice and play it back later.:-record;-0.5
+The school keeps a (r)________________ of our grades until 10 years after graduation.:-record;-0.5
+The area of a (r)________________ 10 cm in length and 5 cm in width is 50 cm2 (squared).:-rectangle;-0.5
+I just took this bottle of water out from the (r)________________, so it's pretty cold.:-refrigerator;-0.5
+They say she left the company for another offer that was too good to (r)________________.:-refuse;-0.5
+My uncle sends you his warm (r)________________. He hopes you're doing well.:-regards;-0.5
+He's the sales manager for the entire southwest (r)________________ of the country.:-region;-0.5
+I have a pretty (r)________________ sleep schedule - I go to bed and wake up around the same times every day.:-regular;-0.5
+The college accepts only 10% of students who apply, and (r)________________ the rest.:-rejects;-0.5
+I studied international (r)________________ in college, which is about the relationships between countries.:-relations;-0.5
+What is the (r)________________ between you two? He is my cousin.:-relationship;-0.5
+I didn't hear the first time, so I asked her to (r)________________ what she said.:-repeat;-0.5
+Sorry I haven't (r)________________ to your email, I've been very busy.:-replied;-0.5
+A (r)________________ works for a newspaper of TV news station and tells people the news.:-reporter;-0.5
+The school (r)________________ all students to wear uniforms.:-requires;-0.5
+Sadly, she didn't meet the school's (r)________________ for graduation.:-requirements;-0.5
+Please (r)________________ your elders. Don't talk back to them.:-respect;-0.5
+Parents are (r)________________ for feeding and clothing their children.:-responsible;-0.5
+We had dinner at a Japanese (r)________________.:-restaurant;-0.5
+Excuse me, I have to go to the (r)________________.:-restroom/rest room;-0.5
+The (r)________________ of the exam will be posted on Monday.:-results;-0.5
+I've read this chapter already, so I just need to (r)________________ it before the test.:-review;-0.5
+Despite all his (r)________________ (money, wealth), what he wanted most was someone to love.:-riches;-0.5
+On the dangerous mountain pass, we had to watch out for falling (r)________________ that might hit our head!:-rocks;-0.5
+The mother gently (softly) (r)________________ her baby to sleep in the cradle.:-rocked;-0.5
+A (r)________________ (full of rocks) road is hard to travel on.:-rocky;-0.5
+Her father played a great (r)________________ in her success, and she was very thankful.:-role;-0.5
+The (r)________________ dog's name was Max. His owner was the King of England.:-royal;-0.5
+Please be polite, not (r)________________.:-rude;-0.5
+We can use a (r)________________ to measure length.:-ruler;-0.5
+She's the fastest (r)________________ I've seen. She can run 1 km in 2 minutes.:-runner;-0.5
+There's no (r)________________ - we're not in a hurry.:-rush;-0.5
+After the earthquake, the father was very worried about the (s)________________ of his daughter at school. But she was fine.:-safety;-0.5
+A (s)________________ is someone who sails a ship or boat.:-sailor;-0.5
+To lose weight, my sister only eats a (s)________________ for dinner. It just has lettuce, tomatoes, and an egg.:-salad;-0.5
+If you add salt, it will taste (s)________________.:-salty;-0.5
+At Costco, you can get free (s)________________ of different foods like cookies, candy, etc.:-samples;-0.5
+You can make a (s)________________ quickly using bread and ham.:-sandwich;-0.5
+I'm very hungry, and just one apple cannot (s)________________ me. I need much more!:-satisfy;-0.5
+Adding too much steak (s)________________ could ruin the flavor of the meat!:-sauce;-0.5
+In (s)________________ class, our teacher asked us why the sky is blue.:-science;-0.5
+A (s)________________ is a person who studies science.:-scientist;-0.5
+I used (s)________________ to cut the paper.:-scissors;-0.5
+Our team beat them with a (s)________________ of 10-0.:-score;-0.5
+The (s)________________ on my cell phone is too small, and it's hurting my eyes.:-screen;-0.5
+I used Google to (s)________________ for the answer.:-search;-0.5
+It's a (s)________________. I haven't told anyone.:-secret;-0.5
+The CEO's (s)________________ helped me set up (schedule) a time to see him.:-secretary;-0.5
+Chapter 2 is about the brain: the first (s)________________ describes its structure (shape), and the second describes its function (what it does).:-section;-0.5
+Out of 14 people who tried out, only 5 were (s)________________ to be on the team.:-selected;-0.5
+Please make your (s)________________ and proceed (go) to the checkout counter to pay.:-selection;-0.5
+There are usually two (s)________________ in a school year.:-semesters;-0.5
+My brother and I shared a room before, but now we sleep in (s)________________ rooms.:-separate;-0.5
+I'm (s)________________. I'm not joking.:-serious;-0.5
+A (s)________________ is someone who serves somebody else.  These days, we prefer to say "helper" or "assistant.":-servant;-0.5
+When the English first arrived in America, they (s)________________ (lived in a new place) near the coasts (ocean).:-settled;-0.5
+There's only one cookie left, so we will have to (s)________________.:-share;-0.5
+Please put the book back on the (s)________________.:-shelf;-0.5
+A snail has a hard (s)________________ protecting its soft body.:-shell;-0.5
+She was (s)________________ to find out the bank robber was her best friend! She couldn't believe it.:-shocked;-0.5
+The hunter can (s)________________ an arrow from his bow.:-shoot;-0.5
+In the summer, we wear (s)________________. Long pants are too hot.:-shorts;-0.5
+I (s)________________. My parents take baths.:-shower;-0.5
+(s)________________ live in the ocean, and have shells like lobsters and crabs.  All three are my favorite seafoods.:-shrimp;-0.5
+Cars drive on the road. People walk on the (s)________________.:-sidewalk;-0.5
+A stop (s)________________ tells cars to stop.:-sign;-0.5
+I asked if she loved him.  Her (s)__________ (no words) told me what I needed to know...:-silence;-0.5
+When the police asked if he was the bank robber, he was (s)________________. (said nothing):-silent;-0.5
+(s)________________ is an expensive cloth made by worms.:-silk;-0.5
+The brothers' handwriting styles are very (s)________________ to each other. I can't tell who wrote what.:-similar;-0.5
+There's (s)________________ no arguing about it - chocolate chip sundaes are the best!:-simply;-0.5
+Are you (s)________________? No, I'm married.:-single;-0.5
+If a boat fills with water, it will (s)________________.:-sink;-0.5
+I washed the apple in the kitchen (s)________________.:-sink;-0.5
+It would take a (s)________________ craftsman many weeks to create a mechanical watch.:-skilled;-0.5
+(s)________________ fit jeans are tighter than regular fit. Slim fit is in between.:-skinny;-0.5
+Girls like to wear pants or (s)________________.:-skirts;-0.5
+I'm (s)________________. I want to take a nap.:-sleepy;-0.5
+She has a (s)________________ figure. = She is thin, but not too thin.:-slender;-0.5
+Children played on the (s)________________ in the playground. They climbed to the top, and slid down to the bottom.:-slide;-0.5
+Slender means thin and nice. (s)________________ just means thin.:-slim;-0.5
+The floor was wet. He (s)________________ and fell.:-slipped;-0.5
+At home, I take off my shoes and put on (s)________________.:-slippers;-0.5
+Besides lunch and dinner, I also have a (s)________________ in the afternoon.:-snack;-0.5
+A (s)________________ is a small animal with a shell that moves (slides) very slowly.:-snail;-0.5
+After the storm last night, we could see the (s)________________ mountaintops from our window this morning.:-snowy;-0.5
+Football is called (s)________________ in the United States.:-soccer;-0.5
+The boy is very popular, and has a very busy (s)________________ life.:-social;-0.5
+We need to do more to help the poorer members of our (s)________________.:-society;-0.5
+First take off your shoes, then your (s)________________.:-socks;-0.5
+(s)________________ fight in an army.:-soldiers;-0.5
+It was a difficult problem. Then finally, somebody came up with the (s)________________.:-solution;-0.5
+This problem is difficult to (s)________________.:-solve;-0.5
+Did (s)________________ call me?:-somebody;-0.5
+I've hidden my book (s)________________ in this room - can you find it?:-somewhere;-0.5
+He was (s)________________ of (kind of, a little bit) surprised, but not really...:-sort;-0.5
+We tried to uncover (find) the (s)________________ of the strange smell. But nobody knew where it was coming from.:-source;-0.5
+Not northern but (s)________________.:-southern;-0.5
+We use (s)________________ to make tofu and soy milk.:-soybeans;-0.5
+The (s)________________ was quite boring. We almost fell asleep listening to him.:-speaker;-0.5
+The car was traveling at a (s)________________ of 60 kmph.:-speed;-0.5
+English (s)________________ is hard. Sometimes a word doesn't sound like how it's written, e.g., "enough.":-spelling;-0.5
+A (s)________________ has eight legs and spins a web.:-spider;-0.5
+Popeye eats (s)________________. It makes you stronger.:-spinach;-0.5
+Do you believe in ghosts and (s)________________ (what remains after the body dies)?:-spirits;-0.5
+A leopard has (s)________________ all over its body.:-spots;-0.5
+People with flu can (s)________________ it to others.:-spread;-0.5
+A car's body may be connected to its tires by (s)________________, allowing the car to bounce up and down.:-springs;-0.5
+A rectangle with equal sides is called a (s)________________.:-square;-0.5
+A (s)________________ looks like a mouse with a fat tail. It lives in trees and eats nuts.:-squirrel;-0.5
+The children performed the song on (s)________________, while their parents took pictures.:-stage;-0.5
+When you mail a letter, you should put a (s)________________ on the envelope.:-stamp;-0.5
+King and queen are (s)________________ sizes for beds. (Sizes that everyone agrees on.):-standard;-0.5
+A (s)________________ is a piece of cooked beef. You eat it with a knife and fork.:-steak;-0.5
+I think a thief (s)------- my watch!:-stole;-0.5
+(s)________________ is hot water that has become smoke.:-steam;-0.5
+(s)________________ is a hard metal made from iron. It's used to build many things.:-steel;-0.5
+I threw the wooden (s)________________ and my dog fetched it (picked it up and brought it back).:-stick;-0.5
+Be careful - bubble gum can (s)________________ to your clothes.:-stick;-0.5
+My (s)________________ is full. I can't eat any more.:-stomach;-0.5
+A (s)________________ is coming. It may bring lots of rain and thunder.:-storm;-0.5
+I boiled the water in my kettle using the  (s)________________.:-stove;-0.5
+Go (s)________________, then turn left.:-straight;-0.5
+A (s)________________ is someone you don't know.:-stranger;-0.5
+To drink pearl (珍珠) milk tea, you need a thick (s)________________.:-straw;-0.5
+(s)________________ is a popular flavor of ice cream, usually colored pink.:-strawberry;-0.5
+A (s)________________ is a small river.:-stream;-0.5
+We might feel (s)________________ when there's too much work to do.:-stress;-0.5
+You can (s)________________ a rubber band without breaking it (but only by so much!).:-stretch;-0.5
+Her parents were very (s)________________. No cell phones, no video games, and no going out.:-strict;-0.5
+When the clock (s)________________ (hits) twelve, it's time to go home.:-strikes;-0.5
+A (s)________________ is thinner than a rope.:-string;-0.5
+The girl (s)________________ to finish her homework.  It wasn't easy.:-struggled;-0.5
+What's your favorite (s)________________? I like math.:-subject;-0.5
+If you (s)________________ 5 from 11, you get 6.:-subtract;-0.5
+It takes a lot of hard work and also luck to (s)________________.:-succeed;-0.5
+Hard work and a loving family were the reasons for the rich man's (s)________________.:-success;-0.5
+What does it take to be (s)________________? You need luck and lots of hard work.:-successful;-0.5
+The woman's (s)________________ death shocked everyone. She seemed healthy just yesterday!:-sudden;-0.5
+At the beach, boys wear swimming trunks, and girls wear bathing (s)________________.:-suits;-0.5
+The hot summers in this country didn't (s)________________ her. So she moved somewhere else.:-suit;-0.5
+It's a (s)________________ day. (The sun is out.):-sunny;-0.5
+They don't sell these at 7-Eleven. I think we have to go to a (s)________________.:-supermarket;-0.5
+The world's (s)________________ of drinkable water is limited. That's why we shouldn't waste it.:-supply;-0.5
+While he went to school, his wife (s)________________ him by working two jobs.:-supported;-0.5
+The (s)________________ of the sun is about 6000 degrees Celsius. As you go deeper, towards the center, it can get up to 15 million degrees.:-surface;-0.5
+Can human beings (s)________________ on the moon?  Maybe, but we would need some way to obtain air and water.:-survive;-0.5
+I kept the pill in my mouth, but didn't (s)________________ it.:-swallow;-0.5
+(s)________________ are songbirds. You can find them all around the world.:-swallows;-0.5
+A (s)________________ is a white or black bird with a long neck. They can swim across the surface of a lake, like ducks.:-swan;-0.5
+It's cold. I will wear a (s)________________ under my coat.:-sweater;-0.5
+The cleaning lady (s)________________ the floor with a broom to keep it clean.:-swept;-0.5
+(s)________________ are found in many playgrounds. You can ride it, and it takes you back and forth, higher and higher.:-swing;-0.5
+A (s)________________ is a picture with a meaning, e.g., "+" is the (s)________________ for addition.:-symbol;-0.5
+She has a real (t)________________ for drawing. She began when she was only two years old.:-talent;-0.5
+The (t)________________ boy can talk for three hours straight.:-talkative;-0.5
+A (t)________________ is a fruit like an orange, but smaller.:-tangerine;-0.5
+We keep our pet fish in a fish (t)________________.:-tank;-0.5
+The paper was ripped (torn) in half. I used some (t)________________ to (t)________________ it back together.:-tape;-0.5
+I shot an arrow at the (t)________________ but missed.:-target;-0.5
+She completed her first (t)________________ of the day: call the doctor and schedule a visit.:-task;-0.5
+For a frog, a mosquito might be a (t)________________ snack.:-tasty;-0.5
+I'm the tallest member of my basketball (t)________________.:-team;-0.5
+I will (t)________________ up the paper and throw it in the trash.:-tear;-0.5
+When you cry, you have (t)________________ in your eyes.:-tears;-0.5
+A (t)________________ drama is a story (especially TV show) written for teenagers.:-teen;-0.5
+The magazine is popular among (t)________________ (aged 13-19) girls.:-teenage;-0.5
+(t)________________ include thirteen- to nineteen-year-olds.:-teenagers;-0.5
+Before cell phones were invented, people used (t)________________ connected to the home or office.  They had wires and you couldn't carry them around with you.:-telephones;-0.5
+After dinner, I watched (t)________________ (TV).:-television/TV;-0.5
+Asian people often go to (t)________________ to pray.:-temples;-0.5
+Roger Federer is the most famous (t)________________ player in the world.:-tennis;-0.5
+During summer camp, we slept outside in a (t)________________, under the stars.:-tent;-0.5
+The school hired the teacher for only a one-year (t)________________. We didn't know if she would stay after that.:-term;-0.5
+I have a (t)________________ tomorrow - I must study!:-test;-0.5
+The food was (t)____________.  I took one bite and spit it out.:-terrible;-0.5
+You did a (t)_____________ job on this report!   I'm proud of you.:-terrific;-0.5
+I have to carry many heavy (t)________________ to school. Math, chemistry, physics...:-textbooks;-0.5
+We watched the movie in a movie (t)________________.:-theater;-0.5
+I think, (t)________________ I am. = Because I think, I am human.:-therefore;-0.5
+At 1,200 pages, my textbook is very (t)________________ and heavy.:-thick;-0.5
+The (t)________________ stole all the money.:-thief;-0.5
+What's her secret to staying (t)________________? Eat less and exercise more.:-thin;-0.5
+I'm (t)________________. I need water.:-thirsty;-0.5
+I have a sore (painful) (t)________________ and a runny nose. I think I'm getting sick.:-throat;-0.5
+Obviously, we can't drive our car (t)________________ the lake. So we'll have to go around it.:-through;-0.5
+(t)________________ history, music has played an important part in people's lives.:-throughout;-0.5
+The (t)________________ is usually the thickest finger.:-thumb;-0.5
+We saw the lightning before we heard the (t)________________.:-thunder;-0.5
+When you write, the (t)________________ of the pen touches the paper.:-tip;-0.5
+The (t)________________ of my favorite book is "The Wizard of Oz.":-title;-0.5
+For breakfast, I have a slice of (t)________________ and a glass of orange juice.:-toast;-0.5
+(t)________________ are the fingers on your feet.:-toes;-0.5
+Chinese people eat a lot of (t)________________, made of soybeans. People in Taiwan even enjoy the stinky kind.:-tofu;-0.5
+In the US, people don't say "use the (t)________________." They say "go to the restroom.":-toilet;-0.5
+A (t)________________ is a red vegetable you often find on hamburgers (sliced).:-tomato;-0.5
+The doctor told me to say "Ah" and stick out my (t)________________.:-tongue;-0.5
+I brush my (t)________________ after every meal.:-teeth;-0.5
+Her favorite (t)____________ of conversation is about her pet dog.  Her eyes will just light up!:-topic;-0.5
+He gave us a (t)_____________ of his new house.:-tour;-0.5
+After showering, I dry myself with a bath (t)________________.:-towel;-0.5
+Visitors to Paris often check out the Eiffel (t)________________.:-tower;-0.5
+They are on our high school (t)________________ -and-field team.  They specialize in the 100m.:-track;-0.5
+I will (t)________________ you my apple for your French fries.:-trade;-0.5
+According to Chinese (t)________________, elders give children red envelopes on Chinese New Year.:-tradition;-0.5
+Sweet tofu pudding ("tofu flower") is a (t)________________ Chinese snack.  It's been around for a long time.:-traditional;-0.5
+There's heavy (t)________________ on this highway during rush-hour.:-traffic;-0.5
+You can catch a mouse with a (mouse)________________.:-trap;-0.5
+I love to (t)________________, but I've never been to Korea.:-travel;-0.5
+Many people looked for the (t)________________. It's supposed to contain gold and diamonds.:-treasure;-0.5
+If you act nicely, then others will (t)________________ you nicely (most of the time).:-treat;-0.5
+This medicine is the standard, most effective (t)________________ for the disease.:-treatment;-0.5
+I'm not sure if I want to join this class. Could you give me a free (t)________________ lesson?:-trial;-0.5
+A (t)________________ has three sides.:-triangle;-0.5
+The children played a (t)________________ on their teacher. They hid (past of hide) her chair in another room.:-trick;-0.5
+(t)________________ are long pants.:-trousers;-0.5
+The garbage (t)________________ is here to collect the trash.:-truck;-0.5
+A (t)________________ is a wind musical instrument that has a loud, bright sound.:-trumpet;-0.5
+I don't (t)________________ that woman. I think she's lying.:-trust;-0.5
+Please tell me the (t)________________. Don't lie to me.:-truth;-0.5
+Toothpaste is usually sold in (the shape of) (t)________________.:-tubes;-0.5
+We drove through the (t)________________ to the other side of the mountain.:-tunnel;-0.5
+A (t)________________ looks like a big chicken. Americans eat it for Thanksgiving Day.:-turkey;-0.5
+A tortoise is similar to a (t)________________, but usually a bit bigger.:-turtle;-0.5
+What's her (t)________________ (of guy she likes)?  Handsome and funny.:-type;-0.5
+I can (t)________________ 50 words a minute.:-type;-0.5
+(t)________________ bring lots of rain and strong winds.  Sometimes classes are even cancelled.:-typhoons;-0.5
+The opposite of beautiful is (u)________________.:-ugly;-0.5
+It's raining. Bring your (u)________________.:-umbrella;-0.5
+Men's (u)________________ includes boxers and briefs.:-underwear;-0.5
+Policemen and soldiers wear (u)________________.:-uniforms;-0.5
+Once (u)________________ a time, there was a big bad wolf.:-upon;-0.5
+You have two rows of teeth: (u)________________ and lower.:-upper;-0.5
+I didn't have enough money to buy a new car, so I bought a (u)________________ one.:-used;-0.5
+I (u)________________ to be weak. Now I'm strong.:-used;-0.5
+She's not (u)________________ to speaking in English. She juat needs more practice.:-used;-0.5
+Every (u)________________ on this computer needs a different password to log in.:-user;-0.5
+He is right on time, as (u)________________.  He doesn't like to be late.:-usual;-0.5
+I need a long (v)________________. I'd like to go to Paris.:-vacation;-0.5
+A (v)________________ is a flat, low area between hills or mountains.:-valley;-0.5
+Usually the price of something reflects its  (v)__________, but not always. For example, some expensive watches can be fake!:-value;-0.5
+We will win! (v)________________ shall be ours!:-victory;-0.5
+We watched a short English (v)________________ in class.:-video;-0.5
+A (v)________________ is smaller than a town or city.:-village;-0.5
+My brother plays the piano and the (v)________________.:-violin;-0.5
+(v)________________ to the school should sign in at the front gate.:-visitors;-0.5
+There are so many (v)________________ words. I can't memorize them all!:-vocabulary;-0.5
+(v)________________ is a ball game. Two teams try to hit a ball over a net. If a team lets the ball hit the ground on its side, it loses the point.:-volleyball;-0.5
+Many people (v)________________ for her, and she was elected as the new president.:-voted;-0.5
+A (v)________________ is someone who votes.:-voter;-0.5
+These pants don't fit anymore. My (w)________________ size has grown.:-waist;-0.5
+A (w)________________ is a woman who serves you at a restaurant.:-waitress;-0.5
+(w)________________ up! It's 7am.:-wake;-0.5
+Men sometimes carry their money and cards in a (w)________________.:-wallet;-0.5
+We watched as the river carried the empty canoe downstream and dropped it over a 100-foot (w)________________!:-waterfall;-0.5
+A (w)________________ is a large sweet oval (round) fruit that is hard and green on the outside and red inside. Perfect for a summer day!:-watermelon;-0.5
+I (w)________________ goodbye to her (with my right hand).:-waved;-0.5
+Surfers are always looking to catch the next (w)________________.:-wave;-0.5
+Guns and knives are dangerous (w)________________.:-weapons;-0.5
+They got married at a nice (w)_________ ceremony with 200 guests.:-wedding;-0.5
+(w)________________ include Monday through Friday.:-weekdays;-0.5
+(w)________________ Europe includes the countries on the west side of Europe.:-western;-0.5
+It rained last night, so it's still (w)________________ outside.:-wet;-0.5
+A (w)________________ is a big animal that swims in the ocean. They are not fish, because they breathe using lungs.:-whale;-0.5
+(w)________________ you decide is fine with me.:-whatever;-0.5
+To turn left and right in a car, you use a steering (w)________________.:-wheel;-0.5
+(w)________________ (any time) you need help, just call me.:-whenever;-0.5
+I haven't heard from him in a while.  I hope he's doing well, (w)________________ he may be.:-wherever;-0.5
+To (w)________________ is to speak very quietly.:-whisper;-0.5
+(w)________________ finds this lamp will be granted (given) three wishes.:-whoever;-0.5
+Last year, they (w)________________ the road from three lanes (tracks) to four.:-widened;-0.5
+The (w)________________ of a rectangle is how wide it is.:-width;-0.5
+Unlike dogs, which are used to living with people, wolves mostly live in the (w)________________.:-wild;-0.5
+Are you (w)________________ to do this for me? Yes, I'd be happy to.:-willing;-0.5
+It's very (w)________________ outside. My cap almost flew away!:-windy;-0.5
+Both airplanes and birds fly using (w)________________.:-wings;-0.5
+Most games have a (w)________________ and a loser.:-winner;-0.5
+If you can cut the right (w)________________, maybe the time bomb will not explode.:-wire;-0.5
+The (w)________________ old man taught me many things.:-wise;-0.5
+To find the truth, you must look (w)________________ (ie inside yourself).:-within;-0.5
+(w)________________ water, people cannot live for more than three days.:-without;-0.5
+The Big Bad (w)________________ ate Little Red Riding Hood and her grandmother.:-wolf;-0.5
+It's 9am in Tokyo. I (w)________________ what time it is in New York.:-wonder;-0.5
+Thank you for this (w)________________ birthday present!:-wonderful;-0.5
+Something (w)________________ is made of wood.:-wooden;-0.5
+(w)________________ comes from sheep and goats. You can wear it.:-wool;-0.5
+This car is (w)________________ two thousand dollars. But I'll sell it to you for half that price.:-worth;-0.5
+The man had a terrible gunshot (w)________________, and was taken to the hospital immediately.:-wound;-0.5
+Many American houses have a fence and a (y)________________.:-yard;-0.5
+In his (y)________________, the old man was a fast runner and set many records.:-youth;-0.5
+A (z)________________ is a horse with black and white stripes (lines) on its body.:-zebra;-0.5
