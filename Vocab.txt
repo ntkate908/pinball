@@ -366,7 +366,7 @@ A soccer pitch is also known as a soccer (f)________________. It's where they pl
 A (f)________________ is a person who fights.:-fighter;-0.5
 Our science book has many (f)________________, i.e., pictures that explain the words.:-figures;-0.5
 Avengers: Endgame is my favorite (f)________________ of all time.:-film;-0.5
-A (f)________________ fights fires.:-fireman/firewoman;-0.5
+A (f)________________ is a man who fights fires.:-fireman;-0.5
 My mother works at a law (f)________________, i.e., a company of lawyers.:-firm;-0.5
 (f)________________ have to wake up early every morning to go catch fish.:-fishermen;-0.5
 The boy has grown a lot. His clothes no longer (f)________________.:-fit;-0.5
