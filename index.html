@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taiwanese Pinball Simulation (彈珠台)</title>
+    <title>Taiwanese Pinball Simulation</title>
     <style>
         /* Basic styling for the page */
         body {
@@ -186,45 +186,48 @@
 </head>
 <body>
 
-    <h1>台灣彈珠台 (Taiwanese Pinball)</h1>
+    <h1>Taiwanese Pinball</h1>
 
     <div id="gameContainer">
         <div id="incorrectWordsList" class="wordList">
-            <h3>Incorrect Guesses (答錯的詞)</h3>
+            <h3>Incorrect Guesses</h3>
             <ul id="incorrectWordsUl"></ul>
         </div>
         <canvas id="pinballCanvas"></canvas>
         <div id="correctWordsList" class="wordList">
-            <h3>Correct Answers (答對的詞)</h3>
+            <h3>Correct Answers</h3>
             <ul id="correctWordsUl"></ul>
         </div>
     </div>
 
     <div id="controls">
-        <p>Marbles Left (剩餘彈珠): <span id="marblesLeft">0</span></p>
-        <p>Score (得分): <span id="score">0</span></p>
-        <button id="resetButton">New Game (新遊戲)</button>
+        <p>Marbles Left: <span id="marblesLeft">0</span></p>
+        <p>Score: <span id="score">0</span></p>
+        <button id="resetButton">New Game</button>
     </div>
     <div id="instructions">
         <p>Click and drag the plunger (bottom right) downwards to set power, then release to launch.</p>
-        <p>點擊並向下拖動右下角的彈簧桿設置力度，然後釋放以發射彈珠。</p>
         <p style="font-size:0.8em; color: #777;">(Note: "Marbles Left" shows your reserve. One is used when loaded into the plunger.)</p>
     </div>
 
     <div id="quizModal">
         <div id="quizContent">
-            <h2>Quiz Time! (問答時間!)</h2>
+            <h2>Quiz Time!</h2>
             <p id="quizQuestion">Question text will appear here.</p>
-            <input type="text" id="quizAnswerInput" placeholder="Your answer (你的答案)">
+            <input type="text" id="quizAnswerInput" placeholder="Your answer">
             <div id="quizButtons">
-                <button id="submitAnswerButton">Submit Answer (提交答案)</button>
-                <button id="closeQuizButton">Close Quiz (關閉問答)</button>
+                <button id="submitAnswerButton">Submit Answer</button>
+                <button id="closeQuizButton">Close Quiz</button>
             </div>
             <p id="quizMessage"></p>
         </div>
     </div>
 
 <script>
+    // --- CONFIGURATION ---
+    const useExternalVocabFile = true; // Set to true to attempt loading Vocab.txt, false to use hardcoded
+    const vocabFileName = "Vocab.txt"; // Name of the external vocab file
+
     // Get canvas and context
     const canvas = document.getElementById('pinballCanvas');
     const ctx = canvas.getContext('2d');
@@ -233,7 +236,6 @@
     const marblesLeftEl = document.getElementById('marblesLeft');
     const scoreEl = document.getElementById('score');
     const resetButton = document.getElementById('resetButton');
-    // const debugMarblesValEl = document.getElementById('debugMarblesVal'); // DEBUG ELEMENT REMOVED
 
     // Word list UL elements
     const correctWordsUl = document.getElementById('correctWordsUl');
@@ -280,6 +282,7 @@
     let correctAnswersCount = 0;
     let incorrectAnswersCount = 0;
     let needsNewMarbleInPlunger = false;
+    let quizQuestions = []; // Will be populated from parsed vocab data
 
     // Plunger properties
     const plunger = {
@@ -291,24 +294,93 @@
     };
     plunger.y = plunger.baseY;
 
-    const quizQuestions = [
-        { textPart1: "The flight attendant welcomed us", textPart2: "the airplane.", answer: "aboard" },
-        { textPart1: "Can you accept a job that pays more, but makes you work longer hours? Yes, it's", textPart2: "to me.", answer: "acceptable" },
-        { textPart1: "Unfortunately, the man was in a car", textPart2: ", and had to go to the hospital.", answer: "accident" },
-        { textPart1: "How much money do you have in your bank", textPart2: "?", answer: "account" },
-        { textPart1: "Please make sure your calculations are", textPart2: ", i.e., correct.", answer: "accurate" },
-        { textPart1: "As people get older, they get all kinds of", textPart2: "and pains in their bodies.", answer: "aches" },
-        { textPart1: "By the time he was only 12, he'd", textPart2: "what no Minecraft player had ever done before: beating the game in under 30 seconds.", answer: "accomplished" },
-        { textPart1: "What's the hardest", textPart2: "you've unlocked in Minecraft? I've beaten the Ender Dragon.", answer: "achievement" },
-        { textPart1: "These days, you need more than good grades to get into a top college. You also need to do some", textPart2: ", like basketball, chess, or piano.", answer: "activities" },
-        { textPart1: "He said he beat up the bad guys by himself, but the", textPart2: "story was quite different.", answer: "actual" },
-        { textPart1: "To prepare for the big test, there will be", textPart2: "(extra) class time next week.", answer: "additional" }
-    ];
+    // Hardcoded fallback content of Vocab.txt
+    const hardcodedVocabFileContent = `Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
+My college in Japan offers a six-month study (a)________________ program in California.:-abroad;-0.5
+The missing child was found (a)________________ from home, but safe.:-absent;-0.3
+The (a)________________ of rain for many months caused a serious drought.:-absence;-0.3
+This is an (a)________________ disaster! We need to evacuate immediately!:-absolute;-0.7
+The professor's explanation was so clear that the complex theory became (a)________________ understandable.:-absolutely;-0.7
+The sponge can (a)________________ a lot of water.:-absorb;-0.4
+His research paper was too (a)________________ and difficult for most people to understand.:-abstract;-0.6
+Putting a child in a cage is a form of child (a)________________.:-abuse;-0.8
+She received many (a)________________ awards for her work in science.:-academic;-0.5
+The university is famous for its high (a)________________ standards.:-academy;-0.5`;
 
     /**
-     * Initializes or resets the game state.
+     * Parses the vocab data string and populates the quizQuestions array.
+     * Expected format per line: CLUE_TEXT_WITH_PLACEHOLDER:-ANSWER;-POINTS
+     * The points part (e.g., ";-0.5") is ignored for the stored answer.
      */
-    function initGame() {
+    function parseVocabData(dataString) {
+        const lines = dataString.trim().split('\n');
+        const parsedQuestions = [];
+        const placeholder = "(a)________________";
+
+        lines.forEach(line => {
+            if (line.trim() === "") return; // Skip empty lines
+            const parts = line.split(':-'); // Separates clue from answer+points
+            if (parts.length >= 2) {
+                const clueWithPlaceholder = parts[0];
+                // parts[1] might be "answer" or "answer;-points"
+                const answerPart = parts[1].split(';')[0]; // Take only the part before the first semicolon
+
+                const placeholderIndex = clueWithPlaceholder.indexOf(placeholder);
+                let textPart1 = "";
+                let textPart2 = "";
+
+                if (placeholderIndex !== -1) {
+                    textPart1 = clueWithPlaceholder.substring(0, placeholderIndex);
+                    textPart2 = clueWithPlaceholder.substring(placeholderIndex + placeholder.length);
+                } else {
+                    textPart1 = clueWithPlaceholder; // Fallback if placeholder missing
+                }
+                // Store only the clue parts and the trimmed answer word.
+                parsedQuestions.push({
+                    textPart1: textPart1.trim(),
+                    textPart2: textPart2.trim(),
+                    answer: answerPart.trim()
+                });
+            } else {
+                console.warn("Skipping malformed vocab line:", line);
+            }
+        });
+        return parsedQuestions;
+    }
+
+    /**
+     * Attempts to load vocabulary from an external file, falling back to hardcoded data.
+     */
+    async function loadVocabulary() {
+        if (useExternalVocabFile) {
+            try {
+                const response = await fetch(vocabFileName);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} when fetching ${vocabFileName}`);
+                }
+                const dataString = await response.text();
+                console.log("Successfully loaded vocab from:", vocabFileName);
+                quizQuestions = parseVocabData(dataString);
+            } catch (error) {
+                console.warn("Could not load external vocab file. Error:", error, "Falling back to hardcoded vocabulary.");
+                quizQuestions = parseVocabData(hardcodedVocabFileContent);
+            }
+        } else {
+            console.log("Using hardcoded vocabulary.");
+            quizQuestions = parseVocabData(hardcodedVocabFileContent);
+        }
+        if (quizQuestions.length === 0) {
+            console.error("No quiz questions loaded! Check vocab data source and format.");
+        }
+    }
+
+
+    /**
+     * Initializes or resets the game state. Now an async function.
+     */
+    async function initGame() {
+        await loadVocabulary(); // Wait for vocabulary to be loaded/parsed
+
         playerMarbles = INITIAL_MARBLES;
         score = 0;
         marbles = [];
@@ -338,27 +410,25 @@
         const cols = 8;
         const xSpacing = (CANVAS_WIDTH - 40) / cols;
         const ySpacing = (CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 180) / rows;
-        const xOffset = 20; // Initial horizontal offset for the peg grid
+        const xOffset = 20;
         const marbleStartX = plunger.x + PLUNGER_WIDTH / 2;
         const marbleStartY = plunger.baseY - MARBLE_RADIUS - 5;
 
-        // Define a more aggressive rectangular clear zone for launch path
-        const clearRectX1 = marbleStartX - 150; // Clear much further to the left
-        const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20; // Clear a bit more to the right of marble
-        const clearRectY1 = marbleStartY - 300; // Clear higher above
-        const clearRectY2 = CANVAS_HEIGHT;      // Clear all the way down the chute
+        const clearRectX1 = marbleStartX - 150;
+        const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20;
+        const clearRectY1 = marbleStartY - 300; // Peg clearance updated
+        const clearRectY2 = CANVAS_HEIGHT;
 
         for (let i = 0; i < rows; i++) {
             const numColsThisRow = (i % 2 === 0) ? cols : cols - 1;
             for (let j = 0; j < numColsThisRow; j++) {
                 let pegX = (j * xSpacing) + xOffset;
-                if (i % 2 !== 0) { // Stagger alternate rows
+                if (i % 2 !== 0) {
                     pegX += xSpacing / 2;
                 }
-                const pegY = 90 + i * ySpacing; // Y position for this row of pegs
+                const pegY = 90 + i * ySpacing;
                 let skipPeg = false;
 
-                // Check if the peg's center falls within the defined clear rectangle
                 if (pegX > clearRectX1 && pegX < clearRectX2 &&
                     pegY > clearRectY1 && pegY < clearRectY2) {
                     skipPeg = true;
@@ -392,14 +462,10 @@
     function updateUI() {
         marblesLeftEl.textContent = playerMarbles;
         scoreEl.textContent = score;
-        // debugMarblesValEl.textContent = playerMarbles; // DEBUG LINE REMOVED
     }
 
     /**
      * Creates a new marble object for the plunger if supply allows.
-     * Decrements 'playerMarbles' (supply) by 1.
-     * Sets 'currentMarble' to this new marble.
-     * Adds the new marble (inactive) to the 'marbles' array for drawing.
      */
     function createMarble() {
         if (playerMarbles > 0) {
@@ -422,9 +488,7 @@
     }
 
     /**
-     * Launches the 'currentMarble' (the one in the plunger).
-     * The marble object (which is already in 'marbles' array) is set to active.
-     * 'currentMarble' (plunger reference) is set to null, indicating plunger is empty.
+     * Launches the 'currentMarble' and sets plunger to empty.
      */
     function launchMarble(power) {
         if (currentMarble && !currentMarble.isActive) {
@@ -434,7 +498,7 @@
             const angle = baseAngle + randomFactor;
             currentMarble.vx = power * Math.cos(angle);
             currentMarble.vy = power * Math.sin(angle);
-            currentMarble = null; // Plunger is now empty
+            currentMarble = null;
         }
     }
 
@@ -477,7 +541,7 @@
     }
 
     /**
-     * Draws all marbles from the 'marbles' array (active or inactive in plunger).
+     * Draws all marbles from the 'marbles' array.
      */
     function drawMarbles() {
         marbles.forEach(marble => {
@@ -593,7 +657,6 @@
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < hole.radius) {
                     score += hole.value;
-                    // playerMarbles++; // Player does NOT get a marble back for holing
                     marbles.splice(i, 1);
                     marbleRemoved = true;
                     updateUI();
@@ -661,9 +724,8 @@
         ctx.font = 'bold 32px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('Game Over', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 15);
-        ctx.fillText('(遊戲結束)', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 15);
         ctx.font = '20px Arial';
-        ctx.fillText('Final Score (最終得分): ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 45);
+        ctx.fillText('Final Score: ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 20);
     }
 
     /**
@@ -671,6 +733,10 @@
      */
     function enterQuizMode() {
         if (isQuizModeActive) return;
+        if (quizQuestions.length === 0) {
+            displayGameOverMessage();
+            return;
+        }
         isQuizModeActive = true;
         if(gameLoopId) cancelAnimationFrame(gameLoopId);
         loadNewQuizQuestion();
@@ -685,12 +751,18 @@
      * Loads and displays a new random quiz question.
      */
     function loadNewQuizQuestion() {
+        if (quizQuestions.length === 0) {
+            quizQuestionEl.textContent = "No more questions available.";
+            submitAnswerButton.disabled = true;
+            return;
+        }
         const randomIndex = Math.floor(Math.random() * quizQuestions.length);
         currentQuizQuestionObj = quizQuestions[randomIndex];
         quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} <b>(a)___________</b> ${currentQuizQuestionObj.textPart2}`;
         quizAnswerInput.value = '';
         quizMessageEl.textContent = '';
         quizMessageEl.className = '';
+        submitAnswerButton.disabled = false;
     }
 
     /**
@@ -718,7 +790,7 @@
         const correctAnswer = currentQuizQuestionObj.answer;
 
         if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-            quizMessageEl.textContent = 'Correct! You get 1 marble. (正確! 你得到1個彈珠)';
+            quizMessageEl.textContent = 'Correct! You get 1 marble.';
             quizMessageEl.className = 'quizCorrect';
             playerMarbles++;
             updateUI();
@@ -730,9 +802,9 @@
                 submitAnswerButton.disabled = false;
             }, 1500);
         } else {
-            quizMessageEl.textContent = 'Incorrect. Try another question! (不正確. 再試一題!)';
+            quizMessageEl.textContent = 'Incorrect. Try another question!';
             quizMessageEl.className = 'quizIncorrect';
-            addWordToList(correctAnswer, incorrectWordsUl, false); // Log the correct answer for an incorrect guess
+            addWordToList(correctAnswer, incorrectWordsUl, false);
             submitAnswerButton.disabled = true;
             setTimeout(() => {
                 loadNewQuizQuestion();
@@ -828,10 +900,9 @@
     resetButton.addEventListener('click', initGame);
 
     // Start the game automatically on load
-    initGame();
+    initGame(); // This is now async
 
 </script>
 
 </body>
 </html>
-
