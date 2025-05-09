@@ -758,8 +758,8 @@ The university is famous for its high (a)________________ standards.:-academy;-0
         }
         const randomIndex = Math.floor(Math.random() * quizQuestions.length);
         currentQuizQuestionObj = quizQuestions[randomIndex];
-       // quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} <b>(a)___________</b> ${currentQuizQuestionObj.textPart2}`;
-        quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} ${currentQuizQuestionObj.textPart2}`;
+        quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} <b>(a)___________</b> ${currentQuizQuestionObj.textPart2}`;
+        //quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} ${currentQuizQuestionObj.textPart2}`;
         quizAnswerInput.value = '';
         quizMessageEl.textContent = '';
         quizMessageEl.className = '';
