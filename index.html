@@ -3,1154 +3,835 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taiwanese Style Pinball</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Taiwanese Pinball Simulation (彈珠台)</title>
     <style>
+        /* Basic styling for the page */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Align top */
-            min-height: 100vh;
+            justify-content: flex-start;
             margin: 0;
-            padding-top: 1rem; /* Add some padding at the top */
+            padding: 20px 0;
             background-color: #f0f0f0;
             color: #333;
-            overflow-y: auto; /* Allow body scroll if needed */
-            /* Prevent default touch actions like scrolling/zooming on the body */
-            touch-action: none; 
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
         }
-        .game-container {
+        h1 {
+            color: #6a4f40;
+            margin-bottom: 10px;
+        }
+
+        /* Main game area layout */
+        #gameContainer {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 95%;
-            max-width: 800px; /* Increased max-width further */
+            flex-direction: row; /* Arrange items horizontally */
+            align-items: flex-start; /* Align items to the top */
+            justify-content: center; /* Center the whole container */
+            gap: 15px; /* Space between canvas and word lists */
+            margin-top: 10px;
         }
-        .main-content-area {
-            display: flex;
-            width: 100%;
-            align-items: stretch; 
-            margin-bottom: 15px;
-            gap: 10px; /* Add gap between flex items */
-        }
-        .word-panel {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
+
+        /* Word list styling */
+        .wordList {
+            width: 120px; /* Fixed width for word lists */
             padding: 10px;
-            overflow-y: auto;
-            font-size: 0.8em;
-            flex: 1 1 100px; /* Allow shrinking/growing, base width 100px */
-            max-width: 150px; /* Limit max width */
-             touch-action: pan-y; /* Allow vertical scroll within panels */
-        }
-        .word-panel h3 {
-            font-family: 'Press Start 2P', cursive;
+            background-color: #fff8e1;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            height: calc(600px - 22px); /* Match canvas height minus padding/border */
+            overflow-y: auto; /* Scroll if content overflows */
             font-size: 0.9em;
+        }
+        .wordList h3 {
+            margin-top: 0;
             margin-bottom: 8px;
+            font-size: 1em;
+            color: #5d4037;
             text-align: center;
-            color: #495057;
-            position: sticky; /* Keep title visible when scrolling */
-            top: 0;
-            background-color: #f8f9fa; /* Match background */
-            padding-bottom: 4px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
         }
-        .word-panel div p {
-            padding: 2px 0;
-            border-bottom: 1px solid #e9ecef;
+        .wordList ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-        .word-panel div p:last-child { border-bottom: none; }
+        .wordList ul li {
+            padding: 3px 0;
+            border-bottom: 1px dashed #eee;
+            word-wrap: break-word; /* Ensure long words break */
+        }
+        .wordList ul li:last-child {
+            border-bottom: none;
+        }
 
-        .game-board-area {
-            display: flex; 
-            flex: 3 1 400px; /* Allow shrinking/growing, higher flex factor, base width 400px */
-             touch-action: none; /* Prevent scrolling on game board */
-        }
+        /* Canvas styling */
         canvas {
+            border: 3px solid #4a3b31;
+            background-color: #deb887;
             display: block;
-            background-color: #2c3e50;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        /* Controls container styling */
+        #controls {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background-color: #fff8e1;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2) inset;
-            flex-grow: 1; /* Canvas takes available space in game-board-area */
-            min-width: 150px; /* Ensure canvas doesn't collapse too much */
-             touch-action: none; /* Prevent scrolling on canvas */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #e0e0e0;
         }
-        .controls {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            padding: 10px 0;
-            background-color: #ecf0f1;
-            border-radius: 8px;
+        #controls p {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #5d4037;
         }
-        .status-display {
-            font-size: 1.0em; 
-            font-weight: bold;
-            color: #2980b9;
-            padding: 8px 10px;
-            background-color: #fff;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin: 5px; 
-        }
+        /* Button styling */
         button {
-            font-family: 'Press Start 2P', cursive;
-            padding: 10px 15px; 
-            font-size: 0.8em; 
+            padding: 12px 20px;
+            font-size: 1.05em;
+            background-color: #c87638;
             color: white;
-            background-image: linear-gradient(to right, #3498db, #2980b9);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-            margin: 5px; 
+            margin-top: 10px;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
-        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); }
-        button:active:not(:disabled) { transform: translateY(1px); }
-        button:disabled { background-image: linear-gradient(to right, #bdc3c7, #95a5a6); cursor: not-allowed; }
+        button:hover {
+            background-color: #b5652c;
+            transform: translateY(-1px);
+        }
+        button:active {
+            background-color: #a05420;
+            transform: translateY(0px);
+        }
+        /* Instructions styling */
+        #instructions {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 0.95em;
+            color: #666;
+            max-width: 400px; /* Max width for instructions below canvas */
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
 
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.6); display: flex;
-            align-items: center; justify-content: center; z-index: 1000; padding: 15px;
-        }
-        .modal-content {
-            background-color: #fff; padding: 25px; border-radius: 12px; text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 90%; max-width: 450px; color: #333;
-        }
-        .modal-content h2 { font-family: 'Press Start 2P', cursive; font-size: 1.2em; margin-bottom: 15px; color: #2c3e50; }
-        .modal-content p { font-size: 1em; margin-bottom: 15px; line-height: 1.6; }
-        .modal-content input[type="text"] { width: calc(100% - 20px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; }
-        .modal-content button { margin-top: 10px; font-size: 0.9em; }
-        #quizFeedback { margin-top: 10px; font-weight: bold; min-height: 1.2em; /* Reserve space for feedback */}
-        .hidden { display: none; }
 
-        .launcher-area {
-            position: relative; width: 60px; flex-shrink: 0; 
-            background-color: #bdc3c7; border-radius: 8px; cursor: grab;
-            display: flex; align-items: flex-start; justify-content: center;
-            margin-left: 10px; 
-            overflow: hidden; 
-            touch-action: none; /* Prevent default touch actions on launcher */
+        /* Quiz Modal Styling */
+        #quizModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
-        .plunger {
-            width: 80%; background-color: #e74c3c; border-radius: 4px;
-            position: absolute; top: 5px; height: 20px; 
-            transition: transform 0.1s ease-out; 
+        #quizContent {
+            background-color: #fff8e1;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            border: 2px solid #c87638;
         }
+        #quizContent h2 {
+            color: #6a4f40;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        #quizQuestion {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.5;
+        }
+        #quizAnswerInput {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px);
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        #quizMessage {
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 1.2em;
+        }
+        .quizCorrect { color: green; }
+        .quizIncorrect { color: red; }
+        #quizButtons button {
+            margin: 5px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1 class="text-3xl font-bold mb-4 text-center text-indigo-600" style="font-family: 'Press Start 2P', cursive;">Pinball Mania!</h1>
-        
-        <div class="main-content-area">
-            <div id="correctWordsPanel" class="word-panel"> 
-                <h3>Correct</h3>
-                <div id="correctWordsList"></div>
-            </div>
 
-            <div class="game-board-area"> 
-                <canvas id="pinballCanvas"></canvas>
-                <div id="launcherArea" class="launcher-area">
-                    <div id="plunger" class="plunger"></div>
-                </div>
-            </div>
+    <h1>台灣彈珠台 (Taiwanese Pinball)</h1>
 
-            <div id="incorrectWordsPanel" class="word-panel"> 
-                <h3>Incorrect</h3>
-                <div id="incorrectWordsList"></div>
-            </div>
+    <div id="gameContainer">
+        <div id="incorrectWordsList" class="wordList">
+            <h3>Incorrect Guesses (答錯的詞)</h3>
+            <ul id="incorrectWordsUl"></ul>
         </div>
-        
-        <div class="controls">
-            <div id="scoreDisplay" class="status-display">Score: 0</div>
-            <div id="marblesDisplay" class="status-display">Marbles: 5</div> 
-            <button id="bonusQuizButton">Bonus Quiz!</button>
-            <button id="resetButton">Reset</button>
+        <canvas id="pinballCanvas"></canvas>
+        <div id="correctWordsList" class="wordList">
+            <h3>Correct Answers (答對的詞)</h3>
+            <ul id="correctWordsUl"></ul>
         </div>
     </div>
 
-    <div id="messageBox" class="modal hidden">
-        <div class="modal-content">
-            <h2 id="messageBoxTitle">Game Over!</h2>
-            <p id="messageText"></p>
-            <button id="playAgainButton">Play Again</button>
+    <div id="controls">
+        <p>Marbles Left (剩餘彈珠): <span id="marblesLeft">0</span></p>
+        <p>Score (得分): <span id="score">0</span></p>
+        <button id="resetButton">New Game (新遊戲)</button>
+    </div>
+    <div id="instructions">
+        <p>Click and drag the plunger (bottom right) downwards to set power, then release to launch.</p>
+        <p>點擊並向下拖動右下角的彈簧桿設置力度，然後釋放以發射彈珠。</p>
+        <p style="font-size:0.8em; color: #777;">(Note: "Marbles Left" shows your reserve. One is used when loaded into the plunger.)</p>
+    </div>
+
+    <div id="quizModal">
+        <div id="quizContent">
+            <h2>Quiz Time! (問答時間!)</h2>
+            <p id="quizQuestion">Question text will appear here.</p>
+            <input type="text" id="quizAnswerInput" placeholder="Your answer (你的答案)">
+            <div id="quizButtons">
+                <button id="submitAnswerButton">Submit Answer (提交答案)</button>
+                <button id="closeQuizButton">Close Quiz (關閉問答)</button>
+            </div>
+            <p id="quizMessage"></p>
         </div>
     </div>
 
-    <div id="quizModal" class="modal hidden">
-        <div class="modal-content">
-            <h2 id="quizModalTitle">Vocabulary Quiz!</h2>
-            <p id="quizQuestionText">Question text will appear here.</p>
-            <input type="text" id="quizAnswerInput" placeholder="Your answer...">
-            <p id="quizFeedback"></p>
-            <button id="submitQuizAnswerButton">Submit Answer</button>
-            <button id="closeQuizModalButton">Close</button>
-        </div>
-    </div>
-    
-    <script>
-        // Game DOM Elements
-        const canvas = document.getElementById('pinballCanvas');
-        const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const marblesDisplay = document.getElementById('marblesDisplay');
-        const resetButton = document.getElementById('resetButton');
-        const launcherArea = document.getElementById('launcherArea');
-        const plunger = document.getElementById('plunger');
-        
-        const messageBox = document.getElementById('messageBox');
-        const messageBoxTitle = document.getElementById('messageBoxTitle');
-        const messageText = document.getElementById('messageText');
-        const playAgainButton = document.getElementById('playAgainButton');
+<script>
+    // Get canvas and context
+    const canvas = document.getElementById('pinballCanvas');
+    const ctx = canvas.getContext('2d');
 
-        const bonusQuizButton = document.getElementById('bonusQuizButton');
-        const quizModal = document.getElementById('quizModal');
-        const quizModalTitle = document.getElementById('quizModalTitle');
-        const quizQuestionText = document.getElementById('quizQuestionText');
-        const quizAnswerInput = document.getElementById('quizAnswerInput');
-        const quizFeedback = document.getElementById('quizFeedback');
-        const submitQuizAnswerButton = document.getElementById('submitQuizAnswerButton');
-        const closeQuizModalButton = document.getElementById('closeQuizModalButton');
+    // Get UI elements
+    const marblesLeftEl = document.getElementById('marblesLeft');
+    const scoreEl = document.getElementById('score');
+    const resetButton = document.getElementById('resetButton');
+    // const debugMarblesValEl = document.getElementById('debugMarblesVal'); // DEBUG ELEMENT REMOVED
 
-        const correctWordsPanel = document.getElementById('correctWordsPanel');
-        const incorrectWordsPanel = document.getElementById('incorrectWordsPanel');
-        const correctWordsListDiv = document.getElementById('correctWordsList');
-        const incorrectWordsListDiv = document.getElementById('incorrectWordsList');
+    // Word list UL elements
+    const correctWordsUl = document.getElementById('correctWordsUl');
+    const incorrectWordsUl = document.getElementById('incorrectWordsUl');
+
+    // Quiz Modal Elements
+    const quizModal = document.getElementById('quizModal');
+    const quizQuestionEl = document.getElementById('quizQuestion');
+    const quizAnswerInput = document.getElementById('quizAnswerInput');
+    const submitAnswerButton = document.getElementById('submitAnswerButton');
+    const closeQuizButton = document.getElementById('closeQuizButton');
+    const quizMessageEl = document.getElementById('quizMessage');
 
 
-        // Game Constants and Variables
-        const BASE_WIDTH = 400; 
-        const BASE_HEIGHT = 600;
-        let scaleFactor = 1;
+    // Game settings
+    const CANVAS_WIDTH = 400;
+    const CANVAS_HEIGHT = 600;
+    const MARBLE_RADIUS = 8;
+    const PEG_RADIUS = 4;
+    const GRAVITY = 0.15;
+    const BOUNCE_FACTOR = 0.65;
+    const LAUNCH_AREA_HEIGHT = 80;
+    const PLUNGER_WIDTH = 20;
+    const PLUNGER_HEIGHT = 70;
+    const MAX_PULL_DISTANCE = 60;
+    const INITIAL_MARBLES = 5;
 
-        let allMarbles = []; 
-        let pegs = [];
-        let columns = []; 
-        let slantedBoard = null; 
-        let gapZones = []; 
-        
-        let score = 0;
-        const initialMarbles = 5; 
-        let marblesRemaining = initialMarbles; 
-        const MARBLE_BASE_RADIUS = 8; 
-        const maxEarnedByQuiz = 8; 
-        const maxTotalMarbles = initialMarbles + maxEarnedByQuiz; 
-        const gapPenalty = -5; 
+    // Set canvas dimensions
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
 
-        const gravity = 0.17; 
-        const bounceFactor = -0.6; 
-        const boardBounceFactor = -0.7; 
-        const columnBounceFactor = -0.4; 
-        
-        const LINEAR_FRICTION = 0.995; 
-        const AUTO_SETTLE_SPEED = 0.35; 
-        const AUTO_SETTLE_DEPTH_FRACTION = 0.78; 
+    // Game state variables
+    let marbles = [];
+    let pegs = [];
+    let holes = [];
+    let playerMarbles; // Marbles in supply
+    let score;
+    let currentMarble = null; // Marble in plunger
+    let isDraggingPlunger = false;
+    let plungerPullDistance = 0;
+    let gameLoopId;
+    let isQuizModeActive = false;
+    let currentQuizQuestionObj = null;
+    let correctAnswersCount = 0;
+    let incorrectAnswersCount = 0;
+    let needsNewMarbleInPlunger = false;
 
-        let isDraggingLauncher = false;
-        let launchPower = 0;
-        const maxLaunchPower = 100;
-        const minLaunchPowerForEffect = 5;
+    // Plunger properties
+    const plunger = {
+        x: CANVAS_WIDTH - PLUNGER_WIDTH - 15,
+        baseY: CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT + (LAUNCH_AREA_HEIGHT - PLUNGER_HEIGHT) / 2,
+        width: PLUNGER_WIDTH,
+        height: PLUNGER_HEIGHT,
+        color: '#4a3b31'
+    };
+    plunger.y = plunger.baseY;
 
-        let gameState = 'READY_TO_LAUNCH'; 
+    const quizQuestions = [
+        { textPart1: "The flight attendant welcomed us", textPart2: "the airplane.", answer: "aboard" },
+        { textPart1: "Can you accept a job that pays more, but makes you work longer hours? Yes, it's", textPart2: "to me.", answer: "acceptable" },
+        { textPart1: "Unfortunately, the man was in a car", textPart2: ", and had to go to the hospital.", answer: "accident" },
+        { textPart1: "How much money do you have in your bank", textPart2: "?", answer: "account" },
+        { textPart1: "Please make sure your calculations are", textPart2: ", i.e., correct.", answer: "accurate" },
+        { textPart1: "As people get older, they get all kinds of", textPart2: "and pains in their bodies.", answer: "aches" },
+        { textPart1: "By the time he was only 12, he'd", textPart2: "what no Minecraft player had ever done before: beating the game in under 30 seconds.", answer: "accomplished" },
+        { textPart1: "What's the hardest", textPart2: "you've unlocked in Minecraft? I've beaten the Ender Dragon.", answer: "achievement" },
+        { textPart1: "These days, you need more than good grades to get into a top college. You also need to do some", textPart2: ", like basketball, chess, or piano.", answer: "activities" },
+        { textPart1: "He said he beat up the bad guys by himself, but the", textPart2: "story was quite different.", answer: "actual" },
+        { textPart1: "To prepare for the big test, there will be", textPart2: "(extra) class time next week.", answer: "additional" }
+    ];
 
-        let dragStartMouseY = 0; 
+    /**
+     * Initializes or resets the game state.
+     */
+    function initGame() {
+        playerMarbles = INITIAL_MARBLES;
+        score = 0;
+        marbles = [];
+        currentMarble = null;
+        isDraggingPlunger = false;
+        plungerPullDistance = 0;
+        isQuizModeActive = false;
+        quizModal.style.display = 'none';
+        correctAnswersCount = 0;
+        incorrectAnswersCount = 0;
+        needsNewMarbleInPlunger = true;
+        correctWordsUl.innerHTML = '';
+        incorrectWordsUl.innerHTML = '';
+        updateUI();
+        setupBoard();
+        if (gameLoopId) cancelAnimationFrame(gameLoopId);
+        gameLoop();
+    }
 
-        // --- QUIZ VARIABLES ---
-        const quizQuestions = [
-             { sentence: "The flight attendant welcomed us (a)________ the airplane.", answer: "aboard" },
-             { sentence: "Is a job that pays more, but makes you work longer hours, (a)________ to you?", answer: "acceptable" },
-             { sentence: "Unfortunately, the man was in a car (a)________ and had to go to the hospital.", answer: "accident" },
-             { sentence: "How much money do you have in your bank (a)________?", answer: "account" },
-             { sentence: "Please make sure your calculations are (a)________, i.e., correct.", answer: "accurate" },
-             { sentence: "As people get older, they get all kinds of (a)________ and pains in their bodies.", answer: "aches" },
-             { sentence: "By the time he was only 12, he'd (a)________________ what no Minecraft player had ever done before: beating the game in under 30 seconds.", answer: "accomplished" },
-             { sentence: "What's the hardest (a)________________ you've unlocked in Minecraft? I've beaten the Ender Dragon.", answer: "achievement" },
-             { sentence: "These days, you need more than good grades to get into a top college. You also need to do some (a)________________, like basketball, chess, or piano.", answer: "activities" },
-             { sentence: "He said he beat up the bad guys by himself, but the (a)________________ story was quite different.", answer: "actual" },
-             { sentence: "To prepare for the big test, there will be (a)________________ (extra) class time next week.", answer: "additional" },
-             { sentence: "I really (a)________________ people from poor families who can still achieve their dreams.", answer: "admire" },
-             { sentence: "Even though I have a lot of friends, I (a)________________ I still feel lonely sometimes.", answer: "admit" },
-             { sentence: "Rather than buy a new puppy, we (a)________________ one.", answer: "adopted" },
-             { sentence: "His English skills are quite (a)______________; he's definitely not a beginner!", answer: "advanced" },
-             { sentence: "One (a)________________ of living in Taiwan is the great food.", answer: "advantage" },
-             { sentence: "Every time I go out with her, it's like an (a)________________. I never know what will happen next!", answer: "adventure" },
-             { sentence: "One way to make money on the Internet is to develop a popular game like BloxFruit, then let others (a)____________ their products on your platform.", answer: "advertise" },
-             { sentence: "It costs a lot of money to run an (a)________________ in a newspaper that many people read.", answer: "advertisements" },
-             { sentence: "The old man gave the student some (a)________________: be nice to everyone you meet!", answer: "advice" },
-             { sentence: "The doctor (a)________________ me to stay home and rest.", answer: "advised" },
-             { sentence: "The four-star general was the chief military (a)________________ to the President.", answer: "advisor" },
-             { sentence: "Everything we do (a)________________ the people around us.", answer: "affects" },
-             { sentence: "I only make NTD $100/hr, and can't (a)________________ to buy a new gaming laptop.", answer: "afford" },
-             { sentence: "We had dinner. (a)________________, we went to a movie.", answer: "Afterwards" },
-             { sentence: "Thanks to (a)________________, people did not have to hunt for food anymore. They could grow it.", answer: "agriculture" },
-             { sentence: "It would be difficult to live without an (a)________________ in Taiwan during the summer.", answer: "air conditioner" },
-             { sentence: "I live at Zhongxiao E. (East) Rd. (Road), Sec. (Section) 4, (a)________________ 135, No. (Number) 2.", answer: "Alley" },
-             { sentence: "I'm always (a)_________________ at how quickly the boy's fingers can fly when playing the piano.", answer: "amazed" },
-             { sentence: "I could not hide my (a)________________ at seeing the young girl run so quickly.", answer: "amazement" },
-             { sentence: "The United States (a)_______________ to Canada is the top representative of the US government in Canada.", answer: "ambassador" },
-             { sentence: "The young man had great (a)________________ for his future, but his father didn't want him to leave their hometown.", answer: "ambitions" },
-             { sentence: "Drawings of (a)________________ sometimes show a person (man or woman), having wings and wearing white, with a ring of light (halo) around his head.", answer: "angels" },
-             { sentence: "A triangle has three (a)________________ that add up to 180 degrees.", answer: "angles" },
-             { sentence: "I am happy to (a)________________ that our beautiful baby boy was born this morning.", answer: "announce" },
-             { sentence: "She asked everyone to quiet down, as she had an (a)________________ to make.", answer: "announcement" },
-             { sentence: "Her mother tried to keep the young boy and girl (a)________________, but they still found a way to be together.", answer: "apart" },
-             { sentence: "The happiness on her face was (a)________________; it was clear that she loved that man.", answer: "apparent" },
-             { sentence: "The school gives many tests and lots of homework. This might (a)________________ to parents, but students hate it.", answer: "appeal" },
-             { sentence: "I (a)________________ (am thankful for) everything you have done for our family.", answer: "appreciate" },
-             { sentence: "Be careful when (a)________________ that dog. He may bite if you get too close.", answer: "approaching" },
-             { sentence: "The bank (a)________________ his application for a loan, and he successfully purchased the house.", answer: "approved" },
-             { sentence: "We took a weekend trip to the (a)________________, where we saw many kinds of fish in a nice air-conditioned hall.", answer: "aquarium" },
-             { sentence: "\"The three R's\" refers to three important subjects that students should know: reading, writing, and (a)________________.", answer: "arithmetic" },
-             { sentence: "The airport has one area for departures and one for (a)________________.", answer: "arrivals" },
-             { sentence: "After the big fire, there was nothing left of the log cabin except (a)________________.", answer: "ashes" },
-             { sentence: "Move (a)________________ please. I need to get through.", answer: "aside" },
-             { sentence: "How may I (a)________________ you? I'd like to book a flight to Hong Kong.", answer: "assist" },
-             { sentence: "She's a great (a)________________. She is captain of the soccer team, can lift 200 kg, and is the fastest runner in the country!", answer: "athlete" },
-             { sentence: "He (a)________________ to climb the mountain in under 2 hours, but just missed with a time of 2:05.", answer: "attempted" },
-             { sentence: "The boy has a bad (a)________________ towards his parents. He always shouts at them and never listens to what they say.", answer: "attitude" },
-             { sentence: "Flowers (a)________________ bees.", answer: "attract" },
-             { sentence: "She's a very (a)_______________ girl. All the boys think she is pretty.", answer: "attractive" },
-             { sentence: "The entire (a)________________ was amazed when the magician pulled two rabbits out of the man's hair.", answer: "audience" },
-             { sentence: "Shakespeare is the (a)________________ of the play \"Romeo and Juliet.\"", answer: "author" },
-             { sentence: "(a)________________ doors open by themselves when anyone draws near.", answer: "Automatic" },
-             { sentence: "My mother works for an (a)________________ manufacturer (company that makes things), where she tests new cars.", answer: "automobile" },
-             { sentence: "Is this seat (a)________________? No, I'm afraid it's taken.", answer: "available" },
-             { sentence: "I live at the corner of Third (a)________________ and Park Street.", answer: "Avenue" },
-             { sentence: "The (a)________________ of 4 and 7 is 5.5.", answer: "average" },
-             { sentence: "It's hard to stay (a)________________ for the entire movie, which is over 6 hours long.", answer: "awake" },
-             { sentence: "A loud noise will (a)________________ her from her sleep.", answer: "awaken" },
-             { sentence: "He was very good at basketball, and won many (a)________________ for being the best player on his team.", answer: "awards" },
-             { sentence: "The mother was not (a)________________ that her daughter had not been coming to class!", answer: "aware" },
-             { sentence: "When I mixed ketchup with Coke, I thought it would taste (a)________________. But actually, it was pretty good.", answer: "awful" },
-             { sentence: "We used an (a)________________ to cut down the tree.", answer: "axe" },
-             { sentence: "I didn't know anything about his (b)________________ (where he came from), and thought we were the same. I was wrong.", answer: "background" },
-             { sentence: "My brother loves to eat two strips of (b)________________ with eggs. But I don't like pork.", answer: "bacon" },
-             { sentence: "When you catch a cold, it might be because (b)________________ entered your body and made you sick.", answer: "bacteria" },
-             { sentence: "Their relationship ended (b)________________. Now they never talk to each other.", answer: "badly" },
-             { sentence: "(b)________________ is a racket sport like tennis, except the court is smaller and a birdie is used instead of a ball.", answer: "Badminton" },
-             { sentence: "You can carry two pieces of (b)________________ onto the airplane, weighing up to 20 kg.", answer: "baggage" },
-             { sentence: "We used the worm as (b)________________ to attract the fish.", answer: "bait" },
-             { sentence: "To ride a bicycle, you must learn to keep your (b)________________.", answer: "balance" },
-             { sentence: "After falling off my bike, my mother put a (b)________________ on my bloody knee.", answer: "bandage" },
-             { sentence: "The piano fell from the second floor onto the street with a loud (b)________________.", answer: "bang" },
-             { sentence: "If you wear shorts, then bugs might bite your (b)________________ skin.", answer: "bare" },
-             { sentence: "Class starts at 2pm, and I arrived at 1:59. I (b)________________ made it!", answer: "barely" },
-             { sentence: "The farmer kept the horses inside a (b)________________, and fed them hay.", answer: "barn" },
-             { sentence: "Wine can be stored and shipped (moved) in large oak (wood) (b)________________.", answer: "barrels" },
-             { sentence: "San Francisco (b)________________ is a body of water in California that connects to the Pacific Ocean through the Golden Gate Bridge.", answer: "Bay" },
-             { sentence: "The laser (b)________________ burned a hole through the desk.", answer: "beam" },
-             { sentence: "In the story \"Beauty and the (b)________________,\" a beautiful princess falls in love with a scary animal who is actually a prince.", answer: "Beast" },
-             { sentence: "Not all homeless people are (b)________________, Many are not looking for hand-outs (free stuff), just a chance to live with dignity.", answer: "beggars" },
-             { sentence: "The little girl was very well-(b)________________, and even offered to help the younger children with their homework.", answer: "behaved" },
-             { sentence: "If one day aliens visit the Earth, what would human (b)________________ do?", answer: "beings" },
-             { sentence: "I have a pain in my (b)________________ from eating three bags of potato chips.", answer: "belly" },
-             { sentence: "The CEO took great pride in his company, and never considered it (b)_________ him to chat with even his most entry-level workers.", answer: "beneath" },
-             { sentence: "There are (b)________________ to arriving at the movie theater early. For example, you can get the best seats.", answer: "benefits" },
-             { sentence: "The only sweet foods I could find in the forest were fruits and (b)________________.", answer: "berries" },
-             { sentence: "I go to church every Sunday, and also attend (b)________________ study on Friday nights.", answer: "bible" },
-             { sentence: "These days, having a million dollars is not enough for some people. They want a (b)________________ dollars.", answer: "billion" },
-             { sentence: "In the game of (b)________________, you try to match some numbers to a 5x5 card. You win if you get five numbers in a row.", answer: "bingo" },
-             { sentence: "A meal at KFC can include fried chicken, a (b)________________ (like bread), and soda.", answer: "biscuit" },
-             { sentence: "My sister (b)________________ me for waking up the baby, saying I made too much noise.", answer: "blamed" },
-             { sentence: "During the summer, it's usually so hot that I sleep without a (b)________________.", answer: "blanket" },
-             { sentence: "If you cut me, I will (b)________________.", answer: "bleed" },
-             { sentence: "When someone says \"God (b)________________ you,\" it means they hope you have good luck.", answer: "bless" },
-             { sentence: "As a businesswoman, my mother often wears a (b)________________ and a skirt to work.", answer: "blouse" },
-             { sentence: "We say, \"Fortune favors the (b)________________,\" meaning that brave people will have good luck.", answer: "bold" },
-             { sentence: "I wore my rain (b)________________, not my tennis shoes, to school today.", answer: "boots" },
-             { sentence: "The Himalaya Mountains lie at the (b)________________ between China and Nepal.", answer: "border" },
-             { sentence: "If the class (b)________________ you, you should try to make it more interesting for yourself.", answer: "bores" },
-             { sentence: "I had no time to step on my (b)________________, and crashed my car into hers.", answer: "brakes" },
-             { sentence: "(b)________________ musical instruments include the trumpet and horn. They are usually the loudest in an orchestra.", answer: "Brass" },
-             { sentence: "During the war, he saved many lives, and received a medal for (b)________________.", answer: "bravery" },
-             { sentence: "What parts of a chicken do we usually eat? Chicken (b)________________, drumstick (lower leg), and thigh (upper leg).", answer: "breast" },
-             { sentence: "Take a deep (b)________________ through your nose, and count to ten.", answer: "breath" },
-             { sentence: "If a person stops (b)________________ for three or four minutes, he may die.", answer: "breathing" },
-             { sentence: "There was not even a (b)________________ in the air, and the leaves were totally still.", answer: "breeze" },
-             { sentence: "Some girls dream of being a beautiful (b)________________ on their wedding day.", answer: "bride" },
-             { sentence: "A (b)___________ person is someone who is very smart (or bright).", answer: "brilliant" },
-             { sentence: "Running through her backyard is a charming (b)________________ with tiny fish and frogs.", answer: "brook" },
-             { sentence: "I used a (b)________________ to sweep up all the dust from the floor.", answer: "broom" },
-             { sentence: "The boy had a high temperature (fever), and his mother wiped the sweat from his (b)________________.", answer: "brow" },
-             { sentence: "The girl blew soap (b)________________, while her little brother popped them.", answer: "bubbles" },
-             { sentence: "Please fill this (b)________________ with water, and bring it to me so I can wash the windows.", answer: "bucket" },
-             { sentence: "I only have a (b)________________ of NT $300, so I cannot buy that expensive toy.", answer: "budget" },
-             { sentence: "Many (b)________________ (animals that look like large cows) used to run wild on this land, before human beings moved in.", answer: "buffalo" },
-             { sentence: "The \"Running of the (b)________________\" is an event in which people run and try to escape from several big charging cows.", answer: "Bulls" },
-             { sentence: "At $499 per person, this restaurant offers the best all-you-can-eat (b)________________ in town.", answer: "buffet" },
-             { sentence: "The lights don't work anymore; I think it's time to change the light (b)________________.", answer: "bulb" },
-             { sentence: "The Chicago (b)____________ are a professional basketball team. They are named after big male cows.", answer: "Bulls" },
-             { sentence: "The (b)________________ from the gun almost hit my arm!", answer: "bullet" },
-             { sentence: "I was playing with my smartphone, and (b)________________ into the person in front of me.", answer: "bumped" },
-             { sentence: "I can feel a (b)__________________ on my skin from the mosquito bite.", answer: "bump" },
-             { sentence: "The teacher gave us a (b)________________ of homework, and told us we had to finish all of it by tomorrow!", answer: "bunch" },
-             { sentence: "He's already working two jobs. I don't want to add to his (b)________________ and ask for his help.", answer: "burden" },
-             { sentence: "The (b)________________ set off the alarm when they opened the door. The police came and arrested them.", answer: "burglars" },
-             { sentence: "Many years ago, the masters (b)________________ a treasure under this tree.", answer: "buried" },
-             { sentence: "\"A bird in the hand is worth two in the (b)________________.\" This means what you have is more valuable than what you don't have.", answer: "bush" },
-             { sentence: "The sound of the mosquitoes' (b)________________ drove me crazy, and I could not fall asleep.", answer: "buzzing" },
-             { sentence: "Abraham Lincoln lived in a log (wood) (c)________________ when he was young.", answer: "cabin" },
-             { sentence: "I like going to the (c)________________ of NTU on the weekends. It's like a big park!", answer: "campus" },
-             { sentence: "The old gentleman needs a (c)________________ to help him walk.", answer: "cane" }
-         ];
-        let currentQuizQuestion = null;
-        let quizInProgress = false;
-        let correctlyAnsweredWords = []; 
-        let incorrectlyAnsweredWords = []; 
-        let askedQuestionIndices = new Set(); 
+    /**
+     * Sets up the pegs and winning holes on the game board.
+     */
+    function setupBoard() {
+        pegs = [];
+        holes = [];
+        const rows = 13;
+        const cols = 8;
+        const xSpacing = (CANVAS_WIDTH - 40) / cols;
+        const ySpacing = (CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 180) / rows;
+        const xOffset = 20; // Initial horizontal offset for the peg grid
+        const marbleStartX = plunger.x + PLUNGER_WIDTH / 2;
+        const marbleStartY = plunger.baseY - MARBLE_RADIUS - 5;
 
+        // Define a more aggressive rectangular clear zone for launch path
+        const clearRectX1 = marbleStartX - 150; // Clear much further to the left
+        const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20; // Clear a bit more to the right of marble
+        const clearRectY1 = marbleStartY - 300; // Clear higher above
+        const clearRectY2 = CANVAS_HEIGHT;      // Clear all the way down the chute
 
-        // Helper function to scale values
-        function S(value) {
-            return value * scaleFactor;
-        }
+        for (let i = 0; i < rows; i++) {
+            const numColsThisRow = (i % 2 === 0) ? cols : cols - 1;
+            for (let j = 0; j < numColsThisRow; j++) {
+                let pegX = (j * xSpacing) + xOffset;
+                if (i % 2 !== 0) { // Stagger alternate rows
+                    pegX += xSpacing / 2;
+                }
+                const pegY = 90 + i * ySpacing; // Y position for this row of pegs
+                let skipPeg = false;
 
-        // Marble Object
-        class Marble {
-            constructor(x, y, radius_base, color) { 
-                this.x = x; this.y = y; this.radius = radius_base; this.color = color;
-                this.vx = 0; this.vy = 0; 
-                this.isActive = true; 
-                this.isSettled = false; 
-            }
-            draw() {
-                const isReadyInChute = gameState === 'READY_TO_LAUNCH' && this.isActive && !this.isSettled && 
-                                     allMarbles.length > 0 && this === allMarbles.find(m => m.isActive && !m.isSettled); 
-                if (this.isSettled || this.isActive) { 
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, S(this.radius), 0, Math.PI * 2); 
-                    ctx.fillStyle = this.isSettled ? '#7f8c8d' : this.color; 
-                    ctx.fill();
-                    ctx.closePath();
+                // Check if the peg's center falls within the defined clear rectangle
+                if (pegX > clearRectX1 && pegX < clearRectX2 &&
+                    pegY > clearRectY1 && pegY < clearRectY2) {
+                    skipPeg = true;
+                }
+
+                if (!skipPeg && pegX + PEG_RADIUS < CANVAS_WIDTH - xOffset && pegX - PEG_RADIUS > xOffset) {
+                     pegs.push({ x: pegX, y: pegY, radius: PEG_RADIUS, color: '#704214' });
                 }
             }
-            update() {
-                if (!this.isActive || gameState !== 'MARBLE_IN_PLAY') return; 
-                
-                this.vy += gravity * scaleFactor; 
-                this.vx *= LINEAR_FRICTION; 
-                this.vy *= LINEAR_FRICTION;
-                this.x += this.vx; this.y += this.vy;
-
-                if (this.x - S(this.radius) < 0) { this.x = S(this.radius); this.vx *= bounceFactor; } 
-                else if (this.x + S(this.radius) > canvas.width) { this.x = canvas.width - S(this.radius); this.vx *= bounceFactor; }
-                if (this.y - S(this.radius) < 0) { this.y = S(this.radius); this.vy *= bounceFactor; }
-            }
         }
+        const holeValues = [50, 25, 10, 5, 3, 1, -1];
+        const holeRadius = 16;
+        const holeY = CANVAS_HEIGHT - 60;
+        const numHoles = holeValues.length;
+        const holeSpacing = (CANVAS_WIDTH - 40) / (numHoles);
+        const firstHoleX = 20 + holeSpacing / 2;
+        for (let i = 0; i < numHoles; i++) {
+            holes.push({
+                x: firstHoleX + i * holeSpacing,
+                y: holeY,
+                radius: holeRadius,
+                value: holeValues[i],
+                color: `hsl(${20 + i * (300 / numHoles)}, 70%, 55%)`
+            });
+        }
+    }
 
-        // Peg Object
-        class Peg {
-            constructor(x, y, radius, color) { 
-                this.x = x; this.y = y; this.radius = radius; this.color = color;
-            }
-            draw() {
+    /**
+     * Updates the displayed score, number of marbles left in supply.
+     */
+    function updateUI() {
+        marblesLeftEl.textContent = playerMarbles;
+        scoreEl.textContent = score;
+        // debugMarblesValEl.textContent = playerMarbles; // DEBUG LINE REMOVED
+    }
+
+    /**
+     * Creates a new marble object for the plunger if supply allows.
+     * Decrements 'playerMarbles' (supply) by 1.
+     * Sets 'currentMarble' to this new marble.
+     * Adds the new marble (inactive) to the 'marbles' array for drawing.
+     */
+    function createMarble() {
+        if (playerMarbles > 0) {
+            playerMarbles--;
+            currentMarble = {
+                x: plunger.x + PLUNGER_WIDTH / 2,
+                y: plunger.baseY - MARBLE_RADIUS - 5,
+                radius: MARBLE_RADIUS,
+                vx: 0, vy: 0,
+                color: `hsl(${Math.random() * 360}, 85%, 65%)`,
+                isActive: false,
+                hasHitPeg: false
+            };
+            marbles.push(currentMarble);
+            updateUI();
+            return true;
+        }
+        updateUI();
+        return false;
+    }
+
+    /**
+     * Launches the 'currentMarble' (the one in the plunger).
+     * The marble object (which is already in 'marbles' array) is set to active.
+     * 'currentMarble' (plunger reference) is set to null, indicating plunger is empty.
+     */
+    function launchMarble(power) {
+        if (currentMarble && !currentMarble.isActive) {
+            currentMarble.isActive = true;
+            const baseAngle = -Math.PI * (2/3);
+            const randomFactor = (Math.random() * Math.PI / 18) - (Math.PI / 36);
+            const angle = baseAngle + randomFactor;
+            currentMarble.vx = power * Math.cos(angle);
+            currentMarble.vy = power * Math.sin(angle);
+            currentMarble = null; // Plunger is now empty
+        }
+    }
+
+    /**
+     * Draws the plunger mechanism.
+     */
+    function drawPlunger() {
+        ctx.fillStyle = '#a0522d';
+        ctx.beginPath();
+        ctx.moveTo(plunger.x - 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
+        ctx.lineTo(plunger.x - 8, CANVAS_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
+        ctx.lineTo(plunger.x - 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#5d4037';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = plunger.color;
+        const currentPlungerY = plunger.baseY + plungerPullDistance;
+        const currentPlungerHeight = plunger.height - plungerPullDistance;
+        ctx.fillRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
+        ctx.strokeStyle = '#332a23';
+        ctx.strokeRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
+        ctx.strokeStyle = '#777';
+        ctx.lineWidth = 3;
+        const springTopY = plunger.baseY + plunger.height;
+        const springBottomY = currentPlungerY + currentPlungerHeight;
+        if (springBottomY > springTopY) {
+            for(let i=0; i < 4; i++) {
                 ctx.beginPath();
-                ctx.arc(S(this.x), S(this.y), S(this.radius), 0, Math.PI * 2);
-                ctx.fillStyle = this.color; ctx.fill(); ctx.closePath();
+                const yPos = springTopY + (i * (springBottomY - springTopY) / 4);
+                ctx.moveTo(plunger.x + PLUNGER_WIDTH/2 - 6, yPos);
+                ctx.lineTo(plunger.x + PLUNGER_WIDTH/2 + 6, yPos + (springBottomY - springTopY) / 8);
+                ctx.stroke();
             }
         }
+    }
 
-        // ScoringZone Object (for Columns and Gaps)
-        class ScoringZone { 
-            constructor(x_base, opening_y_base, width_base, depth_base, points, color, isGap = false) {
-                this.x = x_base; 
-                this.openingY = opening_y_base; 
-                this.width = width_base;    
-                this.depth = depth_base; 
-                this.floorY = opening_y_base + depth_base; 
-                this.points = points; 
-                this.color = color; 
-                this.isGap = isGap; 
-                this.leftWallX = x_base - width_base / 2;
-                this.rightWallX = x_base + width_base / 2;
-            }
-            draw() {
-                if (!this.isGap) {
-                    ctx.fillStyle = this.color;
-                    ctx.fillRect(S(this.leftWallX), S(this.openingY), S(this.width), S(this.depth));
+    /**
+     * Draws all marbles from the 'marbles' array (active or inactive in plunger).
+     */
+    function drawMarbles() {
+        marbles.forEach(marble => {
+            if (marble) {
+                ctx.beginPath();
+                ctx.arc(marble.x, marble.y, marble.radius, 0, Math.PI * 2);
+                ctx.fillStyle = marble.color;
+                ctx.fill();
+                if (marble.isActive) {
+                    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
                 } else {
-                    ctx.beginPath();
-                    ctx.moveTo(S(this.leftWallX), S(this.floorY));
-                    ctx.lineTo(S(this.rightWallX), S(this.floorY));
-                    ctx.strokeStyle = '#555'; 
-                    ctx.lineWidth = S(2);
+                    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                    ctx.lineWidth = 1;
                     ctx.stroke();
                 }
-                
-                ctx.fillStyle = this.isGap ? 'red' : 'white';
-                ctx.font = `${S(14)}px 'Press Start 2P'`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom'; 
-                ctx.fillText(this.points.toString(), S(this.x), S(this.openingY - 5));
             }
-        }
+        });
+    }
 
-        // SlantedBoard Object
-        class SlantedBoard {
-            constructor(x1, y1, x2, y2, thickness, color) {
-                this.x1 = x1; this.y1 = y1; this.x2 = x2; this.y2 = y2;
-                this.thickness = thickness; this.color = color;
-                this.dx = this.x2 - this.x1; this.dy = this.y2 - this.y1;
-                this.lengthSq = this.dx * this.dx + this.dy * this.dy; 
-                this.normalX = -this.dy / Math.sqrt(this.lengthSq); 
-                this.normalY = this.dx / Math.sqrt(this.lengthSq);
+    /**
+     * Draws all pegs on the canvas.
+     */
+    function drawPegs() {
+        pegs.forEach(peg => {
+            ctx.beginPath();
+            ctx.arc(peg.x, peg.y, peg.radius, 0, Math.PI * 2);
+            ctx.fillStyle = peg.color;
+            ctx.fill();
+            ctx.strokeStyle = '#503010';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        });
+    }
+
+    /**
+     * Draws all winning holes on the canvas.
+     */
+    function drawHoles() {
+        holes.forEach(hole => {
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, hole.radius - 3, 0, Math.PI * 2);
+            ctx.fillStyle = hole.color;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.fillStyle = 'white';
+            let fontSize = 12;
+            if (hole.value >= 100 || hole.value <= -10) fontSize = 8;
+            else if (hole.value >= 10 || hole.value < 0) fontSize = 10;
+            ctx.font = `bold ${fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(hole.value, hole.x, hole.y);
+        });
+    }
+
+    /**
+     * Updates the position and physics of all active marbles.
+     */
+    function updateMarbles() {
+        for (let i = marbles.length - 1; i >= 0; i--) {
+            const marble = marbles[i];
+            if (!marble || !marble.isActive) continue;
+
+            marble.vy += GRAVITY;
+            marble.x += marble.vx;
+            marble.y += marble.vy;
+
+            if (marble.x - marble.radius < 0) {
+                marble.x = marble.radius;
+                marble.vx *= -BOUNCE_FACTOR;
+            } else if (marble.x + marble.radius > CANVAS_WIDTH) {
+                marble.x = CANVAS_WIDTH - marble.radius;
+                marble.vx *= -BOUNCE_FACTOR;
             }
-            draw() {
-                ctx.beginPath();
-                ctx.moveTo(S(this.x1), S(this.y1)); ctx.lineTo(S(this.x2), S(this.y2));
-                ctx.lineWidth = S(this.thickness); ctx.strokeStyle = this.color;
-                ctx.stroke(); ctx.closePath();
-            }
-        }
-
-        // Initialize game elements
-        function initGameElements() {
-            pegs = []; columns = []; gapZones = []; 
-            const pegRadius = 8; const pegColor = '#7f8c8d'; 
-            const rows = 7; const cols = 9;      
-            const yOffset = 90;  
-            const xSpacing = BASE_WIDTH / (cols + 1); 
-            const ySpacing = (BASE_HEIGHT * 0.50) / rows; 
-            const rightEdgeClearanceThreshold = BASE_WIDTH * 0.70; 
-
-            for (let i = 0; i < rows; i++) { 
-                const numColsInRow = (i % 2 === 0) ? cols : cols - 1; 
-                const rowXOffset = (i % 2 === 0) ? xSpacing : xSpacing * 1.5; 
-                for (let j = 0; j < numColsInRow; j++) { 
-                    const pegX_base = rowXOffset + j * xSpacing;
-                    const pegY_base = yOffset + i * ySpacing;
-                    if (pegX_base < rightEdgeClearanceThreshold) {
-                        pegs.push(new Peg(pegX_base, pegY_base, pegRadius, pegColor));
-                    }
-                }
-            }
-            
-            const funnelPegY = BASE_HEIGHT * 0.78; 
-            pegs.push(new Peg(BASE_WIDTH * 0.28, funnelPegY, pegRadius * 1.1, '#e74c3c')); 
-            pegs.push(new Peg(BASE_WIDTH * 0.50, funnelPegY + 10, pegRadius * 1.1, '#e74c3c')); 
-            pegs.push(new Peg(BASE_WIDTH * 0.72, funnelPegY, pegRadius * 1.1, '#e74c3c')); 
-
-
-            const numScoreColumns = 5;
-            const totalGapFraction = 0.25; 
-            const totalColumnFraction = 1.0 - totalGapFraction;
-            const numTotalGaps = numScoreColumns + 1; 
-            const individualGapWidth_base = (BASE_WIDTH * totalGapFraction) / numTotalGaps;
-            const columnWidth_base = (BASE_WIDTH * totalColumnFraction) / numScoreColumns; 
-
-            const columnDepth_base = BASE_HEIGHT * 0.20; 
-            const columnOpeningY_base = BASE_HEIGHT - columnDepth_base - 30 - (MARBLE_BASE_RADIUS * 2.5); 
-            const columnColor = '#16a085'; 
-            const columnScores = [50, 25, 10, 5, 10]; 
-            let currentX_base = 0; 
-
-            gapZones.push(new ScoringZone(
-                individualGapWidth_base / 2, columnOpeningY_base,
-                individualGapWidth_base, columnDepth_base, gapPenalty, 'transparent', true
-            ));
-            currentX_base += individualGapWidth_base;
-
-            for (let i = 0; i < numScoreColumns; i++) {
-                const columnCenterX_base = currentX_base + columnWidth_base / 2; 
-                 columns.push(new ScoringZone( 
-                    columnCenterX_base, columnOpeningY_base, columnWidth_base, 
-                    columnDepth_base, columnScores[i], columnColor, false 
-                ));
-                currentX_base += columnWidth_base;
-                if (i < numScoreColumns - 1) {
-                     gapZones.push(new ScoringZone(
-                        currentX_base + individualGapWidth_base / 2, columnOpeningY_base,
-                        individualGapWidth_base, columnDepth_base, gapPenalty, 'transparent', true
-                    ));
-                    currentX_base += individualGapWidth_base;
-                }
-            }
-             if (currentX_base < BASE_WIDTH) { 
-                const remainingWidth = BASE_WIDTH - currentX_base;
-                gapZones.push(new ScoringZone(
-                    currentX_base + remainingWidth / 2, columnOpeningY_base,
-                    remainingWidth, columnDepth_base, gapPenalty, 'transparent', true
-                ));
-            }
-            slantedBoard = new SlantedBoard(
-                BASE_WIDTH * 0.65, BASE_HEIGHT * 0.08, 
-                BASE_WIDTH * 0.90, BASE_HEIGHT * 0.28, 
-                10, '#95a5a6');
-        }
-
-        // Creates a marble in the launch chute (adds to allMarbles)
-        function createReadyMarble() {
-            if (marblesRemaining > 0 && gameState === 'READY_TO_LAUNCH') {
-                const newMarble = new Marble(
-                    canvas.width - S(25) - S(MARBLE_BASE_RADIUS), 
-                    canvas.height - S(25) - S(MARBLE_BASE_RADIUS), 
-                    MARBLE_BASE_RADIUS, '#3498db' 
-                );
-                newMarble.vx = 0; newMarble.vy = 0; newMarble.isActive = true; 
-                allMarbles.push(newMarble); 
-            } 
-            updateQuizButtonState(); 
-        }
-        
-        // Reset game state
-        function resetGame() {
-            score = 0;
-            marblesRemaining = initialMarbles; 
-            gameState = 'READY_TO_LAUNCH';
-            plunger.style.transform = 'translateY(0px)'; 
-            quizInProgress = false; 
-            allMarbles = []; 
-            correctlyAnsweredWords = []; 
-            incorrectlyAnsweredWords = [];
-            askedQuestionIndices.clear(); 
-            updateAnsweredWordsDisplay(); 
-            updateUI();
-            hideMessage(); 
-            hideQuizModal(); 
-            createReadyMarble(); 
-        }
-
-        function updateUI() {
-            scoreDisplay.textContent = `Score: ${score}`;
-            marblesDisplay.textContent = `Marbles: ${marblesRemaining}`;
-            updateQuizButtonState();
-        }
-
-        function showGameOverMessage(text) { 
-            gameState = 'GAME_OVER'; 
-            messageBoxTitle.textContent = "Game Over!";
-            messageText.textContent = text;
-            playAgainButton.style.display = 'inline-block';
-            messageBox.classList.remove('hidden');
-        }
-
-        function hideMessage() { 
-            messageBox.classList.add('hidden');
-        }
-
-        // --- QUIZ MODAL FUNCTIONS ---
-        function showQuizModal() {
-             quizAnswerInput.value = "";
-             quizFeedback.textContent = "";
-             submitQuizAnswerButton.disabled = false; 
-
-             if (quizInProgress && !submitQuizAnswerButton.disabled) { 
-                 return; 
-             }
-             if (marblesRemaining >= maxTotalMarbles && gameState !== 'QUIZ_REQUIRED') { 
-                 quizFeedback.textContent = "Max marbles reached!";
-                 quizFeedback.style.color = "orange";
-                 setTimeout(hideQuizModal, 1500);
-                 return;
-             }
-             if (gameState === 'QUIZ_REQUIRED' && marblesRemaining > 0) {
-                 gameState = 'READY_TO_LAUNCH'; 
-                 hideQuizModal();
-                 return;
-             }
-             if (gameState !== 'READY_TO_LAUNCH' && gameState !== 'QUIZ_REQUIRED') { 
-                 return; 
-             }
-
-            let availableIndices = [];
-            for (let i = 0; i < quizQuestions.length; i++) {
-                if (!askedQuestionIndices.has(i)) {
-                    availableIndices.push(i);
-                }
+            if (marble.y - marble.radius < 0 && marble.vy < 0) {
+                marble.y = marble.radius;
+                marble.vy *= -BOUNCE_FACTOR;
             }
 
-            if (availableIndices.length === 0) {
-                quizFeedback.textContent = "No more questions available!";
-                quizFeedback.style.color = "orange";
-                if (marblesRemaining <= 0) {
-                    setTimeout(() => {
-                        hideQuizModal();
-                        showGameOverMessage(`Final Score: ${score}`);
-                    }, 2000);
-                } else {
-                    setTimeout(hideQuizModal, 2000);
-                }
-                return; 
-            }
-
-            quizInProgress = true; 
-            
-            const randomAvailableIndex = Math.floor(Math.random() * availableIndices.length);
-            const newQuestionIndex = availableIndices[randomAvailableIndex];
-            
-            currentQuizQuestion = quizQuestions[newQuestionIndex]; 
-            askedQuestionIndices.add(newQuestionIndex); 
-            
-            const firstLetter = currentQuizQuestion.answer.charAt(0).toUpperCase();
-            const hint = `(${firstLetter})_______`;
-            quizQuestionText.textContent = currentQuizQuestion.sentence.replace("(a)________", hint);
-            
-            quizModalTitle.textContent = "Vocabulary Quiz!"; 
-            quizModal.classList.remove('hidden');
-            quizAnswerInput.focus(); 
-            updateQuizButtonState(); 
-        }
-
-        function hideQuizModal() {
-            quizModal.classList.add('hidden');
-            quizInProgress = false; 
-            updateQuizButtonState(); 
-        }
-
-        function handleSubmitQuizAnswer() {
-            if (!currentQuizQuestion || submitQuizAnswerButton.disabled) return; 
-            const userAnswer = quizAnswerInput.value.trim().toLowerCase();
-            const correctAnswer = currentQuizQuestion.answer.toLowerCase();
-            submitQuizAnswerButton.disabled = true; 
-
-            let wasOutOfMarbles = marblesRemaining === 0; 
-
-            if (userAnswer === correctAnswer) {
-                quizFeedback.style.color = "green";
-                if (!correctlyAnsweredWords.includes(correctAnswer)) {
-                    correctlyAnsweredWords.push(correctAnswer);
-                }
-                if (marblesRemaining < maxTotalMarbles) {
-                    marblesRemaining++;
-                    quizFeedback.textContent = "Correct! +1 Marble!";
-                    if (wasOutOfMarbles) {
-                        gameState = 'READY_TO_LAUNCH';
-                        createReadyMarble(); 
-                    }
-                } else {
-                     quizFeedback.textContent = "Correct! (Max marbles reached)";
-                }
-                updateUI();
-            } else { // Incorrect answer
-                quizFeedback.style.color = "red";
-                quizFeedback.textContent = `Incorrect. The answer was: ${correctAnswer}`;
-                if (!incorrectlyAnsweredWords.includes(correctAnswer)) {
-                    incorrectlyAnsweredWords.push(correctAnswer);
-                }
-            }
-            updateAnsweredWordsDisplay(); 
-
-            setTimeout(() => {
-                if (quizInProgress && gameState !== 'GAME_OVER') { 
-                    currentQuizQuestion = null; 
-                    showQuizModal(); 
-                }
-            }, 1500); 
-        }
-        
-        function updateQuizButtonState() {
-            if (quizInProgress || marblesRemaining >= maxTotalMarbles || 
-                (gameState !== 'READY_TO_LAUNCH' && marblesRemaining > 0) ) { 
-                bonusQuizButton.disabled = true;
-            } else {
-                bonusQuizButton.disabled = false;
-            }
-        }
-
-        function updateAnsweredWordsDisplay() {
-            correctWordsListDiv.innerHTML = ''; 
-            incorrectWordsListDiv.innerHTML = ''; 
-
-            correctlyAnsweredWords.forEach(word => {
-                const p = document.createElement('p');
-                p.textContent = word;
-                correctWordsListDiv.appendChild(p);
-            });
-
-            incorrectlyAnsweredWords.forEach(word => {
-                const p = document.createElement('p');
-                p.textContent = word;
-                incorrectWordsListDiv.appendChild(p);
-            });
-        }
-        
-        
-        // Collision detection
-        function checkCollisions(marbleToCheck) { 
-             if (!marbleToCheck || typeof marbleToCheck.isActive === 'undefined' || !marbleToCheck.isActive || gameState !== 'MARBLE_IN_PLAY') {
-                 return; 
-             }
-
-            // Marble vs Pegs
-            for (const peg of pegs) { 
-                if (!marbleToCheck.isActive) return; 
-                const dx = marbleToCheck.x - S(peg.x); const dy = marbleToCheck.y - S(peg.y);
+            pegs.forEach(peg => {
+                const dx = marble.x - peg.x;
+                const dy = marble.y - peg.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < S(marbleToCheck.radius) + S(peg.radius)) {
+                const combinedRadii = marble.radius + peg.radius;
+                if (distance < combinedRadii) {
+                    marble.hasHitPeg = true;
+                    const overlap = combinedRadii - distance;
                     const angle = Math.atan2(dy, dx);
-                    const overlap = S(marbleToCheck.radius) + S(peg.radius) - distance;
-                    marbleToCheck.x += Math.cos(angle) * overlap * 0.6; 
-                    marbleToCheck.y += Math.sin(angle) * overlap * 0.6;
-                    const normalX = dx / distance; const normalY = dy / distance;
-                    const dotProduct = marbleToCheck.vx * normalX + marbleToCheck.vy * normalY;
-                    marbleToCheck.vx = (marbleToCheck.vx - 2 * dotProduct * normalX) * Math.abs(bounceFactor * 0.9);
-                    marbleToCheck.vy = (marbleToCheck.vy - 2 * dotProduct * normalY) * Math.abs(bounceFactor * 0.9);
-                    marbleToCheck.vx += (Math.random() - 0.5) * 0.6 * scaleFactor; 
+                    marble.x += Math.cos(angle) * overlap * 0.5;
+                    marble.y += Math.sin(angle) * overlap * 0.5;
+                    const normalX = dx / distance;
+                    const normalY = dy / distance;
+                    const dotProduct = marble.vx * normalX + marble.vy * normalY;
+                    marble.vx = (marble.vx - 2 * dotProduct * normalX) * BOUNCE_FACTOR;
+                    marble.vy = (marble.vy - 2 * dotProduct * normalY) * BOUNCE_FACTOR;
+                    marble.vx += (Math.random() - 0.5) * 0.3;
+                    marble.vy += (Math.random() - 0.5) * 0.3;
                 }
-            }
-            if (!marbleToCheck.isActive) return; 
+            });
 
-            let landedInScoringZone = false;
-
-            // Marble vs Columns (Scoring Zones)
-            for (const zone of columns) { 
-                if (!marbleToCheck.isActive) return; 
-                const marbleRadiusScaled = S(marbleToCheck.radius);
-                const leftWallX_scaled = S(zone.leftWallX);
-                const rightWallX_scaled = S(zone.rightWallX);
-                const floorY_scaled = S(zone.floorY);
-                const openingY_scaled = S(zone.openingY);
-
-                if (marbleToCheck.y + marbleRadiusScaled > openingY_scaled && marbleToCheck.y - marbleRadiusScaled < floorY_scaled) {
-                    if (marbleToCheck.x - marbleRadiusScaled < leftWallX_scaled && marbleToCheck.x > leftWallX_scaled && marbleToCheck.vx < 0) { 
-                         marbleToCheck.x = leftWallX_scaled + marbleRadiusScaled;
-                         marbleToCheck.vx *= columnBounceFactor;
+            let marbleRemoved = false;
+            holes.forEach(hole => {
+                const dx = marble.x - hole.x;
+                const dy = marble.y - hole.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < hole.radius) {
+                    score += hole.value;
+                    // playerMarbles++; // Player does NOT get a marble back for holing
+                    marbles.splice(i, 1);
+                    marbleRemoved = true;
+                    updateUI();
+                    if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
+                        needsNewMarbleInPlunger = true;
                     }
-                    else if (marbleToCheck.x + marbleRadiusScaled > rightWallX_scaled && marbleToCheck.x < rightWallX_scaled && marbleToCheck.vx > 0) { 
-                         marbleToCheck.x = rightWallX_scaled - marbleRadiusScaled;
-                         marbleToCheck.vx *= columnBounceFactor;
-                    }
+                    return;
                 }
-                 if (marbleToCheck.y + marbleRadiusScaled >= floorY_scaled && 
-                     marbleToCheck.y < floorY_scaled + marbleRadiusScaled && 
-                     marbleToCheck.x > leftWallX_scaled && 
-                     marbleToCheck.x < rightWallX_scaled &&
-                     marbleToCheck.vy > 0 
-                    ) {
-                     if (Math.abs(marbleToCheck.vy) < AUTO_SETTLE_SPEED * scaleFactor || marbleToCheck.y + marbleRadiusScaled >= S(zone.openingY + zone.depth * AUTO_SETTLE_DEPTH_FRACTION) ) {
-                        marbleToCheck.isActive = false; 
-                        marbleToCheck.isSettled = true;
-                        marbleToCheck.vy = 0; marbleToCheck.vx = 0; 
-                        marbleToCheck.y = floorY_scaled - marbleRadiusScaled; 
-                        score += zone.points;
-                        landedInScoringZone = true; 
-                        handleMarbleEnd();
-                        return; 
-                     } else {
-                         marbleToCheck.y = floorY_scaled - marbleRadiusScaled;
-                         marbleToCheck.vy *= columnBounceFactor;
-                         marbleToCheck.vx *= 0.7; 
-                     }
-                 }
-            }
-            if (!marbleToCheck.isActive) return; 
+            });
 
-            // Marble vs Gap Zones
-            if (!landedInScoringZone) { 
-                for (const zone of gapZones) { 
-                    if (!marbleToCheck.isActive) return; 
-                    const marbleRadiusScaled = S(marbleToCheck.radius);
-                    const leftWallX_scaled = S(zone.leftWallX);
-                    const rightWallX_scaled = S(zone.rightWallX);
-                    const floorY_scaled = S(zone.floorY);
-                    const openingY_scaled = S(zone.openingY);
+            if (marbleRemoved) continue;
 
-                    if (marbleToCheck.y + marbleRadiusScaled > openingY_scaled && marbleToCheck.y - marbleRadiusScaled < floorY_scaled) {
-                        if (marbleToCheck.x - marbleRadiusScaled < leftWallX_scaled && marbleToCheck.x > leftWallX_scaled && marbleToCheck.vx < 0) {
-                            marbleToCheck.x = leftWallX_scaled + marbleRadiusScaled;
-                            marbleToCheck.vx *= columnBounceFactor;
-                        } else if (marbleToCheck.x + marbleRadiusScaled > rightWallX_scaled && marbleToCheck.x < rightWallX_scaled && marbleToCheck.vx > 0) {
-                            marbleToCheck.x = rightWallX_scaled - marbleRadiusScaled;
-                            marbleToCheck.vx *= columnBounceFactor;
-                        }
-                    }
-                    if (marbleToCheck.y + marbleRadiusScaled >= floorY_scaled &&
-                        marbleToCheck.y < floorY_scaled + marbleRadiusScaled &&
-                        marbleToCheck.x > leftWallX_scaled &&
-                        marbleToCheck.x < rightWallX_scaled &&
-                        marbleToCheck.vy > 0
-                        ) {
-                        if (Math.abs(marbleToCheck.vy) < AUTO_SETTLE_SPEED * scaleFactor || marbleToCheck.y + marbleRadiusScaled >= S(zone.openingY + zone.depth * AUTO_SETTLE_DEPTH_FRACTION)) {
-                            marbleToCheck.isActive = false;
-                            marbleToCheck.isSettled = true;
-                            marbleToCheck.vy = 0; marbleToCheck.vx = 0;
-                            marbleToCheck.y = floorY_scaled - marbleRadiusScaled;
-                            score += zone.points; 
-                            landedInScoringZone = true; 
-                            handleMarbleEnd();
-                            return; 
-                        } else {
-                            marbleToCheck.y = floorY_scaled - marbleRadiusScaled;
-                            marbleToCheck.vy *= columnBounceFactor;
-                            marbleToCheck.vx *= 0.7;
-                        }
-                    }
+            if (marble.y - marble.radius > CANVAS_HEIGHT) {
+                if (!marble.hasHitPeg) {
+                    score = Math.max(0, score - 1);
                 }
-            }
-            if (!marbleToCheck.isActive) return; 
-
-            // Marble vs SlantedBoard
-            if (slantedBoard && marbleToCheck.isActive) { 
-                const marbleX_scaled = marbleToCheck.x; const marbleY_scaled = marbleToCheck.y; 
-                const radius_scaled = S(marbleToCheck.radius); 
-                const boardX1 = S(slantedBoard.x1); const boardY1 = S(slantedBoard.y1);
-                const boardX2 = S(slantedBoard.x2); const boardY2 = S(slantedBoard.y2);
-                const boardThickness_scaled = S(slantedBoard.thickness);
-                const v_am_x = marbleX_scaled - boardX1; const v_am_y = marbleY_scaled - boardY1;
-                const v_ab_x = boardX2 - boardX1; const v_ab_y = boardY2 - boardY1;
-                const len_ab_sq = v_ab_x * v_ab_x + v_ab_y * v_ab_y;
-                let t = (v_am_x * v_ab_x + v_am_y * v_ab_y) / len_ab_sq;
-                let closestX, closestY;
-                if (t < 0) { closestX = boardX1; closestY = boardY1; } 
-                else if (t > 1) { closestX = boardX2; closestY = boardY2; } 
-                else { closestX = boardX1 + t * v_ab_x; closestY = boardY1 + t * v_ab_y; }
-                const distSqToClosest = (marbleX_scaled - closestX) * (marbleX_scaled - closestX) + (marbleY_scaled - closestY) * (marbleY_scaled - closestY);
-                if (distSqToClosest < (radius_scaled + boardThickness_scaled / 2) * (radius_scaled + boardThickness_scaled / 2)) {
-                    const distToClosest = Math.sqrt(distSqToClosest);
-                    const overlap = (radius_scaled + boardThickness_scaled / 2) - distToClosest;
-                    if (distToClosest > 0.001) { 
-                         marbleToCheck.x += ((marbleX_scaled - closestX) / distToClosest) * overlap * 0.5;
-                         marbleToCheck.y += ((marbleY_scaled - closestY) / distToClosest) * overlap * 0.5;
-                    }
-                    const nx = slantedBoard.normalX; const ny = slantedBoard.normalY;
-                    const dotProduct = marbleToCheck.vx * nx + marbleToCheck.vy * ny;
-                    marbleToCheck.vx = (marbleToCheck.vx - 2 * dotProduct * nx) * Math.abs(boardBounceFactor);
-                    marbleToCheck.vy = (marbleToCheck.vy - 2 * dotProduct * ny) * Math.abs(boardBounceFactor);
-                }
-            }
-            if (!marbleToCheck.isActive) return; 
-            
-            // --- Check for falling off bottom (if not settled anywhere) ---
-             if (marbleToCheck.isActive && marbleToCheck.y - S(marbleToCheck.radius) > canvas.height + S(marbleToCheck.radius) * 2) { 
-                 marbleToCheck.isActive = false; 
-                 handleMarbleEnd(); 
-                 return; 
-             }
-        }
-        
-        // Handle marble end of life
-        function handleMarbleEnd() {
-            updateUI(); 
-            if (marblesRemaining > 0) {
-                gameState = 'READY_TO_LAUNCH';
-                createReadyMarble(); 
-            } else { 
-                const anyActive = allMarbles.some(m => m.isActive && !m.isSettled);
-                if (!anyActive) { 
-                    gameState = 'QUIZ_REQUIRED'; 
-                    currentQuizQuestion = null; 
-                    showQuizModal(); 
+                marbles.splice(i, 1);
+                updateUI();
+                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
+                    needsNewMarbleInPlunger = true;
                 }
             }
         }
+    }
 
-        // Launcher Event Listeners
-        function handleLauncherStart(clientY) {
-            if (gameState !== 'READY_TO_LAUNCH') return; 
-             if (marblesRemaining <= 0) return; 
-             const readyMarble = allMarbles.find(m => m.isActive && !m.isSettled && gameState === 'READY_TO_LAUNCH');
-             if (!readyMarble) return; 
-             if (quizInProgress) return; 
-             if (!quizModal.classList.contains('hidden')) return; 
-             if (!messageBox.classList.contains('hidden')) return; 
-             
-            isDraggingLauncher = true;
-            dragStartMouseY = clientY; 
-            launcherArea.style.cursor = 'grabbing';
+    /**
+     * Main game loop.
+     */
+    function gameLoop() {
+        if (isQuizModeActive) {
+            return;
         }
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        drawPlunger();
+        drawPegs();
+        drawHoles();
+        drawMarbles();
 
-        function handleLauncherMove(clientY) {
-            if (!isDraggingLauncher) return;
-            const launcherRect = launcherArea.getBoundingClientRect();
-            let pullDownDistance = clientY - dragStartMouseY;
-            pullDownDistance = Math.max(0, pullDownDistance); 
-            const maxAllowedPull = launcherRect.height * 0.70; 
-            const clampedPullDistance = Math.min(pullDownDistance, maxAllowedPull);
-            plunger.style.transform = `translateY(${clampedPullDistance}px)`;
-            launchPower = (clampedPullDistance / maxAllowedPull) * maxLaunchPower;
-        }
-
-        function handleLauncherEnd() {
-            if (!isDraggingLauncher) return;
-            isDraggingLauncher = false;
-            launcherArea.style.cursor = 'grab';
-            plunger.style.transform = 'translateY(0px)'; 
-            
-            const readyMarble = allMarbles.find(m => m.isActive && !m.isSettled && gameState === 'READY_TO_LAUNCH');
-
-            if (gameState === 'READY_TO_LAUNCH' && marblesRemaining > 0 && launchPower >= minLaunchPowerForEffect && readyMarble) {
-                launchMarble(readyMarble); 
-            } else {
-                launchPower = 0; 
+        if (needsNewMarbleInPlunger && playerMarbles > 0 && !currentMarble && !isQuizModeActive) {
+            if (!marbles.some(m => m && m.isActive)) {
+                createMarble();
+                needsNewMarbleInPlunger = false;
             }
         }
 
-        launcherArea.addEventListener('mousedown', (e) => handleLauncherStart(e.clientY));
-        document.addEventListener('mousemove', (e) => handleLauncherMove(e.clientY));
-        document.addEventListener('mouseup', handleLauncherEnd);
+        if (marbles.some(m => m && m.isActive)) {
+             updateMarbles();
+        }
 
-        launcherArea.addEventListener('touchstart', (e) => {
-            e.preventDefault(); 
-            if (e.touches.length > 0) {
-                handleLauncherStart(e.touches[0].clientY);
-            }
-        });
-        document.addEventListener('touchmove', (e) => {
-            if (isDraggingLauncher && e.touches.length > 0) {
-                 handleLauncherMove(e.touches[0].clientY);
-            }
-        });
-        document.addEventListener('touchend', (e) => {
-            if (isDraggingLauncher) {
-                handleLauncherEnd();
-            }
-        });
+        if (playerMarbles <= 0 && !marbles.some(m => m && m.isActive) && !currentMarble) {
+            enterQuizMode();
+        } else {
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+    }
 
+    /**
+     * Displays the final game over message on the canvas.
+     */
+    function displayGameOverMessage() {
+        if(gameLoopId) cancelAnimationFrame(gameLoopId);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.fillRect(0, CANVAS_HEIGHT / 2 - 60, CANVAS_WIDTH, 120);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Game Over', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 15);
+        ctx.fillText('(遊戲結束)', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 15);
+        ctx.font = '20px Arial';
+        ctx.fillText('Final Score (最終得分): ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 45);
+    }
 
-        // Launch the specific ready marble
-        function launchMarble(marbleToLaunch) {
-            if (!marbleToLaunch || marblesRemaining <= 0) return;
-            marblesRemaining--; 
-            gameState = 'MARBLE_IN_PLAY'; 
-            const powerRatio = launchPower / maxLaunchPower;
-            const randomVxFactor = (Math.random() - 0.5) * 2.5 * scaleFactor; 
-            const randomVyFactor = (Math.random() - 0.5) * 2.5 * scaleFactor; 
-            marbleToLaunch.vy = - (powerRatio * 20 + 7 + randomVyFactor) * scaleFactor; 
-            marbleToLaunch.vx = - (powerRatio * 1.2 + Math.random() * 1.2 + 0.8 + randomVxFactor) * scaleFactor; 
+    /**
+     * Enters the quiz mode.
+     */
+    function enterQuizMode() {
+        if (isQuizModeActive) return;
+        isQuizModeActive = true;
+        if(gameLoopId) cancelAnimationFrame(gameLoopId);
+        loadNewQuizQuestion();
+        quizModal.style.display = 'flex';
+        quizAnswerInput.value = '';
+        quizAnswerInput.focus();
+        quizMessageEl.textContent = '';
+        quizMessageEl.className = '';
+    }
+
+    /**
+     * Loads and displays a new random quiz question.
+     */
+    function loadNewQuizQuestion() {
+        const randomIndex = Math.floor(Math.random() * quizQuestions.length);
+        currentQuizQuestionObj = quizQuestions[randomIndex];
+        quizQuestionEl.innerHTML = `${currentQuizQuestionObj.textPart1} <b>(a)___________</b> ${currentQuizQuestionObj.textPart2}`;
+        quizAnswerInput.value = '';
+        quizMessageEl.textContent = '';
+        quizMessageEl.className = '';
+    }
+
+    /**
+     * Adds a word to the specified list UL element on the page.
+     */
+    function addWordToList(word, listElement, isCorrect) {
+        const li = document.createElement('li');
+        if (isCorrect) {
+            correctAnswersCount++;
+            li.textContent = `${correctAnswersCount}. ${word}`;
+        } else {
+            incorrectAnswersCount++;
+            li.textContent = `${incorrectAnswersCount}. ${word}`;
+        }
+        listElement.appendChild(li);
+        listElement.scrollTop = listElement.scrollHeight;
+    }
+
+    /**
+     * Handles quiz answer submission.
+     */
+    function handleSubmitQuizAnswer() {
+        if (!currentQuizQuestionObj || !isQuizModeActive) return;
+        const userAnswer = quizAnswerInput.value.trim();
+        const correctAnswer = currentQuizQuestionObj.answer;
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            quizMessageEl.textContent = 'Correct! You get 1 marble. (正確! 你得到1個彈珠)';
+            quizMessageEl.className = 'quizCorrect';
+            playerMarbles++;
             updateUI();
-            launchPower = 0; 
+            addWordToList(correctAnswer, correctWordsUl, true);
+            submitAnswerButton.disabled = true;
+            setTimeout(() => {
+                loadNewQuizQuestion();
+                quizAnswerInput.focus();
+                submitAnswerButton.disabled = false;
+            }, 1500);
+        } else {
+            quizMessageEl.textContent = 'Incorrect. Try another question! (不正確. 再試一題!)';
+            quizMessageEl.className = 'quizIncorrect';
+            addWordToList(correctAnswer, incorrectWordsUl, false); // Log the correct answer for an incorrect guess
+            submitAnswerButton.disabled = true;
+            setTimeout(() => {
+                loadNewQuizQuestion();
+                quizAnswerInput.focus();
+                submitAnswerButton.disabled = false;
+            }, 1500);
         }
-        
-        // Draw Reserve Marbles
-        function drawReserveMarbles() {
-            const reserveRadiusBase = MARBLE_BASE_RADIUS * 0.7; 
-            const startXBase = BASE_WIDTH * 0.05;
-            const yPosBase = BASE_HEIGHT - reserveRadiusBase - 10; 
-            const spacingBase = reserveRadiusBase * 2.2; 
-            const maxVisualReserve = 15; 
-            let marblesToDrawInQueue = marblesRemaining;
-            const readyMarbleExists = allMarbles.find(m => m.isActive && !m.isSettled && gameState === 'READY_TO_LAUNCH');
-            if (readyMarbleExists && marblesRemaining > 0) {
-                marblesToDrawInQueue = Math.max(0, marblesRemaining - 1);
+    }
+
+    /**
+     * Closes the quiz modal and handles game state (resume or game over).
+     */
+    function handleCloseQuiz() {
+        quizModal.style.display = 'none';
+        isQuizModeActive = false;
+        if (playerMarbles <= 0 && !currentMarble && !marbles.some(m=> m && m.isActive)) {
+            displayGameOverMessage();
+        } else {
+            if (playerMarbles > 0 && !currentMarble && !marbles.some(m => m && m.isActive)) {
+                 needsNewMarbleInPlunger = true;
             }
-            
-            for (let i = 0; i < Math.min(marblesToDrawInQueue, maxVisualReserve); i++) {
-                ctx.beginPath();
-                ctx.arc(S(startXBase + i * spacingBase), S(yPosBase), S(reserveRadiusBase), 0, Math.PI * 2);
-                ctx.fillStyle = '#95a5a6'; 
-                ctx.fill();
-                ctx.closePath();
-            }
+            gameLoop();
         }
+    }
 
-        // Main game loop
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pegs.forEach(peg => peg.draw());
-            columns.forEach(col => col.draw()); 
-            gapZones.forEach(zone => zone.draw()); 
-            if (slantedBoard) { 
-                slantedBoard.draw();
-            }
-            drawReserveMarbles(); 
+    // Event Listeners for Plunger Interaction
+    let startMouseY;
+    canvas.addEventListener('mousedown', (e) => {
+        if (isQuizModeActive) return;
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        if (mouseX >= plunger.x && mouseX <= plunger.x + plunger.width &&
+            mouseY >= plunger.baseY && mouseY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) {
 
-            allMarbles.forEach(m => m.draw()); 
-
-            // Find the currently active playing marble
-            let currentPlayingMarble = null;
-            for (const m of allMarbles) {
-                if (m.isActive && !m.isSettled && gameState === 'MARBLE_IN_PLAY') {
-                    currentPlayingMarble = m;
-                    break;
+            if (!currentMarble) {
+                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive)) {
+                    createMarble();
+                } else {
+                    return;
                 }
             }
-
-            // Update and check collisions ONLY for the active playing marble
-            if (currentPlayingMarble) {
-                currentPlayingMarble.update();
-                checkCollisions(currentPlayingMarble); 
+            if (currentMarble && !currentMarble.isActive) {
+                isDraggingPlunger = true;
+                startMouseY = mouseY;
+                plungerPullDistance = 0;
             }
-            requestAnimationFrame(gameLoop);
         }
+    });
 
-        // Responsive Canvas Setup
-        function resizeCanvas() {
-            const gameBoardArea = document.querySelector('.game-board-area');
-            const correctPanelElem = document.getElementById('correctWordsPanel');
-            const incorrectPanelElem = document.getElementById('incorrectWordsPanel');
+    canvas.addEventListener('mousemove', (e) => {
+        if (isQuizModeActive || !isDraggingPlunger) return;
+        const rect = canvas.getBoundingClientRect();
+        const mouseY = e.clientY - rect.top;
+        let pull = mouseY - startMouseY;
+        if (pull < 0) pull = 0;
+        if (pull > MAX_PULL_DISTANCE) pull = MAX_PULL_DISTANCE;
+        plungerPullDistance = pull;
+    });
 
-            if (!gameBoardArea || !correctPanelElem || !incorrectPanelElem || !launcherArea) {
-                console.error("Layout elements not found during resize!");
-                return;
-            }
-
-            const panelWidth = correctPanelElem.offsetWidth + incorrectPanelElem.offsetWidth + 
-                               parseInt(getComputedStyle(correctPanelElem).marginRight || '0px') + 
-                               parseInt(getComputedStyle(incorrectPanelElem).marginLeft || '0px');
-            
-            const container = canvas.parentElement.parentElement.parentElement; 
-            const availableWidthForGameBoard = container.clientWidth - panelWidth - (parseInt(getComputedStyle(container).paddingLeft || '0px') * 2);
-            
-            const availableCanvasWidth = availableWidthForGameBoard - launcherArea.offsetWidth;
-
-            const aspectRatio = BASE_HEIGHT / BASE_WIDTH;
-            
-            canvas.width = Math.max(150, Math.min(availableCanvasWidth, BASE_WIDTH * 1.1)); 
-            canvas.height = canvas.width * aspectRatio;
-
-            const maxCanvasHeight = window.innerHeight * 0.65; 
-            if (canvas.height > maxCanvasHeight) {
-                canvas.height = maxCanvasHeight;
-                canvas.width = canvas.height / aspectRatio;
-            }
-            
-            scaleFactor = canvas.width / BASE_WIDTH;
-            launcherArea.style.height = `${canvas.height}px`; 
-            correctWordsPanel.style.height = `${canvas.height}px`;
-            incorrectWordsPanel.style.height = `${canvas.height}px`;
-
-             allMarbles.forEach(m => {
-                 if (m.isActive && gameState === 'READY_TO_LAUNCH') {
-                     m.x = canvas.width - S(25) - S(m.radius);
-                     m.y = canvas.height - S(25) - S(m.radius);
-                 }
-             });
+    canvas.addEventListener('mouseup', () => {
+        if (isQuizModeActive || !isDraggingPlunger) return;
+        isDraggingPlunger = false;
+        if (plungerPullDistance > 5) {
+            const launchPower = (plungerPullDistance / MAX_PULL_DISTANCE) * 12 + 4;
+            launchMarble(launchPower);
         }
+        plungerPullDistance = 0;
+    });
 
-        // Event Listeners
-        resetButton.addEventListener('click', resetGame);
-        playAgainButton.addEventListener('click', () => {
-            hideMessage(); 
-            resetGame();
-        });
-        bonusQuizButton.addEventListener('click', () => {
-            currentQuizQuestion = null; 
-            showQuizModal();
-        });
-        submitQuizAnswerButton.addEventListener('click', handleSubmitQuizAnswer);
-        quizAnswerInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' && !submitQuizAnswerButton.disabled) {
-                event.preventDefault(); 
-                handleSubmitQuizAnswer();
+    canvas.addEventListener('mouseleave', () => {
+        if (isQuizModeActive || !isDraggingPlunger) return;
+         if (isDraggingPlunger) {
+            isDraggingPlunger = false;
+            if (plungerPullDistance > 5) {
+                const launchPower = (plungerPullDistance / MAX_PULL_DISTANCE) * 12 + 4;
+                launchMarble(launchPower);
             }
-        });
-        closeQuizModalButton.addEventListener('click', () => {
-            hideQuizModal();
-            if (marblesRemaining <= 0 && gameState !== 'GAME_OVER') { 
-                gameState = 'GAME_OVER';
-                showGameOverMessage(`Final Score: ${score}`);
-            }
-        });
+            plungerPullDistance = 0;
+        }
+    });
 
+    // Quiz Event Listeners
+    submitAnswerButton.addEventListener('click', handleSubmitQuizAnswer);
+    quizAnswerInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            handleSubmitQuizAnswer();
+        }
+    });
+    closeQuizButton.addEventListener('click', handleCloseQuiz);
 
-        // Initialize Game
-        initGameElements(); 
-        resizeCanvas();     
-        window.addEventListener('resize', resizeCanvas); 
-        resetGame();        
-        gameLoop();         
-    </script>
+    // Reset button functionality
+    resetButton.addEventListener('click', initGame);
+
+    // Start the game automatically on load
+    initGame();
+
+</script>
+
 </body>
 </html>
+
