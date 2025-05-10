@@ -224,105 +224,105 @@
     </div>
 
 <script>
-    // --- CONFIGURATION ---
-    const useExternalVocabFile = true; 
-    const vocabFileName = "Vocab.txt"; 
+    // --- CONFIGURATION ---
+    const useExternalVocabFile = true; 
+    const vocabFileName = "Vocab.txt"; 
 
-    // Get canvas and context
-    const canvas = document.getElementById('pinballCanvas');
-    const ctx = canvas.getContext('2d');
+    // Get canvas and context
+    const canvas = document.getElementById('pinballCanvas');
+    const ctx = canvas.getContext('2d');
 
-    // Get UI elements
-    const marblesLeftEl = document.getElementById('marblesLeft');
-    const scoreEl = document.getElementById('score');
-    const resetButton = document.getElementById('resetButton');
+    // Get UI elements
+    const marblesLeftEl = document.getElementById('marblesLeft');
+    const scoreEl = document.getElementById('score');
+    const resetButton = document.getElementById('resetButton');
 
-    // Word list UL elements
-    const correctWordsUl = document.getElementById('correctWordsUl');
-    const incorrectWordsUl = document.getElementById('incorrectWordsUl');
+    // Word list UL elements
+    const correctWordsUl = document.getElementById('correctWordsUl');
+    const incorrectWordsUl = document.getElementById('incorrectWordsUl');
 
-    // Quiz Modal Elements
-    const quizModal = document.getElementById('quizModal');
-    const quizQuestionEl = document.getElementById('quizQuestion');
-    const quizAnswerInput = document.getElementById('quizAnswerInput');
-    const submitAnswerButton = document.getElementById('submitAnswerButton');
-    const closeQuizButton = document.getElementById('closeQuizButton');
-    const quizMessageEl = document.getElementById('quizMessage');
-
-
-    // Game settings
-    const CANVAS_WIDTH = 400;
-    const CANVAS_HEIGHT = 600;
-    const MARBLE_RADIUS = 8;
-    const PEG_RADIUS = 4;
-    const GRAVITY = 0.15;
-    const BOUNCE_FACTOR = 0.65;
-    const LAUNCH_AREA_HEIGHT = 80;
-    const PLUNGER_WIDTH = 20;
-    const PLUNGER_HEIGHT = 70;
-    const MAX_PULL_DISTANCE = 60;
-    const INITIAL_MARBLES = 5;
-    const HOLE_ANIMATION_DURATION = 300; // ms for hole light-up/enlarge effect
-
-    // Set canvas dimensions
-    canvas.width = CANVAS_WIDTH;
-    canvas.height = CANVAS_HEIGHT;
-
-    // Game state variables
-    let marbles = [];
-    let pegs = [];
-    let holes = [];
-    let playerMarbles; 
-    let score;
-    let currentMarble = null; 
-    let isDraggingPlunger = false;
-    let plungerPullDistance = 0;
-    let gameLoopId;
-    let isQuizModeActive = false;
-    let currentQuizQuestionObj = null;
-    let correctAnswersCount = 0;
-    let incorrectAnswersCount = 0;
-    let needsNewMarbleInPlunger = false;
-    let quizQuestions = []; 
-
-    // --- Audio Setup (Tone.js) ---
-    let audioContextStarted = false;
-    let pegHitSynth = null;
-    let holeHitSynth = null;
-
-    function initializeAudio() {
-        if (typeof Tone !== 'undefined') {
-            pegHitSynth = new Tone.MembraneSynth({
-                pitchDecay: 0.008,
-                octaves: 2,
-                envelope: { attack: 0.001, decay: 0.2, sustain: 0 },
-                volume: -12 
-            }).toDestination();
-
-            holeHitSynth = new Tone.Synth({
-                oscillator: { type: 'triangle' },
-                envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 },
-                volume: -6
-            }).toDestination();
-            console.log("Audio synthesizers initialized.");
-        } else {
-            console.warn("Tone.js is not loaded. Sound effects will be disabled.");
-        }
-    }
-    initializeAudio();
+    // Quiz Modal Elements
+    const quizModal = document.getElementById('quizModal');
+    const quizQuestionEl = document.getElementById('quizQuestion');
+    const quizAnswerInput = document.getElementById('quizAnswerInput');
+    const submitAnswerButton = document.getElementById('submitAnswerButton');
+    const closeQuizButton = document.getElementById('closeQuizButton');
+    const quizMessageEl = document.getElementById('quizMessage');
 
 
-    // Plunger properties
-    const plunger = {
-        x: CANVAS_WIDTH - PLUNGER_WIDTH - 15,
-        baseY: CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT + (LAUNCH_AREA_HEIGHT - PLUNGER_HEIGHT) / 2,
-        width: PLUNGER_WIDTH,
-        height: PLUNGER_HEIGHT,
-        color: '#4a3b31'
-    };
-    plunger.y = plunger.baseY;
+    // Game settings
+    const CANVAS_WIDTH = 400;
+    const CANVAS_HEIGHT = 600;
+    const MARBLE_RADIUS = 8;
+    const PEG_RADIUS = 4;
+    const GRAVITY = 0.15;
+    const BOUNCE_FACTOR = 0.65;
+    const LAUNCH_AREA_HEIGHT = 80;
+    const PLUNGER_WIDTH = 20;
+    const PLUNGER_HEIGHT = 70;
+    const MAX_PULL_DISTANCE = 60;
+    const INITIAL_MARBLES = 5;
+    const HOLE_ANIMATION_DURATION = 300; // ms for hole light-up/enlarge effect
 
-    const hardcodedVocabFileContent = `Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
+    // Set canvas dimensions
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+
+    // Game state variables
+    let marbles = [];
+    let pegs = [];
+    let holes = [];
+    let playerMarbles; 
+    let score;
+    let currentMarble = null; 
+    let isDraggingPlunger = false;
+    let plungerPullDistance = 0;
+    let gameLoopId;
+    let isQuizModeActive = false;
+    let currentQuizQuestionObj = null;
+    let correctAnswersCount = 0;
+    let incorrectAnswersCount = 0;
+    let needsNewMarbleInPlunger = false;
+    let quizQuestions = []; 
+
+    // --- Audio Setup (Tone.js) ---
+    let audioContextStarted = false;
+    let pegHitSynth = null;
+    let holeHitSynth = null;
+
+    function initializeAudio() {
+        if (typeof Tone !== 'undefined') {
+            pegHitSynth = new Tone.MembraneSynth({
+                pitchDecay: 0.008,
+                octaves: 2,
+                envelope: { attack: 0.001, decay: 0.2, sustain: 0 },
+                volume: -12 
+            }).toDestination();
+
+            holeHitSynth = new Tone.Synth({
+                oscillator: { type: 'triangle' },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 },
+                volume: -6
+            }).toDestination();
+            console.log("Audio synthesizers initialized.");
+        } else {
+            console.warn("Tone.js is not loaded. Sound effects will be disabled.");
+        }
+    }
+    initializeAudio();
+
+
+    // Plunger properties
+    const plunger = {
+        x: CANVAS_WIDTH - PLUNGER_WIDTH - 15,
+        baseY: CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT + (LAUNCH_AREA_HEIGHT - PLUNGER_HEIGHT) / 2,
+        width: PLUNGER_WIDTH,
+        height: PLUNGER_HEIGHT,
+        color: '#4a3b31'
+    };
+    plunger.y = plunger.baseY;
+
+    const hardcodedVocabFileContent = `Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
 My college in Japan offers a six-month study (a)________________ program in California.:-abroad;-0.5
 The missing child was found (a)________________ from home, but safe.:-absent;-0.3
 The (a)________________ of rain for many months caused a serious drought.:-absence;-0.3
@@ -338,574 +338,576 @@ A clue where textPart2 is the placeholder (a)________________ (a)_______________
 A clue with text after first placeholder then another placeholder (a)________________ text then (a)________________:-textandplaceholder;-0.4`;
 
 
-    function parseVocabData(dataString) {
-    const lines = dataString.trim().split('\n');
-    const parsedQuestions = [];
-    // Regex to find placeholders like (a)_____, (b)_____, (n)____________
-    // It looks for: ( + a letter + ) + 5 or more underscores
-    const pedagogicalPlaceholderRegex = /\(([a-zA-Z])\)_{5,}/;
-    const potentialSuffixDelimiter = "(a)________________";
+    function parseVocabData(dataString) {
+    const lines = dataString.trim().split('\n');
+    const parsedQuestions = [];
+    // Regex to find placeholders like (a)_____, (b)_____, (n)____________
+    // It looks for: ( + a letter + ) + 5 or more underscores
+    const pedagogicalPlaceholderRegex = /\(([a-zA-Z])\)_{5,}/;
+    const potentialSuffixDelimiter = "(a)________________";
 
-    lines.forEach(line => {
-        if (line.trim() === "") return;
-        const rawParts = line.split(':-'); // Split clue from answer block
-        if (rawParts.length >= 2) {
-            let clueText = rawParts[0]; // The full clue part
-            const answer = rawParts[1].split(';')[0].trim();
+    lines.forEach(line => {
+        if (line.trim() === "") return;
+        const rawParts = line.split(':-'); // Split clue from answer block
+        if (rawParts.length >= 2) {
+            let clueText = rawParts[0]; // The full clue part
+            const answer = rawParts[1].split(';')[0].trim();
 
-            let textPart1 = ""; // Text before the identified pedagogical blank
-            let textPart2 = ""; // Text after the identified pedagogical blank
-            let actualPedagogicalPlaceholder = null; // Stores the found "(x)_____" string
-            let displayClue = clueText; // The version of the clue text to be used if no ped. placeholder found
+            let textPart1 = ""; // Text before the identified pedagogical blank
+            let textPart2 = ""; // Text after the identified pedagogical blank
+            let actualPedagogicalPlaceholder = null; // Stores the found "(x)_____" string
+            let displayClue = clueText; // The version of the clue text to be used if no ped. placeholder found
 
-            const match = clueText.match(pedagogicalPlaceholderRegex);
+            const match = clueText.match(pedagogicalPlaceholderRegex);
 
-            if (match) {
-                // A pedagogical placeholder like (a)_____ or (n)_____ was found
-                actualPedagogicalPlaceholder = match[0]; // The matched string, e.g., "(a)_________"
-                const placeholderIndex = match.index;
-                textPart1 = clueText.substring(0, placeholderIndex);
-                textPart2 = clueText.substring(placeholderIndex + actualPedagogicalPlaceholder.length);
-            } else {
-                // No specific pedagogical placeholder like (x)_____ was found by the regex.
-                // This might mean the clue doesn't use one, or (a)________________ was just a suffix.
-                // If (a)________________ was a suffix, we should remove it from the displayClue.
-                if (clueText.endsWith(potentialSuffixDelimiter)) {
-                    displayClue = clueText.substring(0, clueText.length - potentialSuffixDelimiter.length);
-                }
-                // In this 'else' case, textPart1 will effectively be the displayClue, and textPart2 empty,
-                // as there's no defined "before" and "after" for a pedagogical placeholder.
-                textPart1 = displayClue; // Use the (potentially suffix-stripped) clue
-                                         // textPart2 remains empty
-            }
+            if (match) {
+                // A pedagogical placeholder like (a)_____ or (n)_____ was found
+                actualPedagogicalPlaceholder = match[0]; // The matched string, e.g., "(a)_________"
+                const placeholderIndex = match.index;
+                textPart1 = clueText.substring(0, placeholderIndex);
+                textPart2 = clueText.substring(placeholderIndex + actualPedagogicalPlaceholder.length);
+            } else {
+                // No specific pedagogical placeholder like (x)_____ was found by the regex.
+                // This might mean the clue doesn't use one, or (a)________________ was just a suffix.
+                // If (a)________________ was a suffix, we should remove it from the displayClue.
+                if (clueText.endsWith(potentialSuffixDelimiter)) {
+                    displayClue = clueText.substring(0, clueText.length - potentialSuffixDelimiter.length);
+                }
+                // In this 'else' case, textPart1 will effectively be the displayClue, and textPart2 empty,
+                // as there's no defined "before" and "after" for a pedagogical placeholder.
+                textPart1 = displayClue; // Use the (potentially suffix-stripped) clue
+                                         // textPart2 remains empty
+            }
 
-            parsedQuestions.push({
-                textPart1: textPart1.trim(),
-                textPart2: textPart2.trim(),
-                answer: answer,
-                // This new property will hold the actual placeholder string found, e.g., "(a)____" or "(n)____"
-                foundPlaceholderText: actualPedagogicalPlaceholder,
-                // This will hold the clue text to display if no specific placeholder was extracted
-                clueForDisplayIfNoPlaceholder: displayClue.trim()
-            });
-        } else {
-            console.warn("Skipping malformed vocab line:", line);
-        }
-    });
-    return parsedQuestions;
+            parsedQuestions.push({
+                textPart1: textPart1.trim(),
+                textPart2: textPart2.trim(),
+                answer: answer,
+                // This new property will hold the actual placeholder string found, e.g., "(a)____" or "(n)____"
+                foundPlaceholderText: actualPedagogicalPlaceholder,
+                // This will hold the clue text to display if no specific placeholder was extracted
+                clueForDisplayIfNoPlaceholder: displayClue.trim()
+            });
+        } else {
+            console.warn("Skipping malformed vocab line:", line);
+        }
+    });
+    return parsedQuestions;
 }
 
-    async function loadVocabulary() {
-        if (useExternalVocabFile) {
-            try {
-                const response = await fetch(vocabFileName);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} when fetching ${vocabFileName}`);
-                }
-                const dataString = await response.text();
-                console.log("Successfully loaded vocab from:", vocabFileName);
-                quizQuestions = parseVocabData(dataString);
-            } catch (error) {
-                console.warn("Could not load external vocab file. Error:", error, "Falling back to hardcoded vocabulary.");
-                quizQuestions = parseVocabData(hardcodedVocabFileContent);
-            }
-        } else {
-            console.log("Using hardcoded vocabulary.");
-            quizQuestions = parseVocabData(hardcodedVocabFileContent);
-        }
-        if (quizQuestions.length === 0) {
-            console.error("No quiz questions loaded! Check vocab data source and format.");
-            if (quizQuestions.length === 0) {
-                 quizQuestions = parseVocabData("This is a default question (a)________________ if loading fails.:-default;-0.1");
-            }
-        }
-    }
+    async function loadVocabulary() {
+        if (useExternalVocabFile) {
+            try {
+                const response = await fetch(vocabFileName);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} when fetching ${vocabFileName}`);
+                }
+                const dataString = await response.text();
+                console.log("Successfully loaded vocab from:", vocabFileName);
+                quizQuestions = parseVocabData(dataString);
+            } catch (error) {
+                console.warn("Could not load external vocab file. Error:", error, "Falling back to hardcoded vocabulary.");
+                quizQuestions = parseVocabData(hardcodedVocabFileContent);
+            }
+        } else {
+            console.log("Using hardcoded vocabulary.");
+            quizQuestions = parseVocabData(hardcodedVocabFileContent);
+        }
+        if (quizQuestions.length === 0) {
+            console.error("No quiz questions loaded! Check vocab data source and format.");
+            if (quizQuestions.length === 0) {
+                 quizQuestions = parseVocabData("This is a default question (a)________________ if loading fails.:-default;-0.1");
+            }
+        }
+    }
 
-    async function initGame() {
-        await loadVocabulary(); 
+    async function initGame() {
+        await loadVocabulary(); 
 
-        playerMarbles = INITIAL_MARBLES;
-        score = 0;
-        marbles = [];
-        currentMarble = null;
-        isDraggingPlunger = false;
-        plungerPullDistance = 0;
-        isQuizModeActive = false;
-        quizModal.style.display = 'none';
-        correctAnswersCount = 0;
-        incorrectAnswersCount = 0;
-        needsNewMarbleInPlunger = true;
-        correctWordsUl.innerHTML = '';
-        incorrectWordsUl.innerHTML = '';
-        updateUI();
-        setupBoard();
-        if (gameLoopId) cancelAnimationFrame(gameLoopId);
-        gameLoop();
-    }
+        playerMarbles = INITIAL_MARBLES;
+        score = 0;
+        marbles = [];
+        currentMarble = null;
+        isDraggingPlunger = false;
+        plungerPullDistance = 0;
+        isQuizModeActive = false;
+        quizModal.style.display = 'none';
+        correctAnswersCount = 0;
+        incorrectAnswersCount = 0;
+        needsNewMarbleInPlunger = true;
+        correctWordsUl.innerHTML = '';
+        incorrectWordsUl.innerHTML = '';
+        updateUI();
+        setupBoard();
+        if (gameLoopId) cancelAnimationFrame(gameLoopId);
+        gameLoop();
+    }
 
-    function setupBoard() {
-        pegs = [];
-        holes = [];
-        const rows = 13;
-        const cols = 8;
-        const xSpacing = (CANVAS_WIDTH - 40) / cols;
-        const ySpacing = (CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 180) / rows;
-        const xOffset = 20;
-        const marbleStartX = plunger.x + PLUNGER_WIDTH / 2;
-        const marbleStartY = plunger.baseY - MARBLE_RADIUS - 5;
+    function setupBoard() {
+        pegs = [];
+        holes = [];
+        const rows = 13;
+        const cols = 8;
+        const xSpacing = (CANVAS_WIDTH - 40) / cols;
+        const ySpacing = (CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 180) / rows;
+        const xOffset = 20;
+        const marbleStartX = plunger.x + PLUNGER_WIDTH / 2;
+        const marbleStartY = plunger.baseY - MARBLE_RADIUS - 5;
 
-        const clearRectX1 = marbleStartX - 150;
-        const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20;
-        const clearRectY1 = marbleStartY - 300; 
-        const clearRectY2 = CANVAS_HEIGHT;
+        const clearRectX1 = marbleStartX - 150;
+        const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20;
+        const clearRectY1 = marbleStartY - 300; 
+        const clearRectY2 = CANVAS_HEIGHT;
 
-        for (let i = 0; i < rows; i++) {
-            const numColsThisRow = (i % 2 === 0) ? cols : cols - 1;
-            for (let j = 0; j < numColsThisRow; j++) {
-                let pegX = (j * xSpacing) + xOffset;
-                if (i % 2 !== 0) {
-                    pegX += xSpacing / 2;
-                }
-                const pegY = 90 + i * ySpacing;
-                let skipPeg = false;
+        for (let i = 0; i < rows; i++) {
+            const numColsThisRow = (i % 2 === 0) ? cols : cols - 1;
+            for (let j = 0; j < numColsThisRow; j++) {
+                let pegX = (j * xSpacing) + xOffset;
+                if (i % 2 !== 0) {
+                    pegX += xSpacing / 2;
+                }
+                const pegY = 90 + i * ySpacing;
+                let skipPeg = false;
 
-                if (pegX > clearRectX1 && pegX < clearRectX2 &&
-                    pegY > clearRectY1 && pegY < clearRectY2) {
-                    skipPeg = true;
-                }
+                if (pegX > clearRectX1 && pegX < clearRectX2 &&
+                    pegY > clearRectY1 && pegY < clearRectY2) {
+                    skipPeg = true;
+                }
 
-                if (!skipPeg && pegX + PEG_RADIUS < CANVAS_WIDTH - xOffset && pegX - PEG_RADIUS > xOffset) {
-                     pegs.push({ x: pegX, y: pegY, radius: PEG_RADIUS, color: '#704214' });
-                }
-            }
-        }
-        
-        const holeValues = [25, 50, -5, 10, 5, 15, -10];
-        const baseHoleRadius = 19; 
-        const holeY = CANVAS_HEIGHT - 60;
-        const numHoles = holeValues.length;
-        const holeSpacing = (CANVAS_WIDTH - 40) / (numHoles);
-        const firstHoleX = 20 + holeSpacing / 2;
-        for (let i = 0; i < numHoles; i++) {
-            holes.push({
-                x: firstHoleX + i * holeSpacing,
-                y: holeY,
-                baseRadius: baseHoleRadius, 
-                baseColor: `hsl(${20 + i * (300 / numHoles)}, 70%, 55%)`, 
-                value: holeValues[i],
-                hitAnimationEndTime: 0 
-            });
-        }
-    }
+                if (!skipPeg && pegX + PEG_RADIUS < CANVAS_WIDTH - xOffset && pegX - PEG_RADIUS > xOffset) {
+                     pegs.push({ x: pegX, y: pegY, radius: PEG_RADIUS, color: '#704214' });
+                }
+            }
+        }
+        
+        const holeValues = [25, 50, -5, 10, 5, 15, -10];
+        const baseHoleRadius = 19; 
+        const holeY = CANVAS_HEIGHT - 60;
+        const numHoles = holeValues.length;
+        const holeSpacing = (CANVAS_WIDTH - 40) / (numHoles);
+        const firstHoleX = 20 + holeSpacing / 2;
+        for (let i = 0; i < numHoles; i++) {
+            holes.push({
+                x: firstHoleX + i * holeSpacing,
+                y: holeY,
+                baseRadius: baseHoleRadius, 
+                baseColor: `hsl(${20 + i * (300 / numHoles)}, 70%, 55%)`, 
+                value: holeValues[i],
+                hitAnimationEndTime: 0 
+            });
+        }
+    }
 
-    function updateUI() {
-        marblesLeftEl.textContent = playerMarbles;
-        scoreEl.textContent = score;
-    }
+    function updateUI() {
+        marblesLeftEl.textContent = playerMarbles;
+        scoreEl.textContent = score;
+    }
 
-    function createMarble() {
-        if (playerMarbles > 0) {
-            playerMarbles--;
-            currentMarble = {
-                x: plunger.x + PLUNGER_WIDTH / 2,
-                y: plunger.baseY - MARBLE_RADIUS - 5,
-                radius: MARBLE_RADIUS,
-                vx: 0, vy: 0,
-                color: `hsl(${Math.random() * 360}, 85%, 65%)`,
-                isActive: false,
-                hasHitPeg: false
-            };
-            marbles.push(currentMarble);
-            updateUI();
-            return true;
-        }
-        updateUI();
-        return false;
-    }
+    function createMarble() {
+        if (playerMarbles > 0) {
+            playerMarbles--;
+            currentMarble = {
+                x: plunger.x + PLUNGER_WIDTH / 2,
+                y: plunger.baseY - MARBLE_RADIUS - 5,
+                radius: MARBLE_RADIUS,
+                vx: 0, vy: 0,
+                color: `hsl(${Math.random() * 360}, 85%, 65%)`,
+                isActive: false,
+                hasHitPeg: false
+            };
+            marbles.push(currentMarble);
+            updateUI();
+            return true;
+        }
+        updateUI();
+        return false;
+    }
 
-    function launchMarble(power) {
-        if (currentMarble && !currentMarble.isActive) {
-            currentMarble.isActive = true;
-            const baseAngle = -Math.PI * (2/3); 
-            const randomFactor = (Math.random() * Math.PI / 18) - (Math.PI / 36); 
-            const angle = baseAngle + randomFactor;
-            currentMarble.vx = power * Math.cos(angle);
-            currentMarble.vy = power * Math.sin(angle);
-            currentMarble = null; 
-        }
-    }
+    function launchMarble(power) {
+        if (currentMarble && !currentMarble.isActive) {
+            currentMarble.isActive = true;
+            const baseAngle = -Math.PI * (2/3); 
+            const randomFactor = (Math.random() * Math.PI / 18) - (Math.PI / 36); 
+            const angle = baseAngle + randomFactor;
+            currentMarble.vx = power * Math.cos(angle);
+            currentMarble.vy = power * Math.sin(angle);
+            currentMarble = null; 
+        }
+    }
 
-    function drawPlunger() {
-        ctx.fillStyle = '#a0522d'; 
-        ctx.beginPath();
-        ctx.moveTo(plunger.x - 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
-        ctx.lineTo(plunger.x - 8, CANVAS_HEIGHT);
-        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT);
-        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
-        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
-        ctx.lineTo(plunger.x - 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
-        ctx.closePath();
-        ctx.fill();
-        ctx.strokeStyle = '#5d4037';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.fillStyle = plunger.color;
-        const currentPlungerY = plunger.baseY + plungerPullDistance;
-        const currentPlungerHeight = plunger.height - plungerPullDistance;
-        ctx.fillRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
-        ctx.strokeStyle = '#332a23';
-        ctx.strokeRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
-        ctx.strokeStyle = '#777';
-        ctx.lineWidth = 3;
-        const springTopY = plunger.baseY + plunger.height;
-        const springBottomY = currentPlungerY + currentPlungerHeight;
-        if (springBottomY > springTopY) {
-            for(let i=0; i < 4; i++) {
-                ctx.beginPath();
-                const yPos = springTopY + (i * (springBottomY - springTopY) / 4);
-                ctx.moveTo(plunger.x + PLUNGER_WIDTH/2 - 6, yPos);
-                ctx.lineTo(plunger.x + PLUNGER_WIDTH/2 + 6, yPos + (springBottomY - springTopY) / 8);
-                ctx.stroke();
-            }
-        }
-    }
+    function drawPlunger() {
+        ctx.fillStyle = '#a0522d'; 
+        ctx.beginPath();
+        ctx.moveTo(plunger.x - 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
+        ctx.lineTo(plunger.x - 8, CANVAS_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 8, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT);
+        ctx.lineTo(plunger.x + PLUNGER_WIDTH + 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
+        ctx.lineTo(plunger.x - 18, CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 15);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#5d4037';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = plunger.color;
+        const currentPlungerY = plunger.baseY + plungerPullDistance;
+        const currentPlungerHeight = plunger.height - plungerPullDistance;
+        ctx.fillRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
+        ctx.strokeStyle = '#332a23';
+        ctx.strokeRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
+        ctx.strokeStyle = '#777';
+        ctx.lineWidth = 3;
+        const springTopY = plunger.baseY + plunger.height;
+        const springBottomY = currentPlungerY + currentPlungerHeight;
+        if (springBottomY > springTopY) {
+            for(let i=0; i < 4; i++) {
+                ctx.beginPath();
+                const yPos = springTopY + (i * (springBottomY - springTopY) / 4);
+                ctx.moveTo(plunger.x + PLUNGER_WIDTH/2 - 6, yPos);
+                ctx.lineTo(plunger.x + PLUNGER_WIDTH/2 + 6, yPos + (springBottomY - springTopY) / 8);
+                ctx.stroke();
+            }
+        }
+    }
 
-    function drawMarbles() {
-        marbles.forEach(marble => {
-            if (marble) {
-                ctx.beginPath();
-                ctx.arc(marble.x, marble.y, marble.radius, 0, Math.PI * 2);
-                ctx.fillStyle = marble.color;
-                ctx.fill();
-                if (marble.isActive) {
-                    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
-                } else {
-                    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
-        });
-    }
+    function drawMarbles() {
+        marbles.forEach(marble => {
+            if (marble) {
+                ctx.beginPath();
+                ctx.arc(marble.x, marble.y, marble.radius, 0, Math.PI * 2);
+                ctx.fillStyle = marble.color;
+                ctx.fill();
+                if (marble.isActive) {
+                    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                } else {
+                    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        });
+    }
 
-    function drawPegs() {
-        pegs.forEach(peg => {
-            ctx.beginPath();
-            ctx.arc(peg.x, peg.y, peg.radius, 0, Math.PI * 2);
-            ctx.fillStyle = peg.color;
-            ctx.fill();
-            ctx.strokeStyle = '#503010';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        });
-    }
+    function drawPegs() {
+        pegs.forEach(peg => {
+            ctx.beginPath();
+            ctx.arc(peg.x, peg.y, peg.radius, 0, Math.PI * 2);
+            ctx.fillStyle = peg.color;
+            ctx.fill();
+            ctx.strokeStyle = '#503010';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        });
+    }
 
-    function drawHoles() {
-        const now = Date.now();
-        holes.forEach(hole => {
-            let currentRadius = hole.baseRadius;
-            let currentColor = hole.baseColor;
-            let showHighlight = false;
+    function drawHoles() {
+        const now = Date.now();
+        holes.forEach(hole => {
+            let currentRadius = hole.baseRadius;
+            let currentColor = hole.baseColor;
+            let showHighlight = false;
 
-            if (now < hole.hitAnimationEndTime) {
-                const timeRemaining = hole.hitAnimationEndTime - now;
-                const progress = 1 - (timeRemaining / HOLE_ANIMATION_DURATION); 
-                const scaleFactor = 1 + 0.2 * Math.sin(progress * Math.PI); 
-                currentRadius = hole.baseRadius * scaleFactor;
-                currentColor = '#FFFF99'; 
-                showHighlight = true;
-            }
+            if (now < hole.hitAnimationEndTime) {
+                const timeRemaining = hole.hitAnimationEndTime - now;
+                const progress = 1 - (timeRemaining / HOLE_ANIMATION_DURATION); 
+                const scaleFactor = 1 + 0.2 * Math.sin(progress * Math.PI); 
+                currentRadius = hole.baseRadius * scaleFactor;
+                currentColor = '#FFFF99'; 
+                showHighlight = true;
+            }
 
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, currentRadius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0,0,0,0.4)'; 
-            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, currentRadius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.4)'; 
+            ctx.fill();
 
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, currentRadius - 3, 0, Math.PI * 2); 
-            ctx.fillStyle = currentColor;
-            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, currentRadius - 3, 0, Math.PI * 2); 
+            ctx.fillStyle = currentColor;
+            ctx.fill();
 
-            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
-            ctx.lineWidth = 2;
-            ctx.stroke(); 
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+            ctx.lineWidth = 2;
+            ctx.stroke(); 
 
-            ctx.fillStyle = showHighlight ? '#333' : 'white'; 
-            let fontSize = 12;
-            if (Math.abs(hole.value) >= 100 || (hole.value < 0 && Math.abs(hole.value) >= 10)) fontSize = 10;
-            else if (Math.abs(hole.value) >= 10) fontSize = 11; 
-            
-            ctx.font = `bold ${fontSize}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(hole.value, hole.x, hole.y);
-        });
-    }
+            ctx.fillStyle = showHighlight ? '#333' : 'white'; 
+            let fontSize = 12;
+            if (Math.abs(hole.value) >= 100 || (hole.value < 0 && Math.abs(hole.value) >= 10)) fontSize = 10;
+            else if (Math.abs(hole.value) >= 10) fontSize = 11; 
+            
+            ctx.font = `bold ${fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(hole.value, hole.x, hole.y);
+        });
+    }
 
-    function updateMarbles() {
-        for (let i = marbles.length - 1; i >= 0; i--) {
-            const marble = marbles[i];
-            if (!marble || !marble.isActive) continue;
+    function updateMarbles() {
+        for (let i = marbles.length - 1; i >= 0; i--) {
+            const marble = marbles[i];
+            if (!marble || !marble.isActive) continue;
 
-            marble.vy += GRAVITY;
-            marble.x += marble.vx;
-            marble.y += marble.vy;
+            marble.vy += GRAVITY;
+            marble.x += marble.vx;
+            marble.y += marble.vy;
 
-            if (marble.x - marble.radius < 0) {
-                marble.x = marble.radius;
-                marble.vx *= -BOUNCE_FACTOR;
-            } else if (marble.x + marble.radius > CANVAS_WIDTH) {
-                marble.x = CANVAS_WIDTH - marble.radius;
-                marble.vx *= -BOUNCE_FACTOR;
-            }
-            if (marble.y - marble.radius < 0 && marble.vy < 0) { 
-                marble.y = marble.radius;
-                marble.vy *= -BOUNCE_FACTOR;
-            }
+            if (marble.x - marble.radius < 0) {
+                marble.x = marble.radius;
+                marble.vx *= -BOUNCE_FACTOR;
+            } else if (marble.x + marble.radius > CANVAS_WIDTH) {
+                marble.x = CANVAS_WIDTH - marble.radius;
+                marble.vx *= -BOUNCE_FACTOR;
+            }
+            if (marble.y - marble.radius < 0 && marble.vy < 0) { 
+                marble.y = marble.radius;
+                marble.vy *= -BOUNCE_FACTOR;
+            }
 
-            pegs.forEach(peg => {
-                const dx = marble.x - peg.x;
-                const dy = marble.y - peg.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const combinedRadii = marble.radius + peg.radius;
-                if (distance < combinedRadii) {
-                    marble.hasHitPeg = true; 
-                    const overlap = combinedRadii - distance;
-                    const angle = Math.atan2(dy, dx);
-                    marble.x += Math.cos(angle) * overlap * 0.5; 
-                    marble.y += Math.sin(angle) * overlap * 0.5;
-                    const normalX = dx / distance;
-                    const normalY = dy / distance;
-                    const dotProduct = marble.vx * normalX + marble.vy * normalY;
-                    marble.vx = (marble.vx - 2 * dotProduct * normalX) * BOUNCE_FACTOR;
-                    marble.vy = (marble.vy - 2 * dotProduct * normalY) * BOUNCE_FACTOR;
-                    marble.vx += (Math.random() - 0.5) * 0.3; 
-                    marble.vy += (Math.random() - 0.5) * 0.3;
+            pegs.forEach(peg => {
+                const dx = marble.x - peg.x;
+                const dy = marble.y - peg.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const combinedRadii = marble.radius + peg.radius;
+                if (distance < combinedRadii) {
+                    marble.hasHitPeg = true; 
+                    const overlap = combinedRadii - distance;
+                    const angle = Math.atan2(dy, dx);
+                    marble.x += Math.cos(angle) * overlap * 0.5; 
+                    marble.y += Math.sin(angle) * overlap * 0.5;
+                    const normalX = dx / distance;
+                    const normalY = dy / distance;
+                    const dotProduct = marble.vx * normalX + marble.vy * normalY;
+                    marble.vx = (marble.vx - 2 * dotProduct * normalX) * BOUNCE_FACTOR;
+                    marble.vy = (marble.vy - 2 * dotProduct * normalY) * BOUNCE_FACTOR;
+                    marble.vx += (Math.random() - 0.5) * 0.3; 
+                    marble.vy += (Math.random() - 0.5) * 0.3;
 
-                    if (pegHitSynth && audioContextStarted) {
-                        pegHitSynth.triggerAttackRelease("C2", "8n", Tone.now());
-                    }
-                }
-            });
+                    if (pegHitSynth && audioContextStarted) {
+                        pegHitSynth.triggerAttackRelease("C2", "8n", Tone.now());
+                    }
+                }
+            });
 
-            let marbleRemoved = false;
-            holes.forEach(hole => {
-                const dx = marble.x - hole.x;
-                const dy = marble.y - hole.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < hole.baseRadius) { 
-                    score += hole.value;
-                    marbles.splice(i, 1); 
-                    marbleRemoved = true;
-                    updateUI();
+            let marbleRemoved = false;
+            holes.forEach(hole => {
+                const dx = marble.x - hole.x;
+                const dy = marble.y - hole.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < hole.baseRadius) { 
+                    score += hole.value;
+                    marbles.splice(i, 1); 
+                    marbleRemoved = true;
+                    updateUI();
 
-                    hole.hitAnimationEndTime = Date.now() + HOLE_ANIMATION_DURATION;
-                    if (holeHitSynth && audioContextStarted) {
-                        let freq;
-                        if (hole.value > 0) {
-                            freq = 200 + hole.value * 8; 
-                        } else if (hole.value < 0) {
-                            freq = 150 + hole.value * 6; 
-                        } else { 
-                            freq = 180;
-                        }
-                        freq = Math.max(80, Math.min(freq, 1200)); 
-                        holeHitSynth.triggerAttackRelease(freq, "8n", Tone.now());
-                    }
+                    hole.hitAnimationEndTime = Date.now() + HOLE_ANIMATION_DURATION;
+                    if (holeHitSynth && audioContextStarted) {
+                        let freq;
+                        if (hole.value > 0) {
+                            freq = 200 + hole.value * 8; 
+                        } else if (hole.value < 0) {
+                            freq = 150 + hole.value * 6; 
+                        } else { 
+                            freq = 180;
+                        }
+                        freq = Math.max(80, Math.min(freq, 1200)); 
+                        holeHitSynth.triggerAttackRelease(freq, "8n", Tone.now());
+                    }
 
-                    if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
-                        needsNewMarbleInPlunger = true;
-                    }
-                    return; 
-                }
-            });
+                    if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
+                        needsNewMarbleInPlunger = true;
+                    }
+                    return; 
+                }
+            });
 
-            if (marbleRemoved) continue; 
+            if (marbleRemoved) continue; 
 
-            if (marble.y - marble.radius > CANVAS_HEIGHT) {
-                if (!marble.hasHitPeg) { 
-                    score = Math.max(0, score - 1); 
-                }
-                marbles.splice(i, 1);
-                updateUI();
-                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
-                    needsNewMarbleInPlunger = true;
-                }
-            }
-        }
-    }
+            if (marble.y - marble.radius > CANVAS_HEIGHT) {
+                if (!marble.hasHitPeg) { 
+                    score = Math.max(0, score - 1); 
+                }
+                marbles.splice(i, 1);
+                updateUI();
+                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
+                    needsNewMarbleInPlunger = true;
+                }
+            }
+        }
+    }
 
-    function gameLoop() {
-        if (isQuizModeActive) {
-            return; 
-        }
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        drawPlunger();
-        drawPegs();
-        drawHoles(); 
-        drawMarbles();
+    function gameLoop() {
+        if (isQuizModeActive) {
+            return; 
+        }
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        drawPlunger();
+        drawPegs();
+        drawHoles(); 
+        drawMarbles();
 
-        if (needsNewMarbleInPlunger && playerMarbles > 0 && !currentMarble && !isQuizModeActive) {
-            if (!marbles.some(m => m && m.isActive)) { 
-                createMarble();
-                needsNewMarbleInPlunger = false;
-            }
-        }
-        
-        if (marbles.some(m => m && m.isActive)) { 
-             updateMarbles();
-        }
+        if (needsNewMarbleInPlunger && playerMarbles > 0 && !currentMarble && !isQuizModeActive) {
+            if (!marbles.some(m => m && m.isActive)) { 
+                createMarble();
+                needsNewMarbleInPlunger = false;
+            }
+        }
+        
+        if (marbles.some(m => m && m.isActive)) { 
+             updateMarbles();
+        }
 
-        if (playerMarbles <= 0 && !marbles.some(m => m && m.isActive) && !currentMarble) {
-            enterQuizMode(); 
-        } else {
-            gameLoopId = requestAnimationFrame(gameLoop);
-        }
-    }
+        if (playerMarbles <= 0 && !marbles.some(m => m && m.isActive) && !currentMarble) {
+            enterQuizMode(); 
+        } else {
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+    }
 
-    function displayGameOverMessage() {
-        if(gameLoopId) cancelAnimationFrame(gameLoopId); 
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-        ctx.fillRect(0, CANVAS_HEIGHT / 2 - 60, CANVAS_WIDTH, 120);
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 32px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Game Over', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 15);
-        ctx.font = '20px Arial';
-        ctx.fillText('Final Score: ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 20);
-    }
-    
-    function enterQuizMode() {
-        if (isQuizModeActive) return; 
-        if (quizQuestions.length === 0) {
-            console.log("No quiz questions available, ending game.");
-            displayGameOverMessage(); 
-            return;
-        }
-        isQuizModeActive = true;
-        if(gameLoopId) cancelAnimationFrame(gameLoopId); 
+    function displayGameOverMessage() {
+        if(gameLoopId) cancelAnimationFrame(gameLoopId); 
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.fillRect(0, CANVAS_HEIGHT / 2 - 60, CANVAS_WIDTH, 120);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Game Over', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 15);
+        ctx.font = '20px Arial';
+        ctx.fillText('Final Score: ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 20);
+    }
+    
+    function enterQuizMode() {
+        if (isQuizModeActive) return; 
+        if (quizQuestions.length === 0) {
+            console.log("No quiz questions available, ending game.");
+            displayGameOverMessage(); 
+            return;
+        }
+        isQuizModeActive = true;
+        if(gameLoopId) cancelAnimationFrame(gameLoopId); 
 
-        loadNewQuizQuestion();
-        quizModal.style.display = 'flex';
-        quizAnswerInput.value = '';
-        quizAnswerInput.focus();
-        quizMessageEl.textContent = '';
-        quizMessageEl.className = '';
-    }
+        loadNewQuizQuestion();
+        quizModal.style.display = 'flex';
+        quizAnswerInput.value = '';
+        quizAnswerInput.focus();
+        quizMessageEl.textContent = '';
+        quizMessageEl.className = '';
+    }
 
-    /**
-     * Loads and displays a new random quiz question.
-     * Includes logic to prevent extra placeholders at the end of clues.
-     */
-    function loadNewQuizQuestion() {
-    if (quizQuestions.length === 0) {
-        quizQuestionEl.textContent = "No more questions available.";
-        submitAnswerButton.disabled = true;
-        return;
-    }
-    const randomIndex = Math.floor(Math.random() * quizQuestions.length);
-    currentQuizQuestionObj = quizQuestions[randomIndex]; // Contains new properties
+    /**
+     * Loads and displays a new random quiz question.
+     * Includes logic to prevent extra placeholders at the end of clues.
+     */
+    function loadNewQuizQuestion() {
+    if (quizQuestions.length === 0) {
+        quizQuestionEl.textContent = "No more questions available.";
+        submitAnswerButton.disabled = true;
+        return;
+    }
+    const randomIndex = Math.floor(Math.random() * quizQuestions.length);
+    currentQuizQuestionObj = quizQuestions[randomIndex]; // Contains new properties
 
-    const part1FromParse = currentQuizQuestionObj.textPart1;
-    const part2FromParse = currentQuizQuestionObj.textPart2;
-    const identifiedPlaceholder = currentQuizQuestionObj.foundPlaceholderText;
-    const fallbackClueDisplay = currentQuizQuestionObj.clueForDisplayIfNoPlaceholder;
+    const part1FromParse = currentQuizQuestionObj.textPart1;
+    const part2FromParse = currentQuizQuestionObj.textPart2;
+    const identifiedPlaceholder = currentQuizQuestionObj.foundPlaceholderText;
+    const fallbackClueDisplay = currentQuizQuestionObj.clueForDisplayIfNoPlaceholder;
 
-    let finalQuestionHtml = "";
+    let finalQuestionHtml = "";
 
-    if (identifiedPlaceholder) {
-        // A specific pedagogical placeholder (e.g., "(a)_____", "(n)_____") was found.
-        // This is the one we want to display, bolded.
-        const boldedIdentifiedPlaceholder = `<b>${identifiedPlaceholder}</b>`;
+    if (identifiedPlaceholder) {
+        // A specific pedagogical placeholder (e.g., "(a)_____", "(n)_____") was found.
+        // This is the one we want to display, bolded.
+        const boldedIdentifiedPlaceholder = `<b>${identifiedPlaceholder}</b>`;
 
-        let questionParts = [];
-        if (part1FromParse && part1FromParse.length > 0) { // Text before the placeholder
-            questionParts.push(part1FromParse);
-        }
-        questionParts.push(boldedIdentifiedPlaceholder);
-        if (part2FromParse && part2FromParse.length > 0) { // Text after the placeholder
-            questionParts.push(part2FromParse);
-        }
-        finalQuestionHtml = questionParts.join(" ");
-    } else {
-        // No specific pedagogical placeholder was identified by the regex in parseVocabData.
-        // Display the fallbackClueDisplay, which should be the original clue text,
-        // potentially with a trailing "(a)________________" suffix already removed by parseVocabData.
-        finalQuestionHtml = fallbackClueDisplay;
-    }
+        let questionParts = [];
+        if (part1FromParse && part1FromParse.length > 0) { // Text before the placeholder
+            questionParts.push(part1FromParse);
+        }
+        questionParts.push(boldedIdentifiedPlaceholder);
+        if (part2FromParse && part2FromParse.length > 0) { // Text after the placeholder
+            questionParts.push(part2FromParse);
+        }
+        finalQuestionHtml = questionParts.join(" ");
+    } else {
+        // No specific pedagogical placeholder was identified by the regex in parseVocabData.
+        // Display the fallbackClueDisplay, which should be the original clue text,
+        // potentially with a trailing "(a)________________" suffix already removed by parseVocabData.
+        finalQuestionHtml = fallbackClueDisplay;
+    }
 
-    quizQuestionEl.innerHTML = finalQuestionHtml;
-    quizAnswerInput.value = '';
-    quizMessageEl.textContent = '';
-    quizMessageEl.className = '';
-    submitAnswerButton.disabled = false;
+    quizQuestionEl.innerHTML = finalQuestionHtml;
+    quizAnswerInput.value = '';
+    quizMessageEl.textContent = '';
+    quizMessageEl.className = '';
+    submitAnswerButton.disabled = false;
 }
 
-    function addWordToList(word, listElement, isCorrect) {
-        const li = document.createElement('li');
-        if (isCorrect) {
-            correctAnswersCount++;
-            li.textContent = `${correctAnswersCount}. ${word}`;
-        } else {
-            incorrectAnswersCount++;
-            li.textContent = `${incorrectAnswersCount}. ${word}`; // Word here is now the correct answer for incorrect guesses
-        }
-        listElement.appendChild(li);
-        listElement.scrollTop = listElement.scrollHeight; 
-    }
+    function addWordToList(word, listElement, isCorrect) {
+        const li = document.createElement('li');
+        if (isCorrect) {
+            correctAnswersCount++;
+            li.textContent = `${correctAnswersCount}. ${word}`;
+        } else {
+            incorrectAnswersCount++;
+            li.textContent = `${incorrectAnswersCount}. ${word}`; // Word here is now the correct answer for incorrect guesses
+        }
+        listElement.appendChild(li);
+        listElement.scrollTop = listElement.scrollHeight; 
+    }
 
-    /**
-     * Handles quiz answer submission.
-     * Now adds the CORRECT answer to the incorrect list on a wrong guess.
-     */
-    function handleSubmitQuizAnswer() {
-        if (!currentQuizQuestionObj || !isQuizModeActive) return;
-        const userAnswer = quizAnswerInput.value.trim();
-        const correctAnswer = currentQuizQuestionObj.answer;
+    /**
+     * Handles quiz answer submission.
+     * Now adds the CORRECT answer to the incorrect list on a wrong guess.
+     */
+    function handleSubmitQuizAnswer() {
+        if (!currentQuizQuestionObj || !isQuizModeActive) return;
+        const userAnswer = quizAnswerInput.value.trim();
+        const correctAnswer = currentQuizQuestionObj.answer;
 
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-            quizMessageEl.textContent = 'Correct! You get 1 marble.';
-            quizMessageEl.className = 'quizCorrect';
-            playerMarbles++;
-            updateUI();
-            addWordToList(correctAnswer, correctWordsUl, true);
-            submitAnswerButton.disabled = true; 
-            setTimeout(() => {
-                loadNewQuizQuestion(); 
-                quizAnswerInput.focus();
-            }, 1500);
-        } else {
-            quizMessageEl.textContent = 'Incorrect. Try another question!';
-            quizMessageEl.className = 'quizIncorrect';
-            // --- MODIFIED: Add the CORRECT answer to the incorrect list ---
-            addWordToList(correctAnswer, incorrectWordsUl, false); 
-            submitAnswerButton.disabled = true;
-            setTimeout(() => {
-                loadNewQuizQuestion();
-                quizAnswerInput.focus();
-            }, 1500);
-        }
-    }
-    
-    function handleCloseQuiz() {
-        quizModal.style.display = 'none';
-        isQuizModeActive = false;
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            quizMessageEl.textContent = 'Correct! You get 1 marble.';
+            quizMessageEl.className = 'quizCorrect';
+            playerMarbles++;
+            updateUI();
+            addWordToList(correctAnswer, correctWordsUl, true);
+            submitAnswerButton.disabled = true; 
+            setTimeout(() => {
+                loadNewQuizQuestion(); 
+                quizAnswerInput.focus();
+            }, 1500);
+        } else {
+            quizMessageEl.textContent = 'Incorrect. Try another question!';
+            quizMessageEl.className = 'quizIncorrect';
+            // --- MODIFIED: Add the CORRECT answer to the incorrect list ---
+            addWordToList(correctAnswer, incorrectWordsUl, false); 
+            submitAnswerButton.disabled = true;
+            setTimeout(() => {
+                loadNewQuizQuestion();
+                quizAnswerInput.focus();
+            }, 1500);
+        }
+    }
+    
+    function handleCloseQuiz() {
+        quizModal.style.display = 'none';
+        isQuizModeActive = false;
 
-        if (playerMarbles <= 0 && !currentMarble && !marbles.some(m=> m && m.isActive)) {
-            displayGameOverMessage();
-        } else {
-            if (playerMarbles > 0 && !currentMarble && !marbles.some(m => m && m.isActive)) {
-                 needsNewMarbleInPlunger = true;
-            }
-            gameLoop(); 
-        }
-    }
+        if (playerMarbles <= 0 && !currentMarble && !marbles.some(m=> m && m.isActive)) {
+            displayGameOverMessage();
+        } else {
+            if (playerMarbles > 0 && !currentMarble && !marbles.some(m => m && m.isActive)) {
+                 needsNewMarbleInPlunger = true;
+            }
+            gameLoop(); 
+        }
+    }
 
-    // Event Listeners for Plunger Interaction
-    let startMouseY;
-    canvas.addEventListener('mousedown', async (e) => { 
+    // Event Listeners for Plunger Interaction
+    let startMouseY; // For mouse
+    let startTouchY; // For touch
+
+    async function handlePlungerStart(clientX, clientY) {
         if (isQuizModeActive) return;
 
         if (!audioContextStarted && typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
@@ -919,76 +921,128 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
 
         const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+        const inputX = clientX - rect.left;
+        const inputY = clientY - rect.top;
 
-        if (mouseX >= plunger.x && mouseX <= plunger.x + plunger.width &&
-            mouseY >= plunger.baseY && mouseY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) { 
+        if (inputX >= plunger.x && inputX <= plunger.x + plunger.width &&
+            inputY >= plunger.baseY && inputY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) {
             
-            if (!currentMarble) { 
-                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive)) { 
-                    createMarble(); 
+            if (!currentMarble) {
+                if (playerMarbles > 0 && !marbles.some(m => m && m.isActive)) {
+                    createMarble();
                 } else {
                     return; 
                 }
             }
 
-            if (currentMarble && !currentMarble.isActive) { 
+            if (currentMarble && !currentMarble.isActive) {
                 isDraggingPlunger = true;
-                startMouseY = mouseY;
-                plungerPullDistance = 0; 
+                // Store both mouse and touch start Y separately, though only one will be primarily used per event type
+                startMouseY = inputY; 
+                startTouchY = inputY;
+                plungerPullDistance = 0;
             }
         }
-    });
+    }
 
-    canvas.addEventListener('mousemove', (e) => {
+    function handlePlungerMove(clientY) {
         if (isQuizModeActive || !isDraggingPlunger) return;
+        
         const rect = canvas.getBoundingClientRect();
-        const mouseY = e.clientY - rect.top;
-        let pull = mouseY - startMouseY;
-        if (pull < 0) pull = 0; 
-        if (pull > MAX_PULL_DISTANCE) pull = MAX_PULL_DISTANCE; 
-        plungerPullDistance = pull;
-    });
+        const inputY = clientY - rect.top;
+        
+        // Determine pull based on the appropriate start Y (mouse or touch)
+        // This example assumes startMouseY was set by mousedown and startTouchY by touchstart
+        // For simplicity, we'll use the generic startMouseY here, but for a robust multi-touch vs mouse,
+        // you might need a flag to know which input started the drag.
+        // However, since isDraggingPlunger is global, one event type will "own" the drag.
+        let pullOriginY = startMouseY; // Default to mouse, will be same as startTouchY if touch started it
+        if (event.type.startsWith('touch')) { // Check if it's a touch event
+            pullOriginY = startTouchY;
+        }
 
-    canvas.addEventListener('mouseup', () => {
+
+        let pull = inputY - pullOriginY; 
+        if (pull < 0) pull = 0;
+        if (pull > MAX_PULL_DISTANCE) pull = MAX_PULL_DISTANCE;
+        plungerPullDistance = pull;
+    }
+
+    function handlePlungerEnd() {
         if (isQuizModeActive || !isDraggingPlunger) return;
         isDraggingPlunger = false;
-        if (plungerPullDistance > 5) { 
-            const launchPower = (plungerPullDistance / MAX_PULL_DISTANCE) * 12 + 4; 
+        if (plungerPullDistance > 5) {
+            const launchPower = (plungerPullDistance / MAX_PULL_DISTANCE) * 12 + 4;
             launchMarble(launchPower);
         }
-        plungerPullDistance = 0; 
-    });
+        plungerPullDistance = 0;
+    }
 
-    canvas.addEventListener('mouseleave', () => { 
-        if (isQuizModeActive || !isDraggingPlunger) return;
-         if (isDraggingPlunger) { 
-            isDraggingPlunger = false;
-            if (plungerPullDistance > 5) {
-                const launchPower = (plungerPullDistance / MAX_PULL_DISTANCE) * 12 + 4;
-                launchMarble(launchPower);
-            }
-            plungerPullDistance = 0;
+
+    // Mouse Event Listeners
+    canvas.addEventListener('mousedown', async (e) => { 
+        startMouseY = e.clientY - canvas.getBoundingClientRect().top; // Store specific mouse start Y
+        handlePlungerStart(e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (isDraggingPlunger && event.type.startsWith('mouse')) { // Ensure this only responds if mouse started drag
+            handlePlungerMove(e.clientY);
         }
-    });
+    });
 
-    // Quiz Event Listeners
-    submitAnswerButton.addEventListener('click', handleSubmitQuizAnswer);
-    quizAnswerInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            handleSubmitQuizAnswer();
+    canvas.addEventListener('mouseup', () => {
+        if (event.type.startsWith('mouse')) { // Ensure this only responds if mouse triggered
+            handlePlungerEnd();
         }
+    });
+
+    canvas.addEventListener('mouseleave', () => { 
+        if (event.type.startsWith('mouse')) { // Ensure this only responds if mouse triggered
+            handlePlungerEnd(); // also end drag if mouse leaves canvas while dragging
+        }
+    });
+
+    // Touch Event Listeners
+    canvas.addEventListener('touchstart', async (e) => {
+        if (e.touches.length > 0) {
+            // e.preventDefault(); // Prevent mouse events from firing if desired, and scrolling.
+            startTouchY = e.touches[0].clientY - canvas.getBoundingClientRect().top; // Store specific touch start Y
+            handlePlungerStart(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: false }); // Use passive:false if you call preventDefault
+
+    canvas.addEventListener('touchmove', (e) => {
+        if (isDraggingPlunger && e.touches.length > 0) {
+            e.preventDefault(); // Crucial to prevent page scrolling
+            handlePlungerMove(e.touches[0].clientY);
+        }
+    }, { passive: false }); // Use passive:false because we call preventDefault
+
+    canvas.addEventListener('touchend', (e) => {
+        // No e.touches here for touchend usually, drag is over
+        handlePlungerEnd();
     });
-    closeQuizButton.addEventListener('click', handleCloseQuiz);
 
-    // Reset button functionality
-    resetButton.addEventListener('click', initGame);
+    canvas.addEventListener('touchcancel', (e) => { // Handle if touch is interrupted
+        handlePlungerEnd();
+    });
 
-    // Start the game automatically on load
-    initGame(); 
+    // Quiz Event Listeners
+    submitAnswerButton.addEventListener('click', handleSubmitQuizAnswer);
+    quizAnswerInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            handleSubmitQuizAnswer();
+        }
+    });
+    closeQuizButton.addEventListener('click', handleCloseQuiz);
+
+    // Reset button functionality
+    resetButton.addEventListener('click', initGame);
+
+    // Start the game automatically on load
+    initGame(); 
 
 </script>
-
 </body>
 </html>
