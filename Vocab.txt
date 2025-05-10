@@ -24,9 +24,9 @@ The (a)________________ of poison in a snake bite can kill an adult.:-amount;-0.
 (a)________________ history includes the old history of the Greeks, Romans, and Chinese.:-ancient;-0.5
 While playing basketball, I fell and twisted my (a)________________.:-ankle;-0.5
 Does (a)________________ know who did this?:-anybody;-0.5
-It's OK if we don't go to the movie. I didn't want to see it (a)________________.:-anyhow/anyway;-0.5
+It's OK if we don't go to the movie. I didn't want to see it (a)________________.:-anyway;-0.5
 You can come see me (a)________________.  You don't have to call in advance.:-anytime;-0.5
-The thieves left the house five hours ago.  They could be (a)________________ by now.:-anywhere/anyplace;-0.5
+The thieves left the house five hours ago.  They could be (a)________________ by now.:-anywhere;-0.5
 Before moving to this big house, my family lived in a smaller (a)________________.:-apartment;-0.5
 Although the fruit has an ugly (a)________________, don't be fooled by its looks! It is really quite delicious.:-appearance;-0.5
 After eating five candy bars, I had no more (a)________________ for dinner.:-appetite;-0.5
@@ -113,7 +113,7 @@ The TV station (b)________________ its signal to the whole city.:-broadcasts;-0.
 On the weekends, we usually skip breakfast and have (b)________________ at 11am.:-brunch;-0.5
 We use a toilet (b)________________ to clean the toilet.:-brush;-0.5
 You should (b)________________ your teeth after every meal.:-brush;-0.5
-The bread used for holding a hot dog is called a (b)________________.:-bun/roll;-0.5
+The bread used for holding a hot dog is called a (b)________________.:-bun;-0.5
 I tied up the newspapers into a (b)________________ using some string, and took them outside to recycle.:-bundle;-0.5
 Don't touch the fire, or you will (b)________________ your finger!:-burn;-0.5
 If you fill the balloon with too much air, it might (b)________________.:-burst;-0.5
@@ -373,7 +373,7 @@ The boy has grown a lot. His clothes no longer (f)________________.:-fit;-0.5
 The TV is broken - can you help me (f)________________ it?:-fix;-0.5
 What are the colors of the American (f)________________? Red, white, and blue.:-flag;-0.5
 There was a (f)________________ of lightning, followed by loud thunder.:-flash;-0.5
-If you go outside in the dark, you should bring a (f)________________ to help you see.:-flashlight/flash;-0.5
+If you go outside in the dark, you should bring a (f)________________ to help you see.:-flashlight;-0.5
 My bike tire is (f)________________ - it has no air!:-flat;-0.5
 My father must catch a (f)________________ (on an airplane) to Beijing tomorrow morning.:-flight;-0.5
 In 2001, a typhoon brought heavy rains that caused the subway stations to (f)________________.:-flood;-0.5
@@ -488,7 +488,7 @@ After a price cut, sales of the new electric car model have (i)________________ 
 In 1776, the Americans gained (i)________________ from the British, after fighting the Revolutionary War.:-independence;-0.5
 An (i)________________ person doesn't need anyone else to be happy.:-independent;-0.5
 These signs (i)________________ that you may have superpowers.:-indicate;-0.5
-People who work in the film (i)________________ include actors/actresses, directors, producers, set designers, etc.:-industry;-0.5
+People who work in the film (i)________________ include actors, directors, producers, set designers, etc.:-industry;-0.5
 The father tried to (i)________________ her daughter's decision. But she was independent now, and didn't listen.:-influence;-0.5
 A pen uses (i)________________ to write.:-ink;-0.5
 Ants and mosquitoes are both (i)________________ (or bugs).:-insects;-0.5
@@ -515,13 +515,13 @@ A (j)________________ is where two things meet. For example, your elbow is a (j)
 In court, the (j)________________ sentenced the criminal to five years in prison.:-judge;-0.5
 Don't (j)________________ a book by its cover (appearance) .:-judge;-0.5
 The delicious apple was so (j)________________, I had to wipe my mouth with a napkin.:-juicy;-0.5
-(k)________________ is made from tomatoes, and we put it on french fries.:-ketchup/catsup;-0.5
+(k)________________ is made from tomatoes, and we put it on french fries.:-ketchup;-0.5
 (k)________________ is before first grade.:-kindergarten;-0.5
 The king ruled over his (k)________________.:-kingdom;-0.5
 Before you enter, please (k)________________ on the door.:-knock;-0.5
 To gain more (k)________________, you can read more books.:-knowledge;-0.5
 A (k)________________ bear lives in Australia, and has no tail.:-koala;-0.5
-A (l)________________ is a small red insect with black dots. It crawls and can fly.:-ladybug/ladybird;-0.5
+A (l)________________ is a small red insect with black dots. It crawls and can fly.:-ladybug;-0.5
 This wide road has four (l)________________, including one just for bikes.:-lanes;-0.5
 Is English a difficult (l)________________ to learn?:-language;-0.5
 A (l)________________ is a lamp that you can carry.:-lantern;-0.5
@@ -816,7 +816,7 @@ Sadly, she didn't meet the school's (r)________________ for graduation.:-require
 Please (r)________________ your elders. Don't talk back to them.:-respect;-0.5
 Parents are (r)________________ for feeding and clothing their children.:-responsible;-0.5
 We had dinner at a Japanese (r)________________.:-restaurant;-0.5
-Excuse me, I have to go to the (r)________________.:-restroom/rest room;-0.5
+Excuse me, I have to go to the (r)________________.:-restroom;-0.5
 The (r)________________ of the exam will be posted on Monday.:-results;-0.5
 I've read this chapter already, so I just need to (r)________________ it before the test.:-review;-0.5
 Despite all his (r)________________ (money, wealth), what he wanted most was someone to love.:-riches;-0.5
@@ -966,7 +966,7 @@ A (t)________________ drama is a story (especially TV show) written for teenager
 The magazine is popular among (t)________________ (aged 13-19) girls.:-teenage;-0.5
 (t)________________ include thirteen- to nineteen-year-olds.:-teenagers;-0.5
 Before cell phones were invented, people used (t)________________ connected to the home or office.  They had wires and you couldn't carry them around with you.:-telephones;-0.5
-After dinner, I watched (t)________________ (TV).:-television/TV;-0.5
+After dinner, I watched (t)________________ (TV).:-television;-0.5
 Asian people often go to (t)________________ to pray.:-temples;-0.5
 Roger Federer is the most famous (t)________________ player in the world.:-tennis;-0.5
 During summer camp, we slept outside in a (t)________________, under the stars.:-tent;-0.5
