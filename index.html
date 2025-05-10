@@ -339,38 +339,61 @@ A clue with text after first placeholder then another placeholder (a)___________
 
 
     function parseVocabData(dataString) {
-        const lines = dataString.trim().split('\n');
-        const parsedQuestions = [];
-        const placeholder = "(a)________________"; 
+    const lines = dataString.trim().split('\n');
+    const parsedQuestions = [];
+    // Regex to find placeholders like (a)_____, (b)_____, (n)____________
+    // It looks for: ( + a letter + ) + 5 or more underscores
+    const pedagogicalPlaceholderRegex = /\(([a-zA-Z])\)_{5,}/;
+    const potentialSuffixDelimiter = "(a)________________";
 
-        lines.forEach(line => {
-            if (line.trim() === "") return; 
-            const parts = line.split(':-'); 
-            if (parts.length >= 2) {
-                const clueWithPlaceholder = parts[0];
-                const answerPart = parts[1].split(';')[0]; 
+    lines.forEach(line => {
+        if (line.trim() === "") return;
+        const rawParts = line.split(':-'); // Split clue from answer block
+        if (rawParts.length >= 2) {
+            let clueText = rawParts[0]; // The full clue part
+            const answer = rawParts[1].split(';')[0].trim();
 
-                const placeholderIndex = clueWithPlaceholder.indexOf(placeholder);
-                let textPart1 = "";
-                let textPart2 = "";
+            let textPart1 = ""; // Text before the identified pedagogical blank
+            let textPart2 = ""; // Text after the identified pedagogical blank
+            let actualPedagogicalPlaceholder = null; // Stores the found "(x)_____" string
+            let displayClue = clueText; // The version of the clue text to be used if no ped. placeholder found
 
-                if (placeholderIndex !== -1) {
-                    textPart1 = clueWithPlaceholder.substring(0, placeholderIndex);
-                    textPart2 = clueWithPlaceholder.substring(placeholderIndex + placeholder.length);
-                } else {
-                    textPart1 = clueWithPlaceholder; 
-                }
-                parsedQuestions.push({
-                    textPart1: textPart1.trim(), 
-                    textPart2: textPart2.trim(), 
-                    answer: answerPart.trim()
-                });
+            const match = clueText.match(pedagogicalPlaceholderRegex);
+
+            if (match) {
+                // A pedagogical placeholder like (a)_____ or (n)_____ was found
+                actualPedagogicalPlaceholder = match[0]; // The matched string, e.g., "(a)_________"
+                const placeholderIndex = match.index;
+                textPart1 = clueText.substring(0, placeholderIndex);
+                textPart2 = clueText.substring(placeholderIndex + actualPedagogicalPlaceholder.length);
             } else {
-                console.warn("Skipping malformed vocab line:", line);
+                // No specific pedagogical placeholder like (x)_____ was found by the regex.
+                // This might mean the clue doesn't use one, or (a)________________ was just a suffix.
+                // If (a)________________ was a suffix, we should remove it from the displayClue.
+                if (clueText.endsWith(potentialSuffixDelimiter)) {
+                    displayClue = clueText.substring(0, clueText.length - potentialSuffixDelimiter.length);
+                }
+                // In this 'else' case, textPart1 will effectively be the displayClue, and textPart2 empty,
+                // as there's no defined "before" and "after" for a pedagogical placeholder.
+                textPart1 = displayClue; // Use the (potentially suffix-stripped) clue
+                                         // textPart2 remains empty
             }
-        });
-        return parsedQuestions;
-    }
+
+            parsedQuestions.push({
+                textPart1: textPart1.trim(),
+                textPart2: textPart2.trim(),
+                answer: answer,
+                // This new property will hold the actual placeholder string found, e.g., "(a)____" or "(n)____"
+                foundPlaceholderText: actualPedagogicalPlaceholder,
+                // This will hold the clue text to display if no specific placeholder was extracted
+                clueForDisplayIfNoPlaceholder: displayClue.trim()
+            });
+        } else {
+            console.warn("Skipping malformed vocab line:", line);
+        }
+    });
+    return parsedQuestions;
+}
 
     async function loadVocabulary() {
         if (useExternalVocabFile) {
@@ -777,58 +800,48 @@ A clue with text after first placeholder then another placeholder (a)___________
      * Includes logic to prevent extra placeholders at the end of clues.
      */
     function loadNewQuizQuestion() {
-        if (quizQuestions.length === 0) {
-            quizQuestionEl.textContent = "No more questions available.";
-            submitAnswerButton.disabled = true;
-            return;
+    if (quizQuestions.length === 0) {
+        quizQuestionEl.textContent = "No more questions available.";
+        submitAnswerButton.disabled = true;
+        return;
+    }
+    const randomIndex = Math.floor(Math.random() * quizQuestions.length);
+    currentQuizQuestionObj = quizQuestions[randomIndex]; // Contains new properties
+
+    const part1FromParse = currentQuizQuestionObj.textPart1;
+    const part2FromParse = currentQuizQuestionObj.textPart2;
+    const identifiedPlaceholder = currentQuizQuestionObj.foundPlaceholderText;
+    const fallbackClueDisplay = currentQuizQuestionObj.clueForDisplayIfNoPlaceholder;
+
+    let finalQuestionHtml = "";
+
+    if (identifiedPlaceholder) {
+        // A specific pedagogical placeholder (e.g., "(a)_____", "(n)_____") was found.
+        // This is the one we want to display, bolded.
+        const boldedIdentifiedPlaceholder = `<b>${identifiedPlaceholder}</b>`;
+
+        let questionParts = [];
+        if (part1FromParse && part1FromParse.length > 0) { // Text before the placeholder
+            questionParts.push(part1FromParse);
         }
-        const randomIndex = Math.floor(Math.random() * quizQuestions.length);
-        currentQuizQuestionObj = quizQuestions[randomIndex];
-
-        const displayBlank = "<b>(a)________________</b>"; 
-        const vocabFilePlaceholder = "(a)________________"; 
-
-        let part1Render = currentQuizQuestionObj.textPart1; // Already trimmed from parseVocabData
-        let part2Render = currentQuizQuestionObj.textPart2; // Already trimmed from parseVocabData
-
-        let finalQuestionHtml = part1Render;
-        if (part1Render !== "") { // Add space only if part1 is not empty
-            finalQuestionHtml += " ";
+        questionParts.push(boldedIdentifiedPlaceholder);
+        if (part2FromParse && part2FromParse.length > 0) { // Text after the placeholder
+            questionParts.push(part2FromParse);
         }
-        finalQuestionHtml += displayBlank; // Add the main bolded placeholder
-
-        // --- MODIFIED LOGIC for part2Render ---
-        // This section aims to prevent an extra raw "(a)________________" from appearing
-        // if it's at the end of part2Render.
-        let cleanedPart2 = part2Render;
-
-        if (cleanedPart2 === vocabFilePlaceholder) {
-            // If part2 is *only* the placeholder string, we don't want to append it.
-            cleanedPart2 = "";
-        } else {
-            // Check if part2 ends with " " + placeholder (e.g., "some text (a)________")
-            const spacedTrailingPlaceholder = " " + vocabFilePlaceholder;
-            if (cleanedPart2.endsWith(spacedTrailingPlaceholder)) {
-                cleanedPart2 = cleanedPart2.substring(0, cleanedPart2.length - spacedTrailingPlaceholder.length).trim();
-            } 
-            // Check if part2 ends with placeholder directly (e.g., "sometext(a)________")
-            else if (cleanedPart2.endsWith(vocabFilePlaceholder)) {
-                 cleanedPart2 = cleanedPart2.substring(0, cleanedPart2.length - vocabFilePlaceholder.length).trim();
-            }
-        }
-        // --- END OF MODIFIED LOGIC ---
-
-        if (cleanedPart2 !== "") { // Append cleanedPart2 if it still has content
-            finalQuestionHtml += ` ${cleanedPart2}`;
-        }
-        
-        quizQuestionEl.innerHTML = finalQuestionHtml.trim(); 
-        quizAnswerInput.value = '';
-        quizMessageEl.textContent = '';
-        quizMessageEl.className = '';
-        submitAnswerButton.disabled = false;
+        finalQuestionHtml = questionParts.join(" ");
+    } else {
+        // No specific pedagogical placeholder was identified by the regex in parseVocabData.
+        // Display the fallbackClueDisplay, which should be the original clue text,
+        // potentially with a trailing "(a)________________" suffix already removed by parseVocabData.
+        finalQuestionHtml = fallbackClueDisplay;
     }
 
+    quizQuestionEl.innerHTML = finalQuestionHtml;
+    quizAnswerInput.value = '';
+    quizMessageEl.textContent = '';
+    quizMessageEl.className = '';
+    submitAnswerButton.disabled = false;
+}
 
     function addWordToList(word, listElement, isCorrect) {
         const li = document.createElement('li');
