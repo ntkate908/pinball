@@ -83,7 +83,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             touch-action: none; /* Important for preventing default touch actions like scrolling on the canvas */
             
-            /* --- MODIFIED: Added background image properties --- */
             background-image: url('Background.png');
             background-size: cover; /* Cover the entire canvas */
             background-repeat: no-repeat; /* Do not repeat the image */
@@ -769,7 +768,8 @@ A clue with text after first placeholder then another placeholder (a)___________
                     marble.vy += (Math.random() - 0.5) * 0.3;
 
                     if (pegHitSynth && audioContextStarted) {
-                        pegHitSynth.triggerAttackRelease("C2", "8n", Tone.now());
+                        // --- MODIFIED: Removed Tone.now() ---
+                        pegHitSynth.triggerAttackRelease("C2", "8n");
                     }
                 }
             });
@@ -797,7 +797,8 @@ A clue with text after first placeholder then another placeholder (a)___________
                             freq = 180;
                         }
                         freq = Math.max(80, Math.min(freq, 1200)); // Clamp frequency
-                        holeHitSynth.triggerAttackRelease(freq, "8n", Tone.now());
+                        // --- MODIFIED: Removed Tone.now() ---
+                        holeHitSynth.triggerAttackRelease(freq, "8n");
                     }
                     // Check if a new marble is needed
                     if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
