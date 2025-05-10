@@ -768,8 +768,8 @@ A clue with text after first placeholder then another placeholder (a)___________
                     marble.vy += (Math.random() - 0.5) * 0.3;
 
                     if (pegHitSynth && audioContextStarted) {
-                        // --- MODIFIED: Removed Tone.now() ---
-                        pegHitSynth.triggerAttackRelease("C2", "8n");
+                        // --- MODIFIED: Schedule slightly in the future ---
+                        pegHitSynth.triggerAttackRelease("C2", "8n", "+0.001");
                     }
                 }
             });
@@ -797,8 +797,8 @@ A clue with text after first placeholder then another placeholder (a)___________
                             freq = 180;
                         }
                         freq = Math.max(80, Math.min(freq, 1200)); // Clamp frequency
-                        // --- MODIFIED: Removed Tone.now() ---
-                        holeHitSynth.triggerAttackRelease(freq, "8n");
+                        // --- MODIFIED: Schedule slightly in the future ---
+                        holeHitSynth.triggerAttackRelease(freq, "8n", "+0.001");
                     }
                     // Check if a new marble is needed
                     if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
