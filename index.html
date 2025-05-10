@@ -726,6 +726,18 @@ A clue with text after first placeholder then another placeholder (a)___________
             marble.x += marble.vx;
             marble.y += marble.vy;
 
+            // --- ADDED: NaN/Infinity checks for marble properties ---
+            if (isNaN(marble.x) || isNaN(marble.y) || isNaN(marble.vx) || isNaN(marble.vy) ||
+                !isFinite(marble.x) || !isFinite(marble.y) || !isFinite(marble.vx) || !isFinite(marble.vy)) {
+                console.error("CRITICAL: Marble has invalid properties!", JSON.parse(JSON.stringify(marble)));
+                // If you are debugging with browser tools, uncomment the next line to pause execution here
+                // debugger; 
+                marbles.splice(i, 1); // Remove the problematic marble
+                continue; // Skip further processing for this marble
+            }
+            // --- END: NaN/Infinity checks ---
+
+
             // Wall collisions
             if (marble.x - marble.radius < 0) { // Left wall
                 marble.x = marble.radius;
@@ -746,7 +758,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const combinedRadii = marble.radius + peg.radius;
 
-                if (distance < combinedRadii) {
+                if (distance < combinedRadii && distance > 0) { // Added distance > 0 to prevent division by zero if overlap is perfect
                     marble.hasHitPeg = true; 
                     const overlap = combinedRadii - distance;
                     const angle = Math.atan2(dy, dx);
@@ -767,8 +779,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                     marble.vy += (Math.random() - 0.5) * 0.3;
 
                     if (pegHitSynth && audioContextStarted) {
-                        // --- MODIFIED: Schedule slightly in the future ---
-                        pegHitSynth.triggerAttackRelease("C2", "8n", "+0.01"); // Increased delay
+                        pegHitSynth.triggerAttackRelease("C2", "8n", "+0.005"); 
                     }
                 }
             });
@@ -796,8 +807,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                             freq = 180;
                         }
                         freq = Math.max(80, Math.min(freq, 1200)); // Clamp frequency
-                        // --- MODIFIED: Schedule slightly in the future ---
-                        holeHitSynth.triggerAttackRelease(freq, "8n", "+0.01"); // Increased delay
+                        holeHitSynth.triggerAttackRelease(freq, "8n", "+0.005"); 
                     }
                     // Check if a new marble is needed
                     if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
@@ -831,9 +841,6 @@ A clue with text after first placeholder then another placeholder (a)___________
         if (isQuizModeActive) { // Pause game loop if quiz is active
             return; 
         }
-        // Clearing the canvas is usually done here if the background is drawn by JavaScript.
-        // However, since the background is now a CSS property of the canvas element itself,
-        // ctx.clearRect will clear drawings on top of the CSS background.
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
 
         drawPlunger();
