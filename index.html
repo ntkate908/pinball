@@ -77,7 +77,6 @@
         /* Canvas styling */
         canvas {
             border: 3px solid #4a3b31;
-            /* background-color: #deb887; */ /* Fallback color */
             display: block;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -769,7 +768,7 @@ A clue with text after first placeholder then another placeholder (a)___________
 
                     if (pegHitSynth && audioContextStarted) {
                         // --- MODIFIED: Schedule slightly in the future ---
-                        pegHitSynth.triggerAttackRelease("C2", "8n", "+0.001");
+                        pegHitSynth.triggerAttackRelease("C2", "8n", "+0.01"); // Increased delay
                     }
                 }
             });
@@ -798,7 +797,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                         }
                         freq = Math.max(80, Math.min(freq, 1200)); // Clamp frequency
                         // --- MODIFIED: Schedule slightly in the future ---
-                        holeHitSynth.triggerAttackRelease(freq, "8n", "+0.001");
+                        holeHitSynth.triggerAttackRelease(freq, "8n", "+0.01"); // Increased delay
                     }
                     // Check if a new marble is needed
                     if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
