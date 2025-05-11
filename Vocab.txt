@@ -1032,7 +1032,7 @@ Once (u)________________ a time, there was a big bad wolf.:-upon;-0.5
 You have two rows of teeth: (u)________________ and lower.:-upper;-0.5
 I didn't have enough money to buy a new car, so I bought a (u)________________ one.:-used;-0.5
 I (u)________________ to be weak. Now I'm strong.:-used;-0.5
-She's not (u)________________ to speaking in English. She juat needs more practice.:-used;-0.5
+She's not (u)________________ to speaking in English. She just needs more practice.:-used;-0.5
 Every (u)________________ on this computer needs a different password to log in.:-user;-0.5
 He is right on time, as (u)________________.  He doesn't like to be late.:-usual;-0.5
 I need a long (v)________________. I'd like to go to Paris.:-vacation;-0.5
