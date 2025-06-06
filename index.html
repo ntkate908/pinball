@@ -37,6 +37,7 @@
             justify-content: center; /* Center the whole container */
             gap: 15px; /* Space between canvas and word lists */
             margin-top: 10px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
 
         /* Word list styling */
@@ -82,11 +83,12 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             touch-action: none; /* Important for preventing default touch actions like scrolling on the canvas */
             
-            background-image: url('Background.png');
+            /* Using a placeholder as the original background image is not available */
+            background-color: #deb887; /* Fallback color */
+            background-image: url('https://placehold.co/400x600/deb887/4a3b31?text=Pinball+Board');
             background-size: cover; /* Cover the entire canvas */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-position: center center; /* Center the image */
-            background-color: #deb887; /* Fallback color if image fails to load or has transparency */
         }
         /* Controls container styling */
         #controls {
@@ -206,7 +208,7 @@
             z-index: 20000; /* Ensure it's on top */
             padding: 5px;
             box-sizing: border-box;
-            border-top: 1px solid #ffcccc;
+            display: none; /* Hidden by default */
         }
         #errorLog div { /* Style for individual error messages */
             padding: 2px 0;
@@ -261,7 +263,7 @@
 
 <script>
     // --- CONFIGURATION ---
-    const useExternalVocabFile = true; 
+    const useExternalVocabFile = false; // Set to false to use hardcoded vocab
     const vocabFileName = "Vocab.txt"; 
 
     // Get canvas and context
@@ -285,8 +287,10 @@
     
     const errorLogDiv = document.getElementById('errorLog');
 
+    // Function to display errors on the screen for better debugging
     function displayErrorOnScreen(message) {
         if (errorLogDiv) {
+            errorLogDiv.style.display = 'block'; // Show the log on first error
             const entry = document.createElement('div');
             const time = new Date().toLocaleTimeString();
             entry.textContent = `${time}: ${message}`;
@@ -299,6 +303,7 @@
         console.error(message); 
     }
 
+    // Global error handler
     window.onerror = function(message, source, lineno, colno, errorObject) {
         let fullMessage = `ERROR: ${message}`;
         if (source) {
@@ -330,6 +335,7 @@
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
+    // Game state variables
     let marbles = [];
     let pegs = [];
     let holes = [];
@@ -346,10 +352,12 @@
     let needsNewMarbleInPlunger = false; 
     let quizQuestions = []; 
 
+    // Audio variables
     let audioContextStarted = false;
     let pegHitSynth = null;
     let holeHitSynth = null;
 
+    // Initialize audio synthesizers using Tone.js
     function initializeAudio() {
         if (typeof Tone !== 'undefined') {
             try {
@@ -376,6 +384,7 @@
     initializeAudio(); 
 
 
+    // Plunger object definition
     const plunger = {
         x: CANVAS_WIDTH - PLUNGER_WIDTH - 15, 
         baseY: CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT + (LAUNCH_AREA_HEIGHT - PLUNGER_HEIGHT) / 2, 
@@ -385,7 +394,11 @@
     };
     plunger.y = plunger.baseY; 
 
-    const hardcodedVocabFileContent = `Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
+    // Hardcoded vocabulary data as a fallback
+    // --- MODIFICATION: ADDED USER'S NEW LINES ---
+    const hardcodedVocabFileContent = `The flight attendant welcomed us (a)________________ the airplane.:-aboard;-1.5
+A (z)________________ is a horse with black and white stripes (lines) on its body.:-zebra;-0.5
+Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
 My college in Japan offers a six-month study (a)________________ program in California.:-abroad;-0.5
 The missing child was found (a)________________ from home, but safe.:-absent;-0.3
 The (a)________________ of rain for many months caused a serious drought.:-absence;-0.3
@@ -401,52 +414,64 @@ A clue where textPart2 is the placeholder (a)________________ (a)_______________
 A clue with text after first placeholder then another placeholder (a)________________ text then (a)________________:-textandplaceholder;-0.4`;
 
 
+    // --- MODIFICATION: Updated to parse the reward value ---
+    /**
+     * Parses the vocabulary string into a structured array of questions, including the reward value.
+     * @param {string} dataString The raw vocabulary data.
+     * @returns {Array} An array of question objects.
+     */
     function parseVocabData(dataString) {
-    const lines = dataString.trim().split('\n');
-    const parsedQuestions = [];
-    const pedagogicalPlaceholderRegex = /\(([a-zA-Z])\)_{5,}/;
-    const potentialSuffixDelimiter = "(a)________________"; 
+        const lines = dataString.trim().split('\n');
+        const parsedQuestions = [];
+        const pedagogicalPlaceholderRegex = /\(([a-zA-Z])\)_{5,}/;
+        const potentialSuffixDelimiter = "(a)________________";
 
-    lines.forEach(line => {
-        if (line.trim() === "") return; 
-        const rawParts = line.split(':-'); 
-        if (rawParts.length >= 2) {
-            let clueText = rawParts[0]; 
-            const answer = rawParts[1].split(';')[0].trim(); 
+        lines.forEach(line => {
+            if (line.trim() === "") return;
+            const rawParts = line.split(':-');
+            if (rawParts.length >= 2) {
+                let clueText = rawParts[0];
+                const answerParts = rawParts[1].split(';');
+                const answer = answerParts[0].trim();
+                // Extract the reward value, defaulting to 0.5 if not present
+                const rewardValue = answerParts.length > 1 ? Math.abs(parseFloat(answerParts[1])) : 0.5;
 
-            let textPart1 = ""; 
-            let textPart2 = ""; 
-            let actualPedagogicalPlaceholder = null; 
-            let displayClue = clueText; 
+                let textPart1 = "";
+                let textPart2 = "";
+                let actualPedagogicalPlaceholder = null;
+                let displayClue = clueText;
 
-            const match = clueText.match(pedagogicalPlaceholderRegex);
+                const match = clueText.match(pedagogicalPlaceholderRegex);
 
-            if (match) {
-                actualPedagogicalPlaceholder = match[0]; 
-                const placeholderIndex = match.index;
-                textPart1 = clueText.substring(0, placeholderIndex);
-                textPart2 = clueText.substring(placeholderIndex + actualPedagogicalPlaceholder.length);
-            } else {
-                if (clueText.endsWith(potentialSuffixDelimiter)) {
-                    displayClue = clueText.substring(0, clueText.length - potentialSuffixDelimiter.length);
+                if (match) {
+                    actualPedagogicalPlaceholder = match[0];
+                    const placeholderIndex = match.index;
+                    textPart1 = clueText.substring(0, placeholderIndex);
+                    textPart2 = clueText.substring(placeholderIndex + actualPedagogicalPlaceholder.length);
+                } else {
+                    if (clueText.endsWith(potentialSuffixDelimiter)) {
+                        displayClue = clueText.substring(0, clueText.length - potentialSuffixDelimiter.length);
+                    }
+                    textPart1 = displayClue;
                 }
-                textPart1 = displayClue; 
+
+                parsedQuestions.push({
+                    textPart1: textPart1.trim(),
+                    textPart2: textPart2.trim(),
+                    answer: answer,
+                    rewardValue: rewardValue, // Store the reward value
+                    foundPlaceholderText: actualPedagogicalPlaceholder,
+                    clueForDisplayIfNoPlaceholder: displayClue.trim()
+                });
+            } else {
+                console.warn("Skipping malformed vocab line:", line);
             }
+        });
+        return parsedQuestions;
+    }
 
-            parsedQuestions.push({
-                textPart1: textPart1.trim(),
-                textPart2: textPart2.trim(),
-                answer: answer,
-                foundPlaceholderText: actualPedagogicalPlaceholder,
-                clueForDisplayIfNoPlaceholder: displayClue.trim()
-            });
-        } else {
-            console.warn("Skipping malformed vocab line:", line);
-        }
-    });
-    return parsedQuestions;
-}
 
+    // Asynchronously loads vocabulary from a file or uses the hardcoded version
     async function loadVocabulary() {
         if (useExternalVocabFile) {
             try {
@@ -458,7 +483,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                 console.log("Successfully loaded vocab from:", vocabFileName);
                 quizQuestions = parseVocabData(dataString);
             } catch (error) {
-                displayErrorOnScreen("Vocab load error: " + error.message); 
+                displayErrorOnScreen("Vocab load error: " + error.message + ". Using hardcoded vocab."); 
                 quizQuestions = parseVocabData(hardcodedVocabFileContent);
             }
         } else {
@@ -473,6 +498,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Initializes or resets the game state
     async function initGame() {
         await loadVocabulary(); 
 
@@ -498,6 +524,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         gameLoop(); 
     }
 
+    // Sets up the pegs and holes on the game board
     function setupBoard() {
         pegs = [];
         holes = [];
@@ -507,14 +534,16 @@ A clue with text after first placeholder then another placeholder (a)___________
         const ySpacing = (CANVAS_HEIGHT - LAUNCH_AREA_HEIGHT - 180) / rows; 
         const xOffset = 20; 
 
+        // Define a clear area for the marble path from the plunger
         const marbleStartX = plunger.x + PLUNGER_WIDTH / 2;
         const marbleStartY = plunger.baseY - MARBLE_RADIUS - 5;
         const clearRectX1 = marbleStartX - 150; 
         const clearRectX2 = marbleStartX + MARBLE_RADIUS + 20; 
         const clearRectY1 = marbleStartY - 300; 
-        const clearRectY2 = CANVAS_HEIGHT;      
+        const clearRectY2 = CANVAS_HEIGHT;       
 
 
+        // Create pegs in a grid pattern
         for (let i = 0; i < rows; i++) {
             const numColsThisRow = (i % 2 === 0) ? cols : cols - 1; 
             for (let j = 0; j < numColsThisRow; j++) {
@@ -524,16 +553,19 @@ A clue with text after first placeholder then another placeholder (a)___________
                 }
                 const pegY = 90 + i * ySpacing; 
                 let skipPeg = false;
+                // Check if the peg is in the clear area
                 if (pegX > clearRectX1 && pegX < clearRectX2 &&
                     pegY > clearRectY1 && pegY < clearRectY2) {
                     skipPeg = true;
                 }
+                // Add peg if it's not in the clear area and within bounds
                 if (!skipPeg && pegX + PEG_RADIUS < CANVAS_WIDTH - xOffset && pegX - PEG_RADIUS > xOffset) {
                      pegs.push({ x: pegX, y: pegY, radius: PEG_RADIUS, color: '#704214' }); 
                 }
             }
         }
         
+        // Create holes at the bottom of the board
         const holeValues = [25, 50, -5, 10, 5, 15, -10]; 
         const baseHoleRadius = 19; 
         const holeY = CANVAS_HEIGHT - 60; 
@@ -553,11 +585,13 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Updates the score and marbles left display
     function updateUI() {
         marblesLeftEl.textContent = playerMarbles;
         scoreEl.textContent = score;
     }
 
+    // Creates a new marble if the player has any left
     function createMarble() {
         if (playerMarbles > 0) {
             playerMarbles--; 
@@ -578,6 +612,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         return false;
     }
 
+    // Launches the current marble with a given power
     function launchMarble(power) {
         if (currentMarble && !currentMarble.isActive) {
             currentMarble.isActive = true;
@@ -591,6 +626,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Draws the plunger and its housing
     function drawPlunger() {
         ctx.fillStyle = '#a0522d'; 
         ctx.beginPath();
@@ -613,6 +649,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         ctx.strokeStyle = '#332a23'; 
         ctx.strokeRect(plunger.x, currentPlungerY, plunger.width, currentPlungerHeight);
 
+        // Draw spring effect
         ctx.strokeStyle = '#777'; 
         ctx.lineWidth = 3;
         const springTopY = plunger.baseY + plunger.height; 
@@ -628,6 +665,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Draws all marbles on the canvas
     function drawMarbles() {
         marbles.forEach(marble => {
             if (marble) { 
@@ -647,6 +685,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         });
     }
 
+    // Draws all pegs on the canvas
     function drawPegs() {
         pegs.forEach(peg => {
             ctx.beginPath();
@@ -659,6 +698,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         });
     }
 
+    // Draws the score holes at the bottom
     function drawHoles() {
         const now = Date.now();
         holes.forEach(hole => {
@@ -666,6 +706,7 @@ A clue with text after first placeholder then another placeholder (a)___________
             let currentColor = hole.baseColor;
             let showHighlight = false;
 
+            // Animate hole on hit
             if (now < hole.hitAnimationEndTime) {
                 const timeRemaining = hole.hitAnimationEndTime - now;
                 const progress = 1 - (timeRemaining / HOLE_ANIMATION_DURATION); 
@@ -701,15 +742,18 @@ A clue with text after first placeholder then another placeholder (a)___________
         });
     }
 
+    // Updates physics and checks for collisions for all active marbles
     function updateMarbles() {
         for (let i = marbles.length - 1; i >= 0; i--) { 
             const marble = marbles[i];
             if (!marble || !marble.isActive) continue; 
 
+            // Apply gravity and move marble
             marble.vy += GRAVITY;
             marble.x += marble.vx;
             marble.y += marble.vy;
 
+            // Safety check for invalid marble properties
             if (isNaN(marble.x) || isNaN(marble.y) || isNaN(marble.vx) || isNaN(marble.vy) ||
                 !isFinite(marble.x) || !isFinite(marble.y) || !isFinite(marble.vx) || !isFinite(marble.vy)) {
                 const errorMsg = `CRITICAL: Marble ${i} has invalid properties! x:${marble.x}, y:${marble.y}, vx:${marble.vx}, vy:${marble.vy}`;
@@ -719,6 +763,7 @@ A clue with text after first placeholder then another placeholder (a)___________
             }
 
 
+            // Wall collisions
             if (marble.x - marble.radius < 0) { 
                 marble.x = marble.radius;
                 marble.vx *= -BOUNCE_FACTOR;
@@ -731,6 +776,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                 marble.vy *= -BOUNCE_FACTOR;
             }
 
+            // Peg collisions
             pegs.forEach(peg => {
                 const dx = marble.x - peg.x;
                 const dy = marble.y - peg.y;
@@ -742,20 +788,24 @@ A clue with text after first placeholder then another placeholder (a)___________
                     const overlap = combinedRadii - distance;
                     const angle = Math.atan2(dy, dx);
 
+                    // Separate the overlapping marble and peg
                     marble.x += Math.cos(angle) * overlap * 0.5; 
                     marble.y += Math.sin(angle) * overlap * 0.5;
 
+                    // Reflect velocity
                     const normalX = dx / distance;
                     const normalY = dy / distance;
                     const dotProduct = marble.vx * normalX + marble.vy * normalY;
                     marble.vx = (marble.vx - 2 * dotProduct * normalX) * BOUNCE_FACTOR;
                     marble.vy = (marble.vy - 2 * dotProduct * normalY) * BOUNCE_FACTOR;
                     
+                    // Add a slight random factor to prevent predictable paths
                     marble.vx += (Math.random() - 0.5) * 0.3; 
                     marble.vy += (Math.random() - 0.5) * 0.3;
                 }
             });
 
+            // Hole collisions
             let marbleRemoved = false;
             holes.forEach(hole => {
                 const dx = marble.x - hole.x;
@@ -767,6 +817,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                     marbleRemoved = true;
                     updateUI();
 
+                    // Trigger hole animation and sound
                     hole.hitAnimationEndTime = Date.now() + HOLE_ANIMATION_DURATION; 
                     if (holeHitSynth && audioContextStarted) {
                         let freq; 
@@ -784,6 +835,7 @@ A clue with text after first placeholder then another placeholder (a)___________
                             displayErrorOnScreen("Hole sound error: " + e.message);
                         }
                     }
+                    // Check if a new marble should be loaded
                     if (playerMarbles > 0 && !marbles.some(m => m && m.isActive) && !currentMarble && !isQuizModeActive) {
                         needsNewMarbleInPlunger = true;
                     }
@@ -793,6 +845,7 @@ A clue with text after first placeholder then another placeholder (a)___________
 
             if (marbleRemoved) continue; 
 
+            // Remove marble if it falls off the bottom
             if (marble.y - marble.radius > CANVAS_HEIGHT) {
                 if (!marble.hasHitPeg) { 
                     score = Math.max(0, score - 1); 
@@ -806,6 +859,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Main game loop function
     function gameLoop() {
         if (isQuizModeActive) { 
             return; 
@@ -818,6 +872,7 @@ A clue with text after first placeholder then another placeholder (a)___________
             drawHoles(); 
             drawMarbles();
 
+            // Load a new marble if needed
             if (needsNewMarbleInPlunger && playerMarbles > 0 && !currentMarble && !isQuizModeActive) {
                 if (!marbles.some(m => m && m.isActive)) { 
                     createMarble();
@@ -825,10 +880,12 @@ A clue with text after first placeholder then another placeholder (a)___________
                 }
             }
             
+            // Update active marbles
             if (marbles.some(m => m && m.isActive)) { 
                  updateMarbles();
             }
 
+            // Check for game over condition
             if (playerMarbles <= 0 && !marbles.some(m => m && m.isActive) && !currentMarble) {
                 enterQuizMode(); 
             } else {
@@ -839,6 +896,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Displays the "Game Over" message
     function displayGameOverMessage() {
         if(gameLoopId) cancelAnimationFrame(gameLoopId); 
         ctx.fillStyle = 'rgba(0, 0, 0, 0.75)'; 
@@ -851,6 +909,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         ctx.fillText('Final Score: ' + score, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 20);
     }
     
+    // Enters quiz mode when the player is out of marbles
     function enterQuizMode() {
         if (isQuizModeActive) return; 
         if (quizQuestions.length === 0) {
@@ -871,6 +930,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         quizMessageEl.className = '';
     }
 
+    // Loads a new random question into the quiz modal
     function loadNewQuizQuestion() {
         if (quizQuestions.length === 0) {
             quizQuestionEl.textContent = "No more questions available.";
@@ -880,22 +940,20 @@ A clue with text after first placeholder then another placeholder (a)___________
         const randomIndex = Math.floor(Math.random() * quizQuestions.length);
         currentQuizQuestionObj = quizQuestions[randomIndex];
 
-        const part1FromParse = currentQuizQuestionObj.textPart1;
-        const part2FromParse = currentQuizQuestionObj.textPart2;
-        const identifiedPlaceholder = currentQuizQuestionObj.foundPlaceholderText;
-        const fallbackClueDisplay = currentQuizQuestionObj.clueForDisplayIfNoPlaceholder;
+        const { textPart1, textPart2, foundPlaceholderText, clueForDisplayIfNoPlaceholder } = currentQuizQuestionObj;
 
         let finalQuestionHtml = "";
 
-        if (identifiedPlaceholder) {
-            const boldedIdentifiedPlaceholder = `<b>${identifiedPlaceholder}</b>`;
+        // Construct the question string with placeholders
+        if (foundPlaceholderText) {
+            const boldedIdentifiedPlaceholder = `<b>${foundPlaceholderText}</b>`;
             let questionParts = [];
-            if (part1FromParse && part1FromParse.length > 0) questionParts.push(part1FromParse);
+            if (textPart1 && textPart1.length > 0) questionParts.push(textPart1);
             questionParts.push(boldedIdentifiedPlaceholder);
-            if (part2FromParse && part2FromParse.length > 0) questionParts.push(part2FromParse);
+            if (textPart2 && textPart2.length > 0) questionParts.push(textPart2);
             finalQuestionHtml = questionParts.join(" ");
         } else {
-            finalQuestionHtml = fallbackClueDisplay;
+            finalQuestionHtml = clueForDisplayIfNoPlaceholder;
         }
 
         quizQuestionEl.innerHTML = finalQuestionHtml; 
@@ -905,6 +963,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         submitAnswerButton.disabled = false; 
     }
 
+    // Adds a word to the correct or incorrect list on the side
     function addWordToList(word, listElement, isCorrect) {
         const li = document.createElement('li');
         if (isCorrect) {
@@ -918,54 +977,67 @@ A clue with text after first placeholder then another placeholder (a)___________
         listElement.scrollTop = listElement.scrollHeight; 
     }
 
+    // --- MODIFICATION: Updated to handle variable marble rewards ---
     /**
-     * Handles quiz answer submission.
-     * Shows the correct answer filled in before loading the next question.
+     * Handles quiz answer submission, providing feedback and variable marble rewards.
      */
     function handleSubmitQuizAnswer() {
         if (!currentQuizQuestionObj || !isQuizModeActive) return;
         const userAnswer = quizAnswerInput.value.trim();
         const correctAnswer = currentQuizQuestionObj.answer;
 
-        // Set feedback message
         if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-            quizMessageEl.textContent = 'Correct! You get 1 marble.';
+            const rewardValue = currentQuizQuestionObj.rewardValue || 0.5; // Default reward
+            let marblesAwarded = 0;
+
+            if (rewardValue === 1.5) {
+                marblesAwarded = 2;
+            } else { // Default for 0.5 and any other value
+                marblesAwarded = 1;
+            }
+
+            playerMarbles += marblesAwarded;
+
+            // Update feedback message based on marbles awarded
+            if (marblesAwarded > 1) {
+                quizMessageEl.textContent = `Correct! You get ${marblesAwarded} marbles.`;
+            } else {
+                quizMessageEl.textContent = `Correct! You get 1 marble.`;
+            }
+
             quizMessageEl.className = 'quizCorrect';
-            playerMarbles++; 
             updateUI();
             addWordToList(correctAnswer, correctWordsUl, true);
         } else {
             quizMessageEl.textContent = 'Incorrect. Try another question!';
             quizMessageEl.className = 'quizIncorrect';
-            addWordToList(correctAnswer, incorrectWordsUl, false); 
+            addWordToList(correctAnswer, incorrectWordsUl, false);
         }
-        
-        // --- MODIFIED: Display question with the correct answer filled in ---
+
+        // Display the question with the correct answer filled in for learning
         const { textPart1, textPart2, foundPlaceholderText, clueForDisplayIfNoPlaceholder } = currentQuizQuestionObj;
         const styledAnswer = `<u><b>${correctAnswer}</b></u>`;
         let questionWithAnswerHtml = "";
 
         if (foundPlaceholderText) {
-            // If a specific placeholder like (a)_____ was found
             let parts = [];
             if (textPart1) parts.push(textPart1);
             parts.push(styledAnswer);
             if (textPart2) parts.push(textPart2);
             questionWithAnswerHtml = parts.join(" ");
         } else {
-            // If no specific placeholder, show the original clue and append the answer
             questionWithAnswerHtml = `${clueForDisplayIfNoPlaceholder} (Answer: ${styledAnswer})`;
         }
         quizQuestionEl.innerHTML = questionWithAnswerHtml;
-        // --- END MODIFICATION ---
 
-        submitAnswerButton.disabled = true; 
-        setTimeout(() => { 
-            loadNewQuizQuestion(); 
-            if (quizAnswerInput.offsetParent !== null) quizAnswerInput.focus(); 
+        submitAnswerButton.disabled = true;
+        setTimeout(() => {
+            loadNewQuizQuestion();
+            if (quizAnswerInput.offsetParent !== null) quizAnswerInput.focus();
         }, 1500);
     }
     
+    // Closes the quiz modal and returns to the game
     function handleCloseQuiz() {
         quizModal.style.display = 'none';
         isQuizModeActive = false;
@@ -980,11 +1052,14 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // --- Event Listeners for Plunger Interaction ---
     let startInputY; 
 
+    // Handles the start of a drag/touch on the plunger
     async function handlePlungerStart(clientX, clientY) {
         if (isQuizModeActive) return;
 
+        // Start Tone.js audio context on first user interaction
         if (!audioContextStarted && typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
             try {
                 await Tone.start();
@@ -999,9 +1074,11 @@ A clue with text after first placeholder then another placeholder (a)___________
         const inputX = clientX - rect.left;
         const inputY = clientY - rect.top;
 
+        // Check if the interaction is within the plunger's area
         if (inputX >= plunger.x && inputX <= plunger.x + plunger.width &&
             inputY >= plunger.baseY && inputY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) { 
             
+            // Create a marble if one isn't ready
             if (!currentMarble) { 
                 if (playerMarbles > 0 && !marbles.some(m => m && m.isActive)) { 
                     createMarble(); 
@@ -1018,6 +1095,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }
 
+    // Handles the movement during a drag/touch on the plunger
     function handlePlungerMove(clientY) {
         if (isQuizModeActive || !isDraggingPlunger) return;
         
@@ -1030,6 +1108,7 @@ A clue with text after first placeholder then another placeholder (a)___________
         plungerPullDistance = pull;
     }
 
+    // Handles the end of a drag/touch on the plunger, launching the marble
     function handlePlungerEnd() {
         if (isQuizModeActive || !isDraggingPlunger) return;
         isDraggingPlunger = false;
@@ -1041,14 +1120,15 @@ A clue with text after first placeholder then another placeholder (a)___________
     }
 
 
-    canvas.addEventListener('mousedown', async (e) => { 
+    // Mouse event listeners
+    canvas.addEventListener('mousedown', (e) => { 
         handlePlungerStart(e.clientX, e.clientY);
     });
 
     canvas.addEventListener('mousemove', (e) => {
         if (isDraggingPlunger && e.buttons === 1) { 
              handlePlungerMove(e.clientY);
-        } else if (isDraggingPlunger && e.buttons !== 1) {
+        } else if (isDraggingPlunger && e.buttons !== 1) { // Catches mouseup outside canvas
             handlePlungerEnd();
         }
     });
@@ -1065,14 +1145,16 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     });
 
-    canvas.addEventListener('touchstart', async (e) => {
+    // Touch event listeners for mobile support
+    canvas.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
             const rect = canvas.getBoundingClientRect();
             const touchX = e.touches[0].clientX - rect.left;
             const touchY = e.touches[0].clientY - rect.top;
+             // Prevent default scroll/zoom only if interacting with the plunger
              if (touchX >= plunger.x && touchX <= plunger.x + plunger.width &&
-                touchY >= plunger.baseY && touchY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) {
-                e.preventDefault(); 
+                 touchY >= plunger.baseY && touchY <= plunger.baseY + plunger.height + MAX_PULL_DISTANCE) {
+                 e.preventDefault(); 
             }
             handlePlungerStart(e.touches[0].clientX, e.touches[0].clientY);
         }
@@ -1085,18 +1167,19 @@ A clue with text after first placeholder then another placeholder (a)___________
         }
     }, { passive: false }); 
 
-    canvas.addEventListener('touchend', (e) => {
+    canvas.addEventListener('touchend', () => {
         if (isDraggingPlunger) {
              handlePlungerEnd();
         }
     });
 
-    canvas.addEventListener('touchcancel', (e) => { 
+    canvas.addEventListener('touchcancel', () => { 
         if (isDraggingPlunger) {
             handlePlungerEnd();
         }
     });
 
+    // UI button event listeners
     submitAnswerButton.addEventListener('click', handleSubmitQuizAnswer);
     quizAnswerInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
@@ -1105,7 +1188,11 @@ A clue with text after first placeholder then another placeholder (a)___________
     });
     closeQuizButton.addEventListener('click', handleCloseQuiz);
     resetButton.addEventListener('click', initGame);
-    initGame(); 
+    
+    // Initial game start
+    window.onload = function() {
+        initGame(); 
+    };
 
 </script>
 
