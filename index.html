@@ -83,12 +83,12 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             touch-action: none; /* Important for preventing default touch actions like scrolling on the canvas */
             
-            /* Using a placeholder as the original background image is not available */
-            background-color: #deb887; /* Fallback color */
-            background-image: url('https://placehold.co/400x600/deb887/4a3b31?text=Pinball+Board');
+            /* --- MODIFICATION: Restored original background image logic --- */
+            background-image: url('Background.png');
             background-size: cover; /* Cover the entire canvas */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-position: center center; /* Center the image */
+            background-color: #deb887; /* Fallback color if image fails to load or has transparency */
         }
         /* Controls container styling */
         #controls {
@@ -263,7 +263,8 @@
 
 <script>
     // --- CONFIGURATION ---
-    const useExternalVocabFile = false; // Set to false to use hardcoded vocab
+    // --- MODIFICATION: Set to true to enable dynamic loading by default ---
+    const useExternalVocabFile = true; 
     const vocabFileName = "Vocab.txt"; 
 
     // Get canvas and context
@@ -495,9 +496,27 @@ A clue with text after first placeholder then another placeholder (a)___________
              quizQuestions = parseVocabData("This is a default question (a)________________ if loading fails.:-default;-0.1");
         }
     }
+    
+    // --- MODIFICATION: Added function to handle background image fallback ---
+    /**
+     * Attempts to load the primary background image and applies a placeholder if it fails.
+     */
+    function setupBackgroundImage() {
+        const bgImage = new Image();
+        bgImage.onerror = function() {
+            console.warn("Background.png not found. Applying fallback background.");
+            canvas.style.backgroundImage = "url('https://placehold.co/400x600/deb887/4a3b31?text=Pinball+Board')";
+        };
+        // Set src to the image that might fail. If it does, onerror is triggered.
+        // If it succeeds, the CSS rule remains active and the image shows.
+        bgImage.src = 'Background.png'; 
+    }
 
     // Initializes or resets the game state
     async function initGame() {
+        // --- MODIFICATION: Call the background setup function ---
+        setupBackgroundImage();
+        
         await loadVocabulary(); 
 
         playerMarbles = INITIAL_MARBLES;
@@ -995,7 +1014,6 @@ A clue with text after first placeholder then another placeholder (a)___________
 
             playerMarbles += marblesAwarded;
 
-            // --- MODIFICATION: Updated feedback message to be dynamic ---
             const marbleText = marblesAwarded === 1 ? 'marble' : 'marbles';
             quizMessageEl.textContent = `Correct! You get ${marblesAwarded} ${marbleText}.`;
 
