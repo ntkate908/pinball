@@ -395,7 +395,6 @@
     plunger.y = plunger.baseY; 
 
     // Hardcoded vocabulary data as a fallback
-    // --- MODIFICATION: ADDED USER'S NEW LINES ---
     const hardcodedVocabFileContent = `The flight attendant welcomed us (a)________________ the airplane.:-aboard;-1.5
 A (z)________________ is a horse with black and white stripes (lines) on its body.:-zebra;-0.5
 Is it true that humans are naturally born with the (a)________________ to learn a language?:-ability;-0.5
@@ -414,7 +413,6 @@ A clue where textPart2 is the placeholder (a)________________ (a)_______________
 A clue with text after first placeholder then another placeholder (a)________________ text then (a)________________:-textandplaceholder;-0.4`;
 
 
-    // --- MODIFICATION: Updated to parse the reward value ---
     /**
      * Parses the vocabulary string into a structured array of questions, including the reward value.
      * @param {string} dataString The raw vocabulary data.
@@ -977,7 +975,6 @@ A clue with text after first placeholder then another placeholder (a)___________
         listElement.scrollTop = listElement.scrollHeight; 
     }
 
-    // --- MODIFICATION: Updated to handle variable marble rewards ---
     /**
      * Handles quiz answer submission, providing feedback and variable marble rewards.
      */
@@ -998,12 +995,9 @@ A clue with text after first placeholder then another placeholder (a)___________
 
             playerMarbles += marblesAwarded;
 
-            // Update feedback message based on marbles awarded
-            if (marblesAwarded > 1) {
-                quizMessageEl.textContent = `Correct! You get ${marblesAwarded} marbles.`;
-            } else {
-                quizMessageEl.textContent = `Correct! You get 1 marble.`;
-            }
+            // --- MODIFICATION: Updated feedback message to be dynamic ---
+            const marbleText = marblesAwarded === 1 ? 'marble' : 'marbles';
+            quizMessageEl.textContent = `Correct! You get ${marblesAwarded} ${marbleText}.`;
 
             quizMessageEl.className = 'quizCorrect';
             updateUI();
